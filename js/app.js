@@ -1,7 +1,7 @@
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Delay initialization to sync with the Anime.js preloader completion
+    // Delay initialization to sync with the preloader timeline completion
     setTimeout(() => {
         
         // =========================================
@@ -24,14 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 .from('.metadata-pills .pill', { y: 20, opacity: 0, stagger: 0.1, duration: 0.4 }, '-=0.3')
                 .from('.portal-container', { scale: 0.5, opacity: 0, duration: 1.5, ease: 'expo.out' }, '-=1');
 
-            // --- 2. PORTAL ZOOM-IN SCROLLTRIGGER ---
+            // --- 2. PORTAL ZOOM-IN SCROLLTRIGGER (SNAPPY ZOOM) ---
             if (isDesktop) {
-                // DESKTOP: Scale zoom effect through the hollow portal ring
+                // DESKTOP: Fast scale "Dive-Through" with end threshold cut to +=65%
                 gsap.timeline({
                     scrollTrigger: {
                         trigger: "#hero",
                         start: "top top",
-                        end: "+=120%", // Distance to scroll while pinned
+                        end: "+=65%", // Rapid pin distance for quick transition
                         scrub: 1,
                         pin: true,
                         anticipatePin: 1,
@@ -52,15 +52,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 .to('.portal-core, .portal-text', { 
                     opacity: 0, 
                     ease: 'none', 
-                    duration: 0.4 
+                    duration: 0.3 
                 }, 0);
             } else {
-                // MOBILE: Simplified layout fade
+                // MOBILE: Simplified fade
                 gsap.timeline({
                     scrollTrigger: {
                         trigger: "#hero",
                         start: "top top",
-                        end: "+=50%", 
+                        end: "+=40%", 
                         scrub: 1,
                         pin: true,
                         anticipatePin: 1,
@@ -82,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // --- 3. STATS & TIMER SECTION REVEAL ---
-            // Separated from hero pinned trigger to guarantee section visibility
             gsap.from('.stats-section', {
                 scrollTrigger: {
                     trigger: '.stats-section',
@@ -123,7 +122,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 y: 50, opacity: 0, stagger: 0.15, duration: 0.6, ease: 'power2.out'
             });
 
-            // --- 5. GALLERY SECTION REVEAL ---
+            // --- 5. PRIZE PODIUM REVEAL ---
+            gsap.from('.podium-col', {
+                scrollTrigger: {
+                    trigger: '.prizes-podium',
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                },
+                y: 60, opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out'
+            });
+
+            // --- 6. ROADMAP REVEAL ---
+            gsap.from('.roadmap-step', {
+                scrollTrigger: {
+                    trigger: '.roadmap-timeline',
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                },
+                y: 40, opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out'
+            });
+
+            // --- 7. GALLERY SECTION REVEAL ---
             gsap.from('.card-stack', {
                 scrollTrigger: {
                     trigger: '.gallery-section',
@@ -133,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 scale: 0.8, opacity: 0, duration: 1, ease: 'power3.out'
             });
 
-            // --- 6. FAQ SECTION REVEAL ---
+            // --- 8. FAQ SECTION REVEAL ---
             gsap.from('.faq-item', {
                 scrollTrigger: {
                     trigger: '.faq-grid',

@@ -240,7 +240,139 @@ body {
 .track-prize { font-family: var(--font-mono); color: var(--golden-orange); font-weight: 700; border-top: 1px solid var(--dark-cyan); padding-top: 1rem; }
 
 /* =========================================
-   11. GALLERY (POLAROID STACK)
+   11. PRIZES PODIUM (NEW 3D PODIUM SECTION)
+========================================= */
+.prizes-section {
+  position: relative;
+  z-index: 2;
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.prizes-podium {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 4rem;
+  flex-wrap: wrap;
+}
+.podium-col {
+  flex: 1;
+  min-width: 280px;
+  max-width: 360px;
+  padding: 3rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.rank-2 {
+  height: 380px;
+  border-color: var(--dark-cyan);
+}
+.rank-1 {
+  height: 440px;
+  border-color: var(--golden-orange);
+  box-shadow: 8px 8px 0px var(--rusty-spice);
+}
+.rank-1:hover {
+  box-shadow: 12px 12px 0px var(--brown-red);
+}
+.rank-3 {
+  height: 340px;
+  border-color: var(--dark-cyan);
+}
+.podium-header {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--pearl-aqua);
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+}
+.crown-badge {
+  font-family: var(--font-header);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--golden-orange);
+  border: 1px solid var(--golden-orange);
+  padding: 0.3rem 1rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+  background: rgba(238, 155, 0, 0.1);
+}
+.podium-value {
+  font-family: var(--font-header);
+  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  font-weight: 700;
+  color: var(--vanilla-custard);
+  margin-bottom: 2rem;
+  text-shadow: 0 0 10px rgba(233, 216, 166, 0.15);
+}
+.podium-details {
+  list-style: none;
+  width: 100%;
+  border-top: 1px solid rgba(10, 147, 150, 0.2);
+  padding-top: 1.5rem;
+}
+.podium-details li {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--pearl-aqua);
+  margin-bottom: 0.8rem;
+}
+
+/* =========================================
+   12. TIMELINE ROADMAP
+========================================= */
+.timeline-section {
+  position: relative;
+  z-index: 2;
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.roadmap-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 4rem;
+}
+.roadmap-step {
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.step-num {
+  font-family: var(--font-mono);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--dark-cyan);
+  opacity: 0.4;
+  line-height: 1;
+}
+.roadmap-step h3 {
+  font-family: var(--font-header);
+  font-size: 1.4rem;
+  color: var(--vanilla-custard);
+}
+.step-date {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--golden-orange);
+  letter-spacing: 1px;
+}
+.step-details {
+  font-size: 0.95rem;
+  color: var(--pearl-aqua);
+  line-height: 1.6;
+}
+
+/* =========================================
+   13. GALLERY (POLAROID STACK)
 ========================================= */
 .gallery-section { position: relative; z-index: 2; padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; text-align: center; }
 .card-stack { position: relative; width: 320px; height: 400px; margin: 0 auto; }
@@ -249,7 +381,7 @@ body {
 .gallery-hint { font-family: var(--font-mono); color: var(--dark-cyan); margin-top: 2rem; font-size: 0.9rem; }
 
 /* =========================================
-   12. SPONSORS MARQUEE (REFACTORED HORIZONTAL RUN)
+   14. SPONSORS MARQUEE (COMPACT HORIZONTAL RUN)
 ========================================= */
 .sponsors-section { 
   position: relative; 
@@ -314,7 +446,7 @@ body {
 }
 
 /* =========================================
-   13. SMOOTH FAQ GRID EXPANSION
+   15. SMOOTH FAQ GRID EXPANSION
 ========================================= */
 .faq-section { position: relative; z-index: 2; padding: 6rem 2rem; max-width: 800px; margin: 0 auto; }
 .faq-grid { display: flex; flex-direction: column; gap: 1.5rem; }
@@ -343,7 +475,7 @@ body {
 .faq-item.active .faq-answer { padding-bottom: 1.5rem; }
 
 /* =========================================
-   14. FOOTER
+   16. FOOTER
 ========================================= */
 .footer { background: var(--ink-black); border-top: 1px solid var(--dark-cyan); padding: 4rem 2rem 2rem; position: relative; z-index: 2; }
 .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
@@ -360,7 +492,7 @@ body {
 .dev-credit span { color: var(--golden-orange); font-weight: 700; }
 
 /* =========================================
-   15. RESPONSIVE ADJUSTMENTS
+   17. RESPONSIVE ADJUSTMENTS
 ========================================= */
 @media (max-width: 768px) {
   .bento-grid { grid-template-columns: 1fr; }
@@ -368,4 +500,6 @@ body {
   .footer-container { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
   .nav-menu { display: none; }
+  .prizes-podium { flex-direction: column; align-items: center; }
+  .podium-col { height: auto !important; width: 100%; max-width: 100%; }
 }

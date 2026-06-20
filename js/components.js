@@ -1,9 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     // =========================================
-    // 1. ACTIVE SEGMENT COUNTDOWN TIMER
+    // 1. ACTIVE COUNTDOWN TIMER (DYNAMIC VALUE)
     // =========================================
-    const targetDate = new Date("March 15, 2026 09:00:00").getTime();
+    // Set targets to exactly 30 days into the future based on the user's current session time
+    const sessionTime = new Date().getTime();
+    const targetDate = sessionTime + (30 * 24 * 60 * 60 * 1000);
+
     const elDays = document.getElementById('days');
     const elHours = document.getElementById('hours');
     const elMinutes = document.getElementById('minutes');
@@ -38,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================
     // 2. PARALLAX 3D TILT WITH SMOOTH RESET
     // =========================================
-    const tiltCards = document.querySelectorAll('.track-card');
+    const tiltCards = document.querySelectorAll('.track-card, .bento-card, .prizes-section .podium-col');
 
     tiltCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
@@ -49,8 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const xPct = x / rect.width;
             const yPct = y / rect.height;
             
-            const rotateY = (xPct * 20) - 10; 
-            const rotateX = -((yPct * 20) - 10); 
+            const rotateY = (xPct * 16) - 10; 
+            const rotateX = -((yPct * 16) - 10); 
             
             card.style.transition = 'none';
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
