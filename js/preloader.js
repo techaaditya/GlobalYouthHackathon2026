@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const chars = "!@#$%^&*()_+-=<>?/[]{}|";
     let currentPhrase = 0;
 
-    // Anime.js timeline for the loading bar
     const lineTimeline = anime.timeline({
         autoplay: true,
         loop: false
@@ -24,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
         easing: 'easeInOutQuart'
     });
 
-    // Custom scramble text effect
     function scrambleEffect(target, finalText, duration, onComplete) {
         let interval = 0;
         let revealed = 0;
@@ -36,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (i < revealed) {
                     displayText += finalText[i];
                 } else {
-                    // Keep spaces as spaces
                     if (finalText[i] === ' ') {
                         displayText += ' ';
                     } else {
@@ -60,12 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 10);
     }
 
-    // Sequence the phrases
     setTimeout(() => {
         scrambleEffect(scrambleText, phrases[0], 1500, () => {
             setTimeout(() => {
                 scrambleEffect(scrambleText, phrases[1], 1200, () => {
-                    // Once text and timeline are done, animate out preloader
                     setTimeout(() => {
                         anime({
                             targets: preloader,

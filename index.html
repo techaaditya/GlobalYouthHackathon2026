@@ -58,6 +58,17 @@
 
     <!-- HERO SECTION -->
     <section id="hero" class="hero-section">
+        <!-- Portal Graphic Layer (Behind Text) -->
+        <div id="portal-container" class="portal-container">
+            <div class="portal-ring ring-1"></div>
+            <div class="portal-ring ring-2"></div>
+            <div class="portal-ring ring-3"></div>
+            <div class="portal-core">
+                <span class="portal-text">ENTER</span>
+            </div>
+        </div>
+
+        <!-- Main Text Elements -->
         <div class="hero-content">
             <div class="live-badge">
                 <span class="live-dot"></span> REGISTRATIONS OPEN
@@ -71,41 +82,36 @@
                 <div class="pill"><span class="pill-icon">💻</span> Hybrid Event</div>
             </div>
         </div>
-
-        <div id="portal-container" class="portal-container">
-            <div class="portal-ring ring-1"></div>
-            <div class="portal-ring ring-2"></div>
-            <div class="portal-ring ring-3"></div>
-            <div class="portal-core"></div>
-            <div class="portal-text">ENTER</div>
-        </div>
     </section>
 
     <!-- STATS & TIMER SECTION -->
     <section id="stats" class="stats-section">
         <div class="stats-container">
+            
+            <!-- SEGMENT TIMER GRID -->
             <div class="timer-wrapper brutalist-card">
                 <h3 class="timer-title">COUNTDOWN TO LAUNCH</h3>
                 <div class="timer-display">
                     <div class="time-unit">
-                        <div class="digit-card" id="days">00</div>
+                        <div class="digit-card timer-segment" id="days">00</div>
                         <span class="time-label">DAYS</span>
                     </div>
                     <div class="time-unit">
-                        <div class="digit-card" id="hours">00</div>
+                        <div class="digit-card timer-segment" id="hours">00</div>
                         <span class="time-label">HOURS</span>
                     </div>
                     <div class="time-unit">
-                        <div class="digit-card" id="minutes">00</div>
+                        <div class="digit-card timer-segment" id="minutes">00</div>
                         <span class="time-label">MINS</span>
                     </div>
                     <div class="time-unit">
-                        <div class="digit-card" id="seconds">00</div>
+                        <div class="digit-card timer-segment" id="seconds">00</div>
                         <span class="time-label">SECS</span>
                     </div>
                 </div>
             </div>
 
+            <!-- BENTO GRID (PRIZE POOL & STATS) -->
             <div class="bento-grid">
                 <div class="bento-card brutalist-card span-2-col span-2-row card-prizes">
                     <div class="card-content">
@@ -139,7 +145,7 @@
         </div>
     </section>
 
-    <!-- TRACKS SECTION (Step 5) -->
+    <!-- TRACKS SECTION -->
     <section id="tracks" class="tracks-section">
         <div class="section-header">
             <span class="section-tag">// CHALLENGE VERTICALS</span>
@@ -181,7 +187,7 @@
         </div>
     </section>
 
-    <!-- GALLERY SECTION (Step 5) -->
+    <!-- GALLERY SECTION -->
     <section id="gallery" class="gallery-section">
         <div class="section-header">
             <span class="section-tag">// PAST MEMORIES</span>
@@ -196,10 +202,11 @@
         <p class="gallery-hint">Drag to throw & cycle</p>
     </section>
 
-    <!-- SPONSORS SECTION (Step 6) -->
+    <!-- SPONSORS MARQUEE CONTAINERS -->
     <section id="sponsors" class="sponsors-section">
         <div class="marquee-wrapper">
-            <div class="marquee">
+            <!-- Track 1: Scrolling Left -->
+            <div class="marquee marquee-left">
                 <div class="marquee-track">
                     <span class="sponsor-item">Vercel</span>
                     <span class="sponsor-item">GitHub</span>
@@ -216,7 +223,9 @@
                     <span class="sponsor-item">Supabase</span>
                 </div>
             </div>
-            <div class="marquee marquee-reverse">
+            
+            <!-- Track 2: Scrolling Right -->
+            <div class="marquee marquee-right">
                 <div class="marquee-track">
                     <span class="sponsor-item">Notion</span>
                     <span class="sponsor-item">AWS</span>
@@ -236,7 +245,7 @@
         </div>
     </section>
 
-    <!-- FAQ SECTION (Step 6) -->
+    <!-- FAQ ACCORDION LIST -->
     <section id="faq" class="faq-section">
         <div class="faq-container">
             <div class="section-header">
@@ -292,7 +301,7 @@
         </div>
     </section>
 
-    <!-- FOOTER (Step 6) -->
+    <!-- FOOTER SIGN-OFF -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-brand">

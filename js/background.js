@@ -19,21 +19,17 @@ document.addEventListener('DOMContentLoaded', () => {
             this.size = Math.random() * 2 + 1;
             this.vx = (Math.random() - 0.5) * 0.5;
             this.vy = (Math.random() - 0.5) * 0.5;
-            // Pick from our accent colors
             const colors = ['#005F73', '#0A9396', '#94D2BD'];
             this.color = colors[Math.floor(Math.random() * colors.length)];
         }
 
         update() {
-            // Organic floating movement
             this.x += this.vx;
             this.y += this.vy;
 
-            // Bounce off edges
             if (this.x < 0 || this.x > width) this.vx *= -1;
             if (this.y < 0 || this.y > height) this.vy *= -1;
 
-            // Mouse magnetism
             const dx = mouse.x - this.x;
             const dy = mouse.y - this.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
@@ -52,13 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.shadowBlur = 10;
             ctx.shadowColor = this.color;
             ctx.fill();
-            ctx.shadowBlur = 0; // reset to prevent lag
+            ctx.shadowBlur = 0; 
         }
     }
 
     function init() {
         nodes = [];
-        const nodeCount = Math.min(80, Math.floor(window.innerWidth / 15)); // Responsive count
+        const nodeCount = Math.min(80, Math.floor(window.innerWidth / 15)); 
         for (let i = 0; i < nodeCount; i++) {
             nodes.push(new Node());
         }
