@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================
     // 2. PARALLAX 3D TILT WITH SMOOTH RESET
     // =========================================
-    const tiltCards = document.querySelectorAll('.track-card, .bento-card, .prizes-section .podium-col');
+    const tiltCards = document.querySelectorAll('.track-card, .bento-card, .prizes-section .podium-col, .secretariat-card');
 
     tiltCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
@@ -52,8 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const xPct = x / rect.width;
             const yPct = y / rect.height;
             
-            const rotateY = (xPct * 16) - 10; 
-            const rotateX = -((yPct * 16) - 10); 
+            const rotateY = (xPct * 16) - 8; 
+            const rotateX = -((yPct * 16) - 8); 
             
             card.style.transition = 'none';
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
@@ -137,10 +137,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =========================================
-    // 4. FAQ GRID ACCORDION TRIGGERS
+    // 4. FAQ GRID ACCORDION & CATEGORY FILTER
     // =========================================
     const faqItems = document.querySelectorAll('.faq-item');
+    const filterBtns = document.querySelectorAll('.faq-filter-btn');
     
+    // Accordion click triggers
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
         if (!question) return;
@@ -159,6 +161,45 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 item.classList.remove('active');
             }
+        });
+    });
+
+    // Category filtering triggers
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetFilter = btn.getAttribute('data-filter') || btn.textContent.trim().toLowerCase();
+            
+            // Switch active tab styling
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            let categoryKey = 'all';
+            if (targetFilter.includes('general')) categoryKey = 'general';
+            else if (targetFilter.includes('programme') || targetFilter.includes('track')) categoryKey = 'programme';
+            else if (targetFilter.includes('logistics')) categoryKey = 'logistics';
+
+            faqItems.forEach(item => {
+                const itemCategory = item.getAttribute('data-category');
+                
+                // Collapse before filtering to prevent layout gaps
+                item.classList.remove('active');
+
+                if (categoryKey === 'all' || itemCategory === categoryKey) {
+                    item.style.display = 'block';
+                    
+                    // Kill existing tweens and reset properties cleanly
+                    gsap.killTweensOf(item);
+                    gsap.fromTo(item, 
+                        { opacity: 0, y: 15 }, 
+                        { opacity: 1, y: 0, duration: 0.4, clearProps: 'transform' }
+                    );
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Re-sync ScrollTrigger bounds as content height shifts
+            ScrollTrigger.refresh();
         });
     });
 

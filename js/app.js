@@ -142,7 +142,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 y: 40, opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out'
             });
 
-            // --- 7. GALLERY SECTION REVEAL ---
+            // --- 7. SECRETARIAT REVEAL ---
+            gsap.from('.secretariat-category-group', {
+                scrollTrigger: {
+                    trigger: '.secretariat-section',
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                },
+                y: 50, opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out'
+            });
+
+            // --- 8. GALLERY SECTION REVEAL ---
             gsap.from('.card-stack', {
                 scrollTrigger: {
                     trigger: '.gallery-section',
@@ -152,14 +162,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 scale: 0.8, opacity: 0, duration: 1, ease: 'power3.out'
             });
 
-            // --- 8. FAQ SECTION REVEAL ---
-            gsap.from('.faq-item', {
+            // --- 9. FAQ GRID CONTAINER REVEAL ---
+            // Consolidated to parent container to prevent individual item opacity locking on filter states
+            gsap.from('.faq-grid', {
                 scrollTrigger: {
                     trigger: '.faq-grid',
                     start: 'top 85%',
                     toggleActions: 'play none none reverse'
                 },
-                y: 50, opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out'
+                y: 40,
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power2.out'
             });
 
             ScrollTrigger.refresh();
