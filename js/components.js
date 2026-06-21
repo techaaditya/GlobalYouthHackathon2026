@@ -234,6 +234,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     navMenu.addEventListener('mouseleave', () => { if (navItems.length > 0) moveLine(navItems[0]); }, { passive: true });
 
+    const navbarEl = document.getElementById('navbar');
+    let navScrolled = false;
+
+    function updateNavbarScroll() {
+        const shouldShrink = window.scrollY > 80;
+        if (shouldShrink === navScrolled) return;
+        navScrolled = shouldShrink;
+        navbarEl.classList.toggle('scrolled', navScrolled);
+        clearTimeout(updateNavbarScroll._t);
+        updateNavbarScroll._t = setTimeout(() => {
+            moveLine(document.querySelector('.nav-item.active') || navItems[0]);
+        }, 350);
+    }
+
+    window.addEventListener('scroll', updateNavbarScroll, { passive: true });
+    updateNavbarScroll();
+
     // Sponsor Text Split Effect
     const sponsorItems = document.querySelectorAll('.sponsor-item');
     sponsorItems.forEach(item => {
