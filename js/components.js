@@ -204,52 +204,143 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =========================================
-    // 5. NAVBAR MAGIC LINE & SPONSOR SPLIT
-    // =========================================
-    const navMenu = document.querySelector('.nav-menu');
-    const magicLine = document.getElementById('magic-line');
-    const navItems = document.querySelectorAll('.nav-item');
+// 5. NAVBAR: SHRINK ON SCROLL, MAGIC LINE, SCROLL-SPY, MOBILE TOGGLE
+// =========================================
+const navbarEl = document.getElementById('navbar');
+const navMenu = document.querySelector('.nav-menu');
+const magicLine = document.getElementById('magic-line');
+const navItems = document.querySelectorAll('.nav-item');
+const navToggle = document.getElementById('nav-toggle');
 
-    function moveLine(target) {
-        if (!target) return;
-        const rect = target.getBoundingClientRect();
-        const parentRect = navMenu.getBoundingClientRect();
-        magicLine.style.opacity = '1';
-        magicLine.style.width = `${rect.width}px`;
-        magicLine.style.left = `${rect.left - parentRect.left}px`;
+let navScrolled = false;
+
+function updateNavbarScroll() {
+    const shouldShrink = window.scrollY > 80;
+    if (shouldShrink === navScrolled) return;
+    navScrolled = shouldShrink;
+    navbarEl.classList.toggle('scrolled', navScrolled);
+    syncLineWithLayout();
+
+}
+window.addEventListener('scroll', updateNavbarScroll, { passive: true });
+
+function syncLineWithLayout(duration = 650) {
+    magicLine.style.transition = 'none';
+    const start = performance.now();
+    function tick(now) {
+        moveLine(getActiveItem());
+        if (now - start < duration) {
+            requestAnimationFrame(tick);
+        } else {
+            magicLine.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+            moveLine(getActiveItem());
+        }
     }
+    requestAnimationFrame(tick);
+}
+function moveLine(target) {
+    if (!target) return;
+    const rect = target.getBoundingClientRect();
+    const parentRect = navMenu.getBoundingClientRect();
+    magicLine.style.opacity = '1';
+    magicLine.style.width = `${rect.width}px`;
+    magicLine.style.left = `${rect.left - parentRect.left}px`;
+}
 
-    if (navItems.length > 0) {
-        setTimeout(() => {
-            magicLine.style.transition = 'none';
-            moveLine(navItems[0]);
-            setTimeout(() => {
-                magicLine.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
-            }, 50);
-        }, 500);
-    }
+function getActiveItem() {
+    return document.querySelector('.nav-item.active') || navItems[0];
+}
 
-    navItems.forEach(item => {
-        item.addEventListener('mouseenter', () => moveLine(item), { passive: true });
+function setActiveItem(item) {
+    navItems.forEach(i => i.classList.remove('active'));
+    if (item) item.classList.add('active');
+}
+
+function closeMobileMenu() {
+    navbarEl.classList.remove('menu-open');
+    if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('nav-lock');
+}
+
+if (navToggle) {
+    navToggle.addEventListener('click', () => {
+        const isOpen = navbarEl.classList.toggle('menu-open');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+        document.body.classList.toggle('nav-lock', isOpen);
     });
-    navMenu.addEventListener('mouseleave', () => { if (navItems.length > 0) moveLine(navItems[0]); }, { passive: true });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navbarEl.classList.contains('menu-open')) closeMobileMenu();
+    });
+}
 
-    const navbarEl = document.getElementById('navbar');
-    let navScrolled = false;
+let isClickScrolling = false;
+let clickScrollTimeout;
 
-    function updateNavbarScroll() {
-        const shouldShrink = window.scrollY > 80;
-        if (shouldShrink === navScrolled) return;
-        navScrolled = shouldShrink;
-        navbarEl.classList.toggle('scrolled', navScrolled);
-        clearTimeout(updateNavbarScroll._t);
-        updateNavbarScroll._t = setTimeout(() => {
-            moveLine(document.querySelector('.nav-item.active') || navItems[0]);
-        }, 350);
+navItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+        const href = item.getAttribute('href');
+        setActiveItem(item);
+        moveLine(item);
+        isClickScrolling = true;
+        clearTimeout(clickScrollTimeout);
+        clickScrollTimeout = setTimeout(() => { isClickScrolling = false; }, 1000);
+
+        if (href === '#hero') {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        closeMobileMenu();
+    });
+});
+
+const spySections = Array.from(navItems)
+    .map(item => document.querySelector(item.getAttribute('href')))
+    .filter(Boolean);
+
+const sectionObserver = new IntersectionObserver((entries) => {
+    if (isClickScrolling) return;
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const matchingLink = document.querySelector(`.nav-item[href="#${entry.target.id}"]`);
+            if (matchingLink) {
+                setActiveItem(matchingLink);
+                if (!navMenu.matches(':hover')) moveLine(matchingLink);
+            }
+        }
+    });
+}, {
+    rootMargin: '-45% 0px -45% 0px',
+    threshold: 0
+});
+spySections.forEach(section => sectionObserver.observe(section));
+
+window.addEventListener('scroll', () => {
+    if (isClickScrolling) return; 
+    if (window.scrollY < 50) {
+        const homeLink = document.querySelector('.nav-item[href="#hero"]');
+        if (getActiveItem() !== homeLink) {
+            setActiveItem(homeLink);
+            moveLine(homeLink);
+        }
     }
+}, { passive: true });
 
-    window.addEventListener('scroll', updateNavbarScroll, { passive: true });
-    updateNavbarScroll();
+updateNavbarScroll();
+
+if (navItems.length > 0) {
+    setTimeout(() => {
+        magicLine.style.transition = 'none';
+        moveLine(getActiveItem());
+        setTimeout(() => {
+            magicLine.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+        }, 50);
+    }, 500);
+}
+
+navItems.forEach(item => {
+    item.addEventListener('mouseenter', () => moveLine(item), { passive: true });
+});
+navMenu.addEventListener('mouseleave', () => moveLine(getActiveItem()), { passive: true });
 
     // Sponsor Text Split Effect
     const sponsorItems = document.querySelectorAll('.sponsor-item');
