@@ -26,58 +26,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // --- 2. PORTAL ZOOM-IN SCROLLTRIGGER (SNAPPY ZOOM) ---
             if (isDesktop) {
-                // DESKTOP: Fast scale "Dive-Through" with end threshold cut to +=65%
-                gsap.timeline({
+                let portalDone = false;
+
+                const portalTl = gsap.timeline({
                     scrollTrigger: {
                         trigger: "#hero",
                         start: "top top",
-                        end: "+=65%", // Rapid pin distance for quick transition
-                        scrub: 1,
+                        end: "+=90%",
+                        scrub: 2,
                         pin: true,
                         anticipatePin: 1,
-                        invalidateOnRefresh: true
+                        invalidateOnRefresh: true,
+                        onLeaveBack: (self) => {
+                            // When user scrolls back up into the hero, kill the pin
+                            // so there's no magnetic snap pulling them back down
+                            if (portalDone) {
+                                self.disable();
+                                gsap.set('.portal-container', { scale: 1, opacity: 1 });
+                                gsap.set('.portal-core, .portal-text', { opacity: 1 });
+                                portalDone = false;
+
+                                // Re-enable after they fully leave back to top
+                                ScrollTrigger.create({
+                                    trigger: "#hero",
+                                    start: "top top",
+                                    onLeave: () => {
+                                        self.enable();
+                                        portalDone = true;
+                                    },
+                                    once: true
+                                });
+                            }
+                        },
+                        onLeave: () => {
+                            portalDone = true;  // portal zoom completed
+                        }
                     }
                 })
-                .to('.hero-content', { 
-                    opacity: 0, 
-                    y: -100, 
-                    ease: 'none', 
-                    duration: 0.3 
-                }, 0)
                 .to('.portal-container', { 
-                    scale: 14, // Zooms smoothly past the screen
-                    ease: 'none', 
+                    scale: 8,
+                    ease: 'power1.inOut', 
                     duration: 1 
                 }, 0)
                 .to('.portal-core, .portal-text', { 
                     opacity: 0, 
-                    ease: 'none', 
-                    duration: 0.3 
+                    ease: 'power2.in', 
+                    duration: 0.6
                 }, 0);
-            } else {
-                // MOBILE: Simplified fade
+            }
+            else {
                 gsap.timeline({
                     scrollTrigger: {
                         trigger: "#hero",
                         start: "top top",
-                        end: "+=40%", 
-                        scrub: 1,
-                        pin: true,
-                        anticipatePin: 1,
+                        end: "+=60%",
+                        scrub: 2,
                         invalidateOnRefresh: true
                     }
                 })
-                .to('.hero-content', { 
-                    opacity: 0, 
-                    y: -50, 
-                    ease: 'none', 
-                    duration: 0.5 
-                }, 0)
                 .to('.portal-container', { 
                     opacity: 0, 
-                    scale: 1.5, 
-                    ease: 'none', 
-                    duration: 0.5 
+                    scale: 1.3,
+                    ease: 'power1.inOut', 
+                    duration: 0.8 
                 }, 0);
             }
 
