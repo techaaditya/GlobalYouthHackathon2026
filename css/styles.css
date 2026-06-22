@@ -273,8 +273,8 @@ body.nav-lock { overflow: hidden; }
     background:
         radial-gradient(
             ellipse 70% 65% at 50% 50%,
-            rgba(0, 18, 25, 0.82) 0%,
-            rgba(0, 18, 25, 0.55) 45%,
+            rgba(0, 18, 25, 0.25) 0%,
+            rgba(0, 18, 25, 0.15) 45%,
             rgba(0, 18, 25, 0.0) 100%
         );
 }
@@ -394,7 +394,7 @@ body.nav-lock { overflow: hidden; }
     border-radius: 50%;
     border: 1.5px solid var(--dark-cyan);
     /* Reduced opacity so rings don't compete with title text */
-    opacity: 0.45;
+    opacity: 1;
     box-shadow: 0 0 12px var(--dark-cyan);
 }
 .ring-1 {
