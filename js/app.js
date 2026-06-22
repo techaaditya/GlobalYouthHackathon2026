@@ -72,7 +72,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     opacity: 0, 
                     ease: 'power2.in', 
                     duration: 0.6
-                }, 0);
+                }, 0)
+                .to('.hero-content', {         // ← add this
+                opacity: 0,
+                y: -20,                    // subtle upward drift, not -100
+                ease: 'power1.in',
+                duration: 0.8,             // slow fade over most of the scroll
+                delay: 0.1                 // starts just slightly after portal begins zooming
+            }, 0)
+            .to('.metadata-pills', {       // pills fade out slightly before the rest
+                opacity: 0,
+                y: -10,
+                ease: 'power1.in',
+                duration: 0.5
+            }, 0);
+
             }
             else {
                 gsap.timeline({
