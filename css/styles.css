@@ -267,49 +267,205 @@ body.nav-lock { overflow: hidden; }
 .section-subtitle-text { max-width: 700px; margin: 1.5rem auto 0; font-size: 1.1rem; color: var(--pearl-aqua); line-height: 1.6; }
 
 /* =========================================
-   8. HERO & PORTAL (REFACTORED HOLLOW EFFECT)
+   8. HERO & PORTAL
 ========================================= */
-.hero-section { position: relative; height: 100vh; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
-.hero-content { z-index: 5; max-width: 900px; padding: 0 2rem; }
-.live-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(238, 155, 0, 0.1); border: 1px solid var(--golden-orange); padding: 0.4rem 1rem; border-radius: 50px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--golden-orange); margin-bottom: 1.5rem; letter-spacing: 1px; }
-.live-dot { width: 8px; height: 8px; background: var(--golden-orange); border-radius: 50%; box-shadow: 0 0 10px var(--golden-orange); animation: blink 1.5s infinite; }
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-.hero-title { font-family: var(--font-header); font-size: clamp(2.5rem, 8vw, 6rem); font-weight: 700; line-height: 1.1; color: var(--vanilla-custard); text-transform: uppercase; margin-bottom: 1.5rem; }
-.text-highlight { color: var(--golden-orange); }
-.hero-subtitle { font-size: 1.2rem; color: var(--pearl-aqua); max-width: 600px; margin: 0 auto 2.5rem; }
-.metadata-pills { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-.pill { display: flex; align-items: center; gap: 0.5rem; background: rgba(0, 18, 25, 0.6); border: 1px solid var(--dark-cyan); padding: 0.6rem 1.2rem; border-radius: 8px; font-family: var(--font-mono); font-size: 0.9rem; color: var(--vanilla-custard); }
-
-.portal-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; z-index: 1; display: flex; justify-content: center; align-items: center; pointer-events: none; }
-.portal-ring { position: absolute; border-radius: 50%; border: 2px solid var(--dark-cyan); box-shadow: 0 0 15px var(--dark-cyan), inset 0 0 15px var(--dark-cyan); }
-.ring-1 { width: 300px; height: 300px; animation: rotate 10s linear infinite; }
-.ring-2 { width: 450px; height: 450px; border-color: var(--golden-orange); box-shadow: 0 0 20px var(--golden-orange), inset 0 0 20px var(--golden-orange); animation: rotate 15s linear infinite reverse; opacity: 0.6; }
-.ring-3 { width: 600px; height: 600px; border: 1px dashed var(--pearl-aqua); opacity: 0.3; animation: rotate 30s linear infinite; }
-
-/* Fully hollow glassmorphic concentric core */
-.portal-core { 
-  width: 150px; 
-  height: 150px; 
-  background: rgba(0, 18, 25, 0.5); 
-  backdrop-filter: blur(4px);
-  border: 2px solid var(--golden-orange); 
-  border-radius: 50%; 
-  box-shadow: 0 0 30px var(--golden-orange), inset 0 0 20px var(--golden-orange); 
-  z-index: 2; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.hero-section {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
 }
-.portal-text { 
-  font-family: var(--font-mono); 
-  font-weight: 700; 
-  color: var(--golden-orange); 
-  text-shadow: 0 0 10px var(--golden-orange);
-  letter-spacing: 4px; 
-  font-size: 1.1rem; 
+
+/* Layered radial gradient vignette — darkens the canvas in the center 
+   so text always sits on a sufficiently dark surface, regardless of 
+   where particles drift. The outer edge stays bright for visual depth. */
+.hero-vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+        radial-gradient(
+            ellipse 70% 65% at 50% 50%,
+            rgba(0, 18, 25, 0.25) 0%,
+            rgba(0, 18, 25, 0.15) 45%,
+            rgba(0, 18, 25, 0.0) 100%
+        );
+}
+
+/* Hero content sits above the vignette */
+.hero-content {
+    z-index: 5;
+    max-width: 900px;
+    padding: 4rem 2rem 0;
+    position: relative;
+}
+
+/* Live badge */
+.live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(238, 155, 0, 0.08);
+    border: 1px solid rgba(238, 155, 0, 0.5);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--golden-orange);
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+    /* Subtle glow so it reads against both dark and lit backgrounds */
+    box-shadow: 0 0 20px rgba(238, 155, 0, 0.12), inset 0 0 12px rgba(238, 155, 0, 0.05);
+}
+.live-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--golden-orange);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--golden-orange);
+    animation: blink 1.5s infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+/* Hero title: heavier text-shadow lifts it cleanly off the canvas */
+.hero-title {
+    font-family: var(--font-header);
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--vanilla-custard);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    text-shadow:
+        0 2px 4px rgba(0, 18, 25, 0.9),
+        0 4px 24px rgba(0, 18, 25, 0.7),
+        0 8px 48px rgba(0, 18, 25, 0.5);
+    /* Stops the canvas glow from bleeding through the letterforms */
+    -webkit-font-smoothing: antialiased;
+}
+.text-highlight {
+    color: var(--golden-orange);
+    text-shadow:
+        0 0 30px rgba(238, 155, 0, 0.4),
+        0 2px 4px rgba(0, 18, 25, 0.9);
+}
+
+/* Subtitle: frosted glass pill so it's always legible */
+.hero-subtitle {
+    font-size: clamp(0.65rem, 1.25vw, 0.95rem);
+    color: var(--pearl-aqua);
+    max-width: 580px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.7;
+    background: rgba(0, 18, 25, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(10, 147, 150, 0.15);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+}
+
+/* Metadata pills */
+.metadata-pills {
+    display: flex;
+    justify-content: center;
+    gap: 1.8rem;
+    flex-wrap: wrap;
+}
+.pill {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0, 18, 25, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(148, 210, 189, 0.25);
+    padding: 0.55rem 1.1rem;
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--vanilla-custard);
+    box-shadow: 0 2px 12px rgba(0, 18, 25, 0.5);
+}
+
+/* Portal: pushed behind the vignette so it adds depth without competing */
+.portal-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    z-index: 1; /* sits below vignette and content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+.portal-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1.5px solid var(--dark-cyan);
+    /* Reduced opacity so rings don't compete with title text */
+    opacity: 1;
+    box-shadow: 0 0 12px var(--dark-cyan);
+}
+.ring-1 {
+    width: 300px; height: 300px;
+    animation: rotate 10s linear infinite;
+}
+.ring-2 {
+    width: 450px; height: 450px;
+    border-color: var(--golden-orange);
+    box-shadow: 0 0 15px var(--golden-orange);
+    animation: rotate 15s linear infinite reverse;
+    opacity: 0.3;
+}
+.ring-3 {
+    width: 600px; height: 600px;
+    border: 1px dashed var(--pearl-aqua);
+    opacity: 0.15;
+    animation: rotate 30s linear infinite;
+}
+.portal-core {
+    width: 150px;
+    height: 150px;
+    background: rgba(0, 18, 25, 0.6);
+    backdrop-filter: blur(6px);
+    border: 2px solid var(--golden-orange);
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(238, 155, 0, 0.35), inset 0 0 20px rgba(238, 155, 0, 0.1);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.portal-text {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--golden-orange);
+    text-shadow: 0 0 10px var(--golden-orange);
+    letter-spacing: 4px;
+    font-size: 1rem;
 }
 @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .portal-container { width: 340px; height: 340px; }
+    .ring-1 { width: 170px; height: 170px; }
+    .ring-2 { width: 255px; height: 255px; }
+    .ring-3 { width: 340px; height: 340px; }
+    .portal-core { width: 100px; height: 100px; }
+    .portal-text { font-size: 0.8rem; letter-spacing: 2px; }
+    .hero-subtitle { font-size: 0.95rem; padding: 0.8rem 1.1rem; }
+}
 /* =========================================
    9. STATS & DYNAMIC SEGMENT TIMER GLOW
 ========================================= */

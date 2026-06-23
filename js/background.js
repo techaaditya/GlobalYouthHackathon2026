@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.y = Math.random() * height;
             this.baseX = this.x;
             this.baseY = this.y;
-            this.size = Math.random() * 2 + 1;
+            this.size = Math.random() * 3 + 1.5;
             this.vx = (Math.random() - 0.5) * 0.5;
             this.vy = (Math.random() - 0.5) * 0.5;
             const colors = ['#005F73', '#0A9396', '#94D2BD'];
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fillStyle = this.color;
-            ctx.shadowBlur = 10;
+            ctx.shadowBlur = 6;
             ctx.shadowColor = this.color;
             ctx.fill();
             ctx.shadowBlur = 0; 
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function init() {
         nodes = [];
-        const nodeCount = Math.min(80, Math.floor(window.innerWidth / 15)); 
+        const nodeCount = Math.min(120, Math.floor(window.innerWidth / 10)); 
         for (let i = 0; i < nodeCount; i++) {
             nodes.push(new Node());
         }
@@ -68,9 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const dy = nodes[a].y - nodes[b].y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
 
-                if (dist < 120) {
+                if (dist < 140) {
                     opacity = 1 - (dist / 120);
-                    ctx.strokeStyle = `rgba(10, 147, 150, ${opacity * 0.4})`;
+                    ctx.strokeStyle = `rgba(10, 147, 150, ${opacity * 0.45})`;
                     ctx.lineWidth = 1;
                     ctx.beginPath();
                     ctx.moveTo(nodes[a].x, nodes[a].y);
