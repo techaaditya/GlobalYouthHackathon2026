@@ -361,7 +361,7 @@ body.nav-lock { overflow: hidden; }
     font-size: clamp(0.65rem, 1.25vw, 0.95rem);
     color: var(--pearl-aqua);
     max-width: 580px;
-    margin: 0 auto 2.5rem;
+    margin: 0 auto 1.5rem;
     line-height: 1.7;
     background: rgba(0, 18, 25, 0.4);
     backdrop-filter: blur(8px);
@@ -375,7 +375,7 @@ body.nav-lock { overflow: hidden; }
 .metadata-pills {
     display: flex;
     justify-content: center;
-    gap: 0.75rem;
+    gap: 1.8rem;
     flex-wrap: wrap;
 }
 .pill {
