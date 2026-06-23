@@ -26,16 +26,35 @@
    2. GLOBAL RESETS & BASE STYLES
 ========================================= */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+
+html, body {
+  overflow-x: hidden;         
+  height: 100%;
+  scroll-behavior: auto;      
+}
 
 body {
   background-color: var(--ink-black);
   color: var(--vanilla-custard);
   font-family: var(--font-body);
-  overflow-x: hidden;
-  min-height: 100vh;
 }
 
+/* SCROLL */
+
+#smooth-wrapper {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index:1;
+}
+
+#smooth-content {
+    overflow: visible;
+    width: 100%;
+}
 /* =========================================
    3. PRELOADER
 ========================================= */

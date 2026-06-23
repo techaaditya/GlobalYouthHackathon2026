@@ -3,6 +3,7 @@ gsap.registerPlugin(ScrollTrigger);
 document.addEventListener('DOMContentLoaded', () => {
     // Delay initialization to sync with the preloader timeline completion
     setTimeout(() => {
+        ScrollTrigger.refresh();
         
         // =========================================
         // GSAP MATCHMEDIA FOR RESPONSIVE ANIMATIONS
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .from('.metadata-pills .pill', { y: 20, opacity: 0, stagger: 0.1, duration: 0.4 }, '-=0.3')
                 .from('.portal-container', { scale: 0.5, opacity: 0, duration: 1.5, ease: 'expo.out' }, '-=1');
 
-            // --- 2. PORTAL ZOOM-IN SCROLLTRIGGER (SNAPPY ZOOM) ---
+        // --- 2. PORTAL ZOOM-IN SCROLLTRIGGER (SNAPPY ZOOM) ---
             if (isDesktop) {
                 let portalDone = false;
 
