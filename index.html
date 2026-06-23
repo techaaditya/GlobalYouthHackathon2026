@@ -15,9 +15,9 @@
 
     <!-- CDN Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-</head>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/ScrollSmoother.min.js"></script></head>
 <body>
 
     <!-- Preloader Overlay -->
@@ -31,637 +31,647 @@
     <!-- Interactive Background Canvas -->
     <canvas id="bg-canvas"></canvas>
 
-    <!-- Sticky Glassmorphic Navbar -->
-    <header id="navbar" class="navbar glass">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">
-                <span class="logo-bracket">[</span>
-                GYH
-                <span class="logo-bracket">]</span>
-                <span class="logo-year">2026</span>
-            </a>
-            
-            <nav class="nav-menu">
-                <div id="magic-line" class="magic-line"></div>
-                <a href="#hero" class="nav-item active">Home</a>
-                <a href="#stats" class="nav-item">About</a>
-                <a href="#tracks" class="nav-item">Tracks</a>
-                <a href="#prizes" class="nav-item">Prizes</a>
-                <a href="#timeline" class="nav-item">Timeline</a>
-                <a href="#secretariat" class="nav-item">Secretariat</a>
-                <a href="#gallery" class="nav-item">Gallery</a>
-                <a href="#faq" class="nav-item">FAQ</a>
-            </nav>
+        <!-- Sticky Glassmorphic Navbar -->
+            <header id="navbar" class="navbar glass">
+                <div class="nav-container">
+                    <a href="#" class="nav-logo">
+                        <span class="logo-bracket">[</span>
+                        GYH
+                        <span class="logo-bracket">]</span>
+                        <span class="logo-year">2026</span>
+                    </a>
+                    
+                    <nav class="nav-menu">
+                        <div id="magic-line" class="magic-line"></div>
+                        <a href="#hero" class="nav-item active">Home</a>
+                        <a href="#stats" class="nav-item">About</a>
+                        <a href="#tracks" class="nav-item">Tracks</a>
+                        <a href="#prizes" class="nav-item">Prizes</a>
+                        <a href="#timeline" class="nav-item">Timeline</a>
+                        <a href="#secretariat" class="nav-item">Secretariat</a>
+                        <a href="#gallery" class="nav-item">Gallery</a>
+                        <a href="#faq" class="nav-item">FAQ</a>
+                    </nav>
 
-            <div class="nav-cta">
-                <button class="btn-primary">Register Now</button>
-            </div>
-
-            <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span class="nav-toggle-bar"></span>
-                <span class="nav-toggle-bar"></span>
-                <span class="nav-toggle-bar"></span>
-            </button>
-        </div>
-    </header>
-
-    <!-- HERO SECTION -->
-    <section id="hero" class="hero-section">
-        <!-- Hollow Glowing Portal rings -->
-        <div id="portal-container" class="portal-container">
-            <div class="portal-ring ring-1"></div>
-            <div class="portal-ring ring-2"></div>
-            <div class="portal-ring ring-3"></div>
-            <div class="portal-core">
-                <span class="portal-text">ENTER</span>
-            </div>
-        </div>
-
-        <!-- Main Text Elements -->
-        <div class="hero-content">
-            <div class="live-badge">
-                <span class="live-dot"></span> REGISTRATIONS OPEN
-            </div>
-            <h1 class="hero-title">GLOBAL YOUTH<br><span class="text-highlight">HACKATHON</span> 2026</h1>
-            <p class="hero-subtitle">Exploring critical diplomacy, modern computing, and climate action. An international platform empowering young changemakers to build tangible sustainable solutions.</p>
-            
-            <div class="metadata-pills">
-                <div class="pill"><span class="pill-icon">📅</span> Sept 4-6, 2026</div>
-                <div class="pill"><span class="pill-icon">📍</span> Kathmandu / Paris</div>
-                <div class="pill"><span class="pill-icon">💻</span> Hybrid Format</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- STATS & TIMER SECTION -->
-    <section id="stats" class="stats-section">
-        <div class="stats-container">
-            
-            <!-- SEGMENT TIMER GRID -->
-            <div class="timer-wrapper brutalist-card">
-                <h3 class="timer-title">COUNTDOWN TO LAUNCH</h3>
-                <div class="timer-display">
-                    <div class="time-unit">
-                        <div class="digit-card timer-segment" id="days">00</div>
-                        <span class="time-label">DAYS</span>
+                    <div class="nav-cta">
+                        <button class="btn-primary">Register Now</button>
                     </div>
-                    <div class="time-unit">
-                        <div class="digit-card timer-segment" id="hours">00</div>
-                        <span class="time-label">HOURS</span>
-                    </div>
-                    <div class="time-unit">
-                        <div class="digit-card timer-segment" id="minutes">00</div>
-                        <span class="time-label">MINS</span>
-                    </div>
-                    <div class="time-unit">
-                        <div class="digit-card timer-segment" id="seconds">00</div>
-                        <span class="time-label">SECS</span>
+
+                    <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                        <span class="nav-toggle-bar"></span>
+                        <span class="nav-toggle-bar"></span>
+                        <span class="nav-toggle-bar"></span>
+                    </button>
+                </div>
+            </header>
+
+
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+
+
+            <!-- HERO SECTION -->
+            <section id="hero" class="hero-section">
+                <!-- Hollow Glowing Portal rings -->
+                <div id="portal-container" class="portal-container">
+                    <div class="portal-ring ring-1"></div>
+                    <div class="portal-ring ring-2"></div>
+                    <div class="portal-ring ring-3"></div>
+                    <div class="portal-core">
+                        <span class="portal-text">ENTER</span>
                     </div>
                 </div>
-            </div>
 
-            <!-- BENTO GRID (ABOUT SECTION) -->
-            <div class="bento-grid">
-                <div class="bento-card brutalist-card span-2-col span-2-row card-prizes">
-                    <div class="card-content">
-                        <span class="card-tag">GLOBAL REWARDS</span>
-                        <h2 class="card-value">$10,000+</h2>
-                        <p class="card-desc">Comprehensive bounty pool split among top tracks, specialty awards, and direct incubation support to scale your prototype into a real-world enterprise.</p>
+                <!-- Main Text Elements -->
+                <div class="hero-content">
+                    <div class="live-badge">
+                        <span class="live-dot"></span> REGISTRATIONS OPEN
+                    </div>
+                    <h1 class="hero-title">GLOBAL YOUTH<br><span class="text-highlight">HACKATHON</span> 2026</h1>
+                    <p class="hero-subtitle">Exploring critical diplomacy, modern computing, and climate action. An international platform empowering young changemakers to build tangible sustainable solutions.</p>
+                    
+                    <div class="metadata-pills">
+                        <div class="pill"><span class="pill-icon">📅</span> Sept 4-6, 2026</div>
+                        <div class="pill"><span class="pill-icon">📍</span> Kathmandu / Paris</div>
+                        <div class="pill"><span class="pill-icon">💻</span> Hybrid Format</div>
                     </div>
                 </div>
-                <div class="bento-card brutalist-card card-format">
-                    <div class="card-content">
-                        <span class="card-tag">FORMAT</span>
-                        <h2 class="card-value">36 Hrs</h2>
-                        <p class="card-desc">An intense build run connecting youth teams directly to industry mentors and project design leads.</p>
+            </section>
+
+            <!-- STATS & TIMER SECTION -->
+            <section id="stats" class="stats-section">
+                <div class="stats-container">
+                    
+                    <!-- SEGMENT TIMER GRID -->
+                    <div class="timer-wrapper brutalist-card">
+                        <h3 class="timer-title">COUNTDOWN TO LAUNCH</h3>
+                        <div class="timer-display">
+                            <div class="time-unit">
+                                <div class="digit-card timer-segment" id="days">00</div>
+                                <span class="time-label">DAYS</span>
+                            </div>
+                            <div class="time-unit">
+                                <div class="digit-card timer-segment" id="hours">00</div>
+                                <span class="time-label">HOURS</span>
+                            </div>
+                            <div class="time-unit">
+                                <div class="digit-card timer-segment" id="minutes">00</div>
+                                <span class="time-label">MINS</span>
+                            </div>
+                            <div class="time-unit">
+                                <div class="digit-card timer-segment" id="seconds">00</div>
+                                <span class="time-label">SECS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BENTO GRID (ABOUT SECTION) -->
+                    <div class="bento-grid">
+                        <div class="bento-card brutalist-card span-2-col span-2-row card-prizes">
+                            <div class="card-content">
+                                <span class="card-tag">GLOBAL REWARDS</span>
+                                <h2 class="card-value">$10,000+</h2>
+                                <p class="card-desc">Comprehensive bounty pool split among top tracks, specialty awards, and direct incubation support to scale your prototype into a real-world enterprise.</p>
+                            </div>
+                        </div>
+                        <div class="bento-card brutalist-card card-format">
+                            <div class="card-content">
+                                <span class="card-tag">FORMAT</span>
+                                <h2 class="card-value">36 Hrs</h2>
+                                <p class="card-desc">An intense build run connecting youth teams directly to industry mentors and project design leads.</p>
+                            </div>
+                        </div>
+                        <div class="bento-card brutalist-card card-hackers">
+                            <div class="card-content">
+                                <span class="card-tag">TEAMS EXPECTED</span>
+                                <h2 class="card-value">100+</h2>
+                                <p class="card-desc">High-potential teams competing across multiple tracks.</p>
+                            </div>
+                        </div>
+                        <div class="bento-card brutalist-card span-2-col card-mentors">
+                            <div class="card-content">
+                                <span class="card-tag">FINALE LOCATION</span>
+                                <h2 class="card-value">Paris Grand Finale</h2>
+                                <p class="card-desc">The top selected teams from evaluation will win complete travel support to pitch their models live before international organizations in Paris, France.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="bento-card brutalist-card card-hackers">
-                    <div class="card-content">
-                        <span class="card-tag">TEAMS EXPECTED</span>
-                        <h2 class="card-value">100+</h2>
-                        <p class="card-desc">High-potential teams competing across multiple tracks.</p>
+            </section>
+
+            <!-- TRACKS SECTION -->
+            <section id="tracks" class="tracks-section">
+                <div class="section-header">
+                    <span class="section-tag">// CHALLENGE VERTICALS</span>
+                    <h2 class="section-title">HACK TRACKS</h2>
+                </div>
+                <div class="tracks-grid">
+                    <div class="track-card brutalist-card" data-tilt>
+                        <div class="track-content">
+                            <div class="track-icon">🧠</div>
+                            <h3>AI &amp; Machine Learning</h3>
+                            <p>Build generative models, computer vision apps, or intelligent agents designed to address the UN Sustainable Development Goals (SDGs).</p>
+                            <div class="track-prize">Prize: $2,500</div>
+                        </div>
+                    </div>
+                    <div class="track-card brutalist-card" data-tilt>
+                        <div class="track-content">
+                            <div class="track-icon">🔐</div>
+                            <h3>Cyber Security</h3>
+                            <p>Develop robust tools for threat detection, cryptography, or secure network architectures to defend critical civil systems.</p>
+                            <div class="track-prize">Prize: $2,500</div>
+                        </div>
+                    </div>
+                    <div class="track-card brutalist-card" data-tilt>
+                        <div class="track-content">
+                            <div class="track-icon">⛓️</div>
+                            <h3>Web3 &amp; Blockchain</h3>
+                            <p>Create decentralized apps, secure smart contracts, or open financial protocols promoting transparency in local governance.</p>
+                            <div class="track-prize">Prize: $2,500</div>
+                        </div>
+                    </div>
+                    <div class="track-card brutalist-card" data-tilt>
+                        <div class="track-content">
+                            <div class="track-icon">🌍</div>
+                            <h3>Sustainability Tech</h3>
+                            <p>Engineer data-driven solutions for climate action, smart waste management, and renewable resource optimization.</p>
+                            <div class="track-prize">Prize: $2,500</div>
+                        </div>
                     </div>
                 </div>
-                <div class="bento-card brutalist-card span-2-col card-mentors">
-                    <div class="card-content">
-                        <span class="card-tag">FINALE LOCATION</span>
-                        <h2 class="card-value">Paris Grand Finale</h2>
-                        <p class="card-desc">The top selected teams from evaluation will win complete travel support to pitch their models live before international organizations in Paris, France.</p>
-                    </div>
+            </section>
+
+            <!-- PRIZES SECTION -->
+            <section id="prizes" class="prizes-section">
+                <div class="section-header">
+                    <span class="section-tag">// WINNER DISTRIBUTION</span>
+                    <h2 class="section-title">PODIUM REWARDS</h2>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TRACKS SECTION -->
-    <section id="tracks" class="tracks-section">
-        <div class="section-header">
-            <span class="section-tag">// CHALLENGE VERTICALS</span>
-            <h2 class="section-title">HACK TRACKS</h2>
-        </div>
-        <div class="tracks-grid">
-            <div class="track-card brutalist-card" data-tilt>
-                <div class="track-content">
-                    <div class="track-icon">🧠</div>
-                    <h3>AI &amp; Machine Learning</h3>
-                    <p>Build generative models, computer vision apps, or intelligent agents designed to address the UN Sustainable Development Goals (SDGs).</p>
-                    <div class="track-prize">Prize: $2,500</div>
-                </div>
-            </div>
-            <div class="track-card brutalist-card" data-tilt>
-                <div class="track-content">
-                    <div class="track-icon">🔐</div>
-                    <h3>Cyber Security</h3>
-                    <p>Develop robust tools for threat detection, cryptography, or secure network architectures to defend critical civil systems.</p>
-                    <div class="track-prize">Prize: $2,500</div>
-                </div>
-            </div>
-            <div class="track-card brutalist-card" data-tilt>
-                <div class="track-content">
-                    <div class="track-icon">⛓️</div>
-                    <h3>Web3 &amp; Blockchain</h3>
-                    <p>Create decentralized apps, secure smart contracts, or open financial protocols promoting transparency in local governance.</p>
-                    <div class="track-prize">Prize: $2,500</div>
-                </div>
-            </div>
-            <div class="track-card brutalist-card" data-tilt>
-                <div class="track-content">
-                    <div class="track-icon">🌍</div>
-                    <h3>Sustainability Tech</h3>
-                    <p>Engineer data-driven solutions for climate action, smart waste management, and renewable resource optimization.</p>
-                    <div class="track-prize">Prize: $2,500</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PRIZES SECTION -->
-    <section id="prizes" class="prizes-section">
-        <div class="section-header">
-            <span class="section-tag">// WINNER DISTRIBUTION</span>
-            <h2 class="section-title">PODIUM REWARDS</h2>
-        </div>
-        
-        <div class="prizes-podium">
-            <!-- Rank 2: Left column -->
-            <div class="podium-col rank-2 brutalist-card">
-                <div class="podium-header">🥈 SECOND PLACE</div>
-                <div class="podium-value">$2,500</div>
-                <ul class="podium-details">
-                    <li>Full Runner-Up Trophy</li>
-                    <li>Sponsor Tech Credits &amp; API access</li>
-                    <li>Global Finalist Certificate</li>
-                </ul>
-            </div>
-
-            <!-- Rank 1: Elevated center column -->
-            <div class="podium-col rank-1 brutalist-card">
-                <div class="crown-badge">🏆 GRAND CHAMPION</div>
-                <div class="podium-value">$5,000</div>
-                <ul class="podium-details">
-                    <li>Fully Sponsored Paris Flights &amp; Lodging</li>
-                    <li>Direct Venture Incubation Match</li>
-                    <li>Global Winner Trophy &amp; Press Announcement</li>
-                </ul>
-            </div>
-
-            <!-- Rank 3: Right column -->
-            <div class="podium-col rank-3 brutalist-card">
-                <div class="podium-header">🥉 THIRD PLACE</div>
-                <div class="podium-value">$1,500</div>
-                <ul class="podium-details">
-                    <li>Incubator Partner Match</li>
-                    <li>Hardware Swag Bundle</li>
-                    <li>Global Finalist Certificate</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- TIMELINE ROADMAP -->
-    <section id="timeline" class="timeline-section">
-        <div class="section-header">
-            <span class="section-tag">// July - December 2026 Master Timeline</span>
-            <h2 class="section-title">EVENT TIMELINE</h2>
-        </div>
-        
-        <div class="roadmap-timeline">
-            <!-- Step 1 -->
-            <div class="roadmap-step brutalist-card">
-                <div class="step-num">01</div>
-                <h3>Event Announcement</h3>
-                <p class="step-date">July 1, 2026</p>
-                <p class="step-details">Official announcement of the Global Youth Hackathon &amp; Forum 2026. Kick-off of global marketing campaigns.</p>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="roadmap-step brutalist-card">
-                <div class="step-num">02</div>
-                <h3>Registration Window</h3>
-                <p class="step-date">July 12 - Aug 29, 2026 (49 Days)</p>
-                <p class="step-details">Online team enrollment portal opens. Open registrations for global youth cohorts and track alignment checks.</p>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="roadmap-step brutalist-card">
-                <div class="step-num">03</div>
-                <h3>Pre-Hackathon Buffer</h3>
-                <p class="step-date">Aug 30 - Sept 3, 2026 (5-Day Buffer)</p>
-                <p class="step-details">Screening of applications, participant orientations, final environment setup, and pairing of expert mentors.</p>
-            </div>
-
-            <!-- Step 4 -->
-            <div class="roadmap-step brutalist-card">
-                <div class="step-num">04</div>
-                <h3>Online Hackathon</h3>
-                <p class="step-date">Sept 4 - 6, 2026 (72 Hours)</p>
-                <p class="step-details">The main build sprint. Teams construct, test, and submit their solutions and technical project proposals.</p>
-            </div>
-
-            <!-- Step 5 -->
-            <div class="roadmap-step brutalist-card">
-                <div class="step-num">05</div>
-                <h3>Evaluation &amp; Selection</h3>
-                <p class="step-date">Sept 7 - 26, 2026</p>
-                <p class="step-details">Rigorous evaluation period (Sept 7-23) followed by the final team selection (Sept 24-26) to determine finalists heading to Paris.</p>
-            </div>
-
-            <!-- Step 6 -->
-            <div class="roadmap-step brutalist-card">
-                <div class="step-num">06</div>
-                <h3>Grand Finale in Paris</h3>
-                <p class="step-date">Oct 1 - Dec 7, 2026</p>
-                <p class="step-details">Finalist visa support and preparation phase (Oct-Nov), culminating in the 2-day live Grand Finale in Paris (Dec 2-7).</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECRETARIAT TEAM DIRECTORY SECTION (PRECISE ROLES & ORDER) -->
-    <section id="secretariat" class="secretariat-section">
-        <div class="section-header">
-            <span class="section-tag">// Organising Secretariat</span>
-            <h2 class="section-title">MEET THE SECRETARIAT</h2>
-            <p class="section-subtitle-text">A dedicated team of young leaders bringing expertise across diplomacy, technology, research, and communications — delivering a summit worthy of UNESCO Headquarters, Paris.</p>
-        </div>
-        
-        <!-- Category 1: Forum Leadership -->
-        <div class="secretariat-category-group">
-            <h3 class="category-divider-title"><span>Forum Leadership</span></h3>
-            <div class="secretariat-grid leadership-grid">
                 
-                <!-- 1. Yubraj Bajgain -->
-                <div class="secretariat-card brutalist-card" data-tilt>
-                    <div class="secretariat-img-wrapper">
-                        <img src="assets/images/yubraj1_enhanced.jpg" alt="Yubraj Bajgain">
+                <div class="prizes-podium">
+                    <!-- Rank 2: Left column -->
+                    <div class="podium-col rank-2 brutalist-card">
+                        <div class="podium-header">🥈 SECOND PLACE</div>
+                        <div class="podium-value">$2,500</div>
+                        <ul class="podium-details">
+                            <li>Full Runner-Up Trophy</li>
+                            <li>Sponsor Tech Credits &amp; API access</li>
+                            <li>Global Finalist Certificate</li>
+                        </ul>
                     </div>
-                    <div class="secretariat-info">
-                        <h3>Yubraj Bajgain</h3>
-                        <span class="member-role">Chairperson, Global Youth Forum</span>
-                        <span class="member-org">Bagmati UNESCO Club</span>
+
+                    <!-- Rank 1: Elevated center column -->
+                    <div class="podium-col rank-1 brutalist-card">
+                        <div class="crown-badge">🏆 GRAND CHAMPION</div>
+                        <div class="podium-value">$5,000</div>
+                        <ul class="podium-details">
+                            <li>Fully Sponsored Paris Flights &amp; Lodging</li>
+                            <li>Direct Venture Incubation Match</li>
+                            <li>Global Winner Trophy &amp; Press Announcement</li>
+                        </ul>
+                    </div>
+
+                    <!-- Rank 3: Right column -->
+                    <div class="podium-col rank-3 brutalist-card">
+                        <div class="podium-header">🥉 THIRD PLACE</div>
+                        <div class="podium-value">$1,500</div>
+                        <ul class="podium-details">
+                            <li>Incubator Partner Match</li>
+                            <li>Hardware Swag Bundle</li>
+                            <li>Global Finalist Certificate</li>
+                        </ul>
                     </div>
                 </div>
+            </section>
 
-                <!-- 2. Saiman Pokhrel -->
-                <div class="secretariat-card brutalist-card" data-tilt>
-                    <div class="secretariat-img-wrapper">
-                        <img src="assets/images/saiman_enhanced.jpg" alt="Saiman Pokhrel">
+            <!-- TIMELINE ROADMAP -->
+            <section id="timeline" class="timeline-section">
+                <div class="section-header">
+                    <span class="section-tag">// July - December 2026 Master Timeline</span>
+                    <h2 class="section-title">EVENT TIMELINE</h2>
+                </div>
+                
+                <div class="roadmap-timeline">
+                    <!-- Step 1 -->
+                    <div class="roadmap-step brutalist-card">
+                        <div class="step-num">01</div>
+                        <h3>Event Announcement</h3>
+                        <p class="step-date">July 1, 2026</p>
+                        <p class="step-details">Official announcement of the Global Youth Hackathon &amp; Forum 2026. Kick-off of global marketing campaigns.</p>
                     </div>
-                    <div class="secretariat-info">
-                        <h3>Saiman Pokhrel</h3>
-                        <span class="member-role">Applied Innovation Lead, Track Beta</span>
-                        <span class="member-org">Bagmati UNESCO Club</span>
+
+                    <!-- Step 2 -->
+                    <div class="roadmap-step brutalist-card">
+                        <div class="step-num">02</div>
+                        <h3>Registration Window</h3>
+                        <p class="step-date">July 12 - Aug 29, 2026 (49 Days)</p>
+                        <p class="step-details">Online team enrollment portal opens. Open registrations for global youth cohorts and track alignment checks.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="roadmap-step brutalist-card">
+                        <div class="step-num">03</div>
+                        <h3>Pre-Hackathon Buffer</h3>
+                        <p class="step-date">Aug 30 - Sept 3, 2026 (5-Day Buffer)</p>
+                        <p class="step-details">Screening of applications, participant orientations, final environment setup, and pairing of expert mentors.</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="roadmap-step brutalist-card">
+                        <div class="step-num">04</div>
+                        <h3>Online Hackathon</h3>
+                        <p class="step-date">Sept 4 - 6, 2026 (72 Hours)</p>
+                        <p class="step-details">The main build sprint. Teams construct, test, and submit their solutions and technical project proposals.</p>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="roadmap-step brutalist-card">
+                        <div class="step-num">05</div>
+                        <h3>Evaluation &amp; Selection</h3>
+                        <p class="step-date">Sept 7 - 26, 2026</p>
+                        <p class="step-details">Rigorous evaluation period (Sept 7-23) followed by the final team selection (Sept 24-26) to determine finalists heading to Paris.</p>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div class="roadmap-step brutalist-card">
+                        <div class="step-num">06</div>
+                        <h3>Grand Finale in Paris</h3>
+                        <p class="step-date">Oct 1 - Dec 7, 2026</p>
+                        <p class="step-details">Finalist visa support and preparation phase (Oct-Nov), culminating in the 2-day live Grand Finale in Paris (Dec 2-7).</p>
                     </div>
                 </div>
+            </section>
 
-                <!-- 3. Manika Giri -->
-                <div class="secretariat-card brutalist-card" data-tilt>
-                    <div class="secretariat-img-wrapper">
-                        <img src="assets/images/manika_giri_enhanced.png" alt="Manika Giri">
-                    </div>
-                    <div class="secretariat-info">
-                        <h3>Manika Giri</h3>
-                        <span class="member-role">Director General, Model UNESCO</span>
-                        <span class="member-org">Bagmati UNESCO Club</span>
-                    </div>
+            <!-- SECRETARIAT TEAM DIRECTORY SECTION (PRECISE ROLES & ORDER) -->
+            <section id="secretariat" class="secretariat-section">
+                <div class="section-header">
+                    <span class="section-tag">// Organising Secretariat</span>
+                    <h2 class="section-title">MEET THE SECRETARIAT</h2>
+                    <p class="section-subtitle-text">A dedicated team of young leaders bringing expertise across diplomacy, technology, research, and communications — delivering a summit worthy of UNESCO Headquarters, Paris.</p>
                 </div>
-            </div>
-        </div>
+                
+                <!-- Category 1: Forum Leadership -->
+                <div class="secretariat-category-group">
+                    <h3 class="category-divider-title"><span>Forum Leadership</span></h3>
+                    <div class="secretariat-grid leadership-grid">
+                        
+                        <!-- 1. Yubraj Bajgain -->
+                        <div class="secretariat-card brutalist-card" data-tilt>
+                            <div class="secretariat-img-wrapper">
+                                <img src="assets/images/yubraj1_enhanced.jpg" alt="Yubraj Bajgain">
+                            </div>
+                            <div class="secretariat-info">
+                                <h3>Yubraj Bajgain</h3>
+                                <span class="member-role">Chairperson, Global Youth Forum</span>
+                                <span class="member-org">Bagmati UNESCO Club</span>
+                            </div>
+                        </div>
 
-        <!-- Category 2: Department Leads -->
-        <div class="secretariat-category-group">
-            <h3 class="category-divider-title"><span>Department Leads</span></h3>
-            <div class="secretariat-grid department-grid">
+                        <!-- 2. Saiman Pokhrel -->
+                        <div class="secretariat-card brutalist-card" data-tilt>
+                            <div class="secretariat-img-wrapper">
+                                <img src="assets/images/saiman_enhanced.jpg" alt="Saiman Pokhrel">
+                            </div>
+                            <div class="secretariat-info">
+                                <h3>Saiman Pokhrel</h3>
+                                <span class="member-role">Applied Innovation Lead, Track Beta</span>
+                                <span class="member-org">Bagmati UNESCO Club</span>
+                            </div>
+                        </div>
 
-                <!-- 4. Dhasing Dolmo Gole -->
-                <div class="secretariat-card brutalist-card" data-tilt>
-                    <div class="secretariat-img-wrapper">
-                        <img src="assets/images/dhasing_dolmo_new.jpeg" alt="Dhasing Dolmo Gole">
-                    </div>
-                    <div class="secretariat-info">
-                        <h3>Dhasing Dolmo Gole</h3>
-                        <span class="member-role">Director, Content Management</span>
-                        <span class="member-org">Bagmati UNESCO Club</span>
-                    </div>
-                </div>
-
-                <!-- 5. Lokesh Chaudhary -->
-                <div class="secretariat-card brutalist-card" data-tilt>
-                    <div class="secretariat-img-wrapper">
-                        <img src="assets/images/lokesh_chaudhary.jpeg" alt="Lokesh Chaudhary">
-                    </div>
-                    <div class="secretariat-info">
-                        <h3>Lokesh Chaudhary</h3>
-                        <span class="member-role">Director, Technology &amp; Web Infrastructure</span>
-                        <span class="member-org">Bagmati UNESCO Club</span>
-                    </div>
-                </div>
-
-                <!-- 6. Bhumika Neupane -->
-                <div class="secretariat-card brutalist-card" data-tilt>
-                    <div class="secretariat-img-wrapper">
-                        <img src="assets/images/bhumika_neupane_enhanced.jpg" alt="Bhumika Neupane">
-                    </div>
-                    <div class="secretariat-info">
-                        <h3>Bhumika Neupane</h3>
-                        <span class="member-role">Director, Branding &amp; Digital Marketing</span>
-                        <span class="member-org">Bagmati UNESCO Club</span>
-                    </div>
-                </div>
-
-                <!-- 7. Manish Bartaula -->
-                <div class="secretariat-card brutalist-card" data-tilt>
-                    <div class="secretariat-img-wrapper">
-                        <img src="assets/images/manish_bartaula_enhanced.jpg" alt="Manish Bartaula">
-                    </div>
-                    <div class="secretariat-info">
-                        <h3>Manish Bartaula</h3>
-                        <span class="member-role">Director, Finance</span>
-                        <span class="member-org">Bagmati UNESCO Club</span>
-                    </div>
-                </div>
-
-                <!-- 8. Bishakha Bhattarai -->
-                <div class="secretariat-card brutalist-card" data-tilt>
-                    <div class="secretariat-img-wrapper">
-                        <img src="assets/images/bishakha_bhattarai_enhanced.jpg" alt="Bishakha Bhattarai">
-                    </div>
-                    <div class="secretariat-info">
-                        <h3>Bishakha Bhattarai</h3>
-                        <span class="member-role">Director, Communications &amp; Strategy</span>
-                        <span class="member-org">Bagmati UNESCO Club</span>
-                    </div>
-                </div>
-
-                <!-- 9. Jeevan Pant -->
-                <div class="secretariat-card brutalist-card" data-tilt>
-                    <div class="secretariat-img-wrapper">
-                        <img src="assets/images/jeewan_pant_enhanced.jpg" alt="Jeevan Pant">
-                    </div>
-                    <div class="secretariat-info">
-                        <h3>Jeevan Pant</h3>
-                        <span class="member-role">Director, International Relations</span>
-                        <span class="member-org">Bagmati UNESCO Club</span>
-                    </div>
-                </div>
-
-                <!-- 10. Saksham Rupakheti -->
-                <div class="secretariat-card brutalist-card" data-tilt>
-                    <div class="secretariat-img-wrapper">
-                        <img src="assets/images/saksham_rupakheti_enhanced.jpg" alt="Saksham Rupakheti">
-                    </div>
-                    <div class="secretariat-info">
-                        <h3>Saksham Rupakheti</h3>
-                        <span class="member-role">Director, Research &amp; Development</span>
-                        <span class="member-org">Bagmati UNESCO Club</span>
-                    </div>
-                </div>
-
-                <!-- 11. Prajjwal Adhikari -->
-                <div class="secretariat-card brutalist-card" data-tilt>
-                    <div class="secretariat-img-wrapper">
-                        <img src="assets/images/prajjwal_adhikari_enhanced.jpg" alt="Prajjwal Adhikari">
-                    </div>
-                    <div class="secretariat-info">
-                        <h3>Prajjwal Adhikari</h3>
-                        <span class="member-role">Secretariat Coordinator</span>
-                        <span class="member-org">Bagmati UNESCO Club</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- GALLERY SECTION -->
-    <section id="gallery" class="gallery-section">
-        <div class="section-header">
-            <span class="section-tag">// PAST MEMORIES</span>
-            <h2 class="section-title">MOMENTS</h2>
-        </div>
-        <div id="card-stack" class="card-stack">
-            <div class="polaroid" style="background-image: url('https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
-            <div class="polaroid" style="background-image: url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
-            <div class="polaroid" style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
-            <div class="polaroid" style="background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
-        </div>
-        <p class="gallery-hint">Drag to throw & cycle</p>
-    </section>
-
-    <!-- SPONSORS MARQUEE CONTAINERS -->
-    <section id="sponsors" class="sponsors-section">
-        <div class="marquee-wrapper">
-            <!-- Track 1: Scrolling Left -->
-            <div class="marquee marquee-left">
-                <div class="marquee-track">
-                    <span class="sponsor-item">Vercel</span>
-                    <span class="sponsor-item">GitHub</span>
-                    <span class="sponsor-item">Stripe</span>
-                    <span class="sponsor-item">Figma</span>
-                    <span class="sponsor-item">Linear</span>
-                    <span class="sponsor-item">Supabase</span>
-                    <!-- Duplicate for infinite loop -->
-                    <span class="sponsor-item">Vercel</span>
-                    <span class="sponsor-item">GitHub</span>
-                    <span class="sponsor-item">Stripe</span>
-                    <span class="sponsor-item">Figma</span>
-                    <span class="sponsor-item">Linear</span>
-                    <span class="sponsor-item">Supabase</span>
-                </div>
-            </div>
-            
-            <!-- Track 2: Scrolling Right -->
-            <div class="marquee marquee-right">
-                <div class="marquee-track">
-                    <span class="sponsor-item">Notion</span>
-                    <span class="sponsor-item">AWS</span>
-                    <span class="sponsor-item">Google Cloud</span>
-                    <span class="sponsor-item">Postman</span>
-                    <span class="sponsor-item">DigitalOcean</span>
-                    <span class="sponsor-item">JetBrains</span>
-                    <!-- Duplicate for infinite loop -->
-                    <span class="sponsor-item">Notion</span>
-                    <span class="sponsor-item">AWS</span>
-                    <span class="sponsor-item">Google Cloud</span>
-                    <span class="sponsor-item">Postman</span>
-                    <span class="sponsor-item">DigitalOcean</span>
-                    <span class="sponsor-item">JetBrains</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ ACCORDION LIST (DYNAMIC CATEGORY FILTERING ADDED) -->
-    <section id="faq" class="faq-section">
-        <div class="faq-container">
-            <div class="section-header">
-                <span class="section-tag">// FAQ</span>
-                <h2 class="section-title">Frequently Asked Questions</h2>
-                <p class="section-subtitle-text">Answers for nominees, prospective sponsors, and general observers about the Forum's programme and logistics.</p>
-            </div>
-
-            <!-- Dynamic Category Filter Tabs -->
-            <div class="faq-filter-tabs">
-                <button class="faq-filter-btn active" data-filter="all">All</button>
-                <button class="faq-filter-btn" data-filter="general">General</button>
-                <button class="faq-filter-btn" data-filter="programme">Programme Tracks</button>
-                <button class="faq-filter-btn" data-filter="logistics">Logistics</button>
-            </div>
-
-            <div class="faq-grid">
-                <!-- 1. What is the Global Youth Forum on the Ethics of AI? (General) -->
-                <div class="faq-item brutalist-card" data-category="general">
-                    <button class="faq-question">
-                        <span class="faq-q-text"><span class="faq-q-icon">?</span>What is the Global Youth Forum on the Ethics of AI?</span>
-                        <span class="faq-icon-arrow"></span>
-                    </button>
-                    <div class="faq-answer-wrapper">
-                        <div class="faq-answer">
-                            The Global Youth Forum is a high-profile assembly bringing together 200 selected youth delegates, tech researchers, and student ambassadors at the UNESCO Headquarters in Paris. Organized in partnership with the Bagmati UNESCO Club, the forum serves as a bridge, fusing practical AI development in technical sandboxes with strict multilateral policy guidelines to draft the Youth AI Ethics Accord.
+                        <!-- 3. Manika Giri -->
+                        <div class="secretariat-card brutalist-card" data-tilt>
+                            <div class="secretariat-img-wrapper">
+                                <img src="assets/images/manika_giri_enhanced.png" alt="Manika Giri">
+                            </div>
+                            <div class="secretariat-info">
+                                <h3>Manika Giri</h3>
+                                <span class="member-role">Director General, Model UNESCO</span>
+                                <span class="member-org">Bagmati UNESCO Club</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 2. How do the Sandbox and Policy Tracks differ? (Programme Tracks) -->
-                <div class="faq-item brutalist-card" data-category="programme">
-                    <button class="faq-question">
-                        <span class="faq-q-text"><span class="faq-q-icon">?</span>How do the Sandbox and Policy Tracks differ?</span>
-                        <span class="faq-icon-arrow"></span>
-                    </button>
-                    <div class="faq-answer-wrapper">
-                        <div class="faq-answer">
-                            The Sandbox Track is tailored for programmers, engineers, and digital ethicists to build, test, and audit algorithmic watermarks for generative AI models. The Policy Track is designed for young diplomats, researchers, and legal scholars to negotiate treaty frameworks, standard-setting guidelines, and structural recommendations based on UNESCO's 2021 global standards.
+                <!-- Category 2: Department Leads -->
+                <div class="secretariat-category-group">
+                    <h3 class="category-divider-title"><span>Department Leads</span></h3>
+                    <div class="secretariat-grid department-grid">
+
+                        <!-- 4. Dhasing Dolmo Gole -->
+                        <div class="secretariat-card brutalist-card" data-tilt>
+                            <div class="secretariat-img-wrapper">
+                                <img src="assets/images/dhasing_dolmo_new.jpeg" alt="Dhasing Dolmo Gole">
+                            </div>
+                            <div class="secretariat-info">
+                                <h3>Dhasing Dolmo Gole</h3>
+                                <span class="member-role">Director, Content Management</span>
+                                <span class="member-org">Bagmati UNESCO Club</span>
+                            </div>
+                        </div>
+
+                        <!-- 5. Lokesh Chaudhary -->
+                        <div class="secretariat-card brutalist-card" data-tilt>
+                            <div class="secretariat-img-wrapper">
+                                <img src="assets/images/lokesh_chaudhary.jpeg" alt="Lokesh Chaudhary">
+                            </div>
+                            <div class="secretariat-info">
+                                <h3>Lokesh Chaudhary</h3>
+                                <span class="member-role">Director, Technology &amp; Web Infrastructure</span>
+                                <span class="member-org">Bagmati UNESCO Club</span>
+                            </div>
+                        </div>
+
+                        <!-- 6. Bhumika Neupane -->
+                        <div class="secretariat-card brutalist-card" data-tilt>
+                            <div class="secretariat-img-wrapper">
+                                <img src="assets/images/bhumika_neupane_enhanced.jpg" alt="Bhumika Neupane">
+                            </div>
+                            <div class="secretariat-info">
+                                <h3>Bhumika Neupane</h3>
+                                <span class="member-role">Director, Branding &amp; Digital Marketing</span>
+                                <span class="member-org">Bagmati UNESCO Club</span>
+                            </div>
+                        </div>
+
+                        <!-- 7. Manish Bartaula -->
+                        <div class="secretariat-card brutalist-card" data-tilt>
+                            <div class="secretariat-img-wrapper">
+                                <img src="assets/images/manish_bartaula_enhanced.jpg" alt="Manish Bartaula">
+                            </div>
+                            <div class="secretariat-info">
+                                <h3>Manish Bartaula</h3>
+                                <span class="member-role">Director, Finance</span>
+                                <span class="member-org">Bagmati UNESCO Club</span>
+                            </div>
+                        </div>
+
+                        <!-- 8. Bishakha Bhattarai -->
+                        <div class="secretariat-card brutalist-card" data-tilt>
+                            <div class="secretariat-img-wrapper">
+                                <img src="assets/images/bishakha_bhattarai_enhanced.jpg" alt="Bishakha Bhattarai">
+                            </div>
+                            <div class="secretariat-info">
+                                <h3>Bishakha Bhattarai</h3>
+                                <span class="member-role">Director, Communications &amp; Strategy</span>
+                                <span class="member-org">Bagmati UNESCO Club</span>
+                            </div>
+                        </div>
+
+                        <!-- 9. Jeevan Pant -->
+                        <div class="secretariat-card brutalist-card" data-tilt>
+                            <div class="secretariat-img-wrapper">
+                                <img src="assets/images/jeewan_pant_enhanced.jpg" alt="Jeevan Pant">
+                            </div>
+                            <div class="secretariat-info">
+                                <h3>Jeevan Pant</h3>
+                                <span class="member-role">Director, International Relations</span>
+                                <span class="member-org">Bagmati UNESCO Club</span>
+                            </div>
+                        </div>
+
+                        <!-- 10. Saksham Rupakheti -->
+                        <div class="secretariat-card brutalist-card" data-tilt>
+                            <div class="secretariat-img-wrapper">
+                                <img src="assets/images/saksham_rupakheti_enhanced.jpg" alt="Saksham Rupakheti">
+                            </div>
+                            <div class="secretariat-info">
+                                <h3>Saksham Rupakheti</h3>
+                                <span class="member-role">Director, Research &amp; Development</span>
+                                <span class="member-org">Bagmati UNESCO Club</span>
+                            </div>
+                        </div>
+
+                        <!-- 11. Prajjwal Adhikari -->
+                        <div class="secretariat-card brutalist-card" data-tilt>
+                            <div class="secretariat-img-wrapper">
+                                <img src="assets/images/prajjwal_adhikari_enhanced.jpg" alt="Prajjwal Adhikari">
+                            </div>
+                            <div class="secretariat-info">
+                                <h3>Prajjwal Adhikari</h3>
+                                <span class="member-role">Secretariat Coordinator</span>
+                                <span class="member-org">Bagmati UNESCO Club</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <!-- 3. How are youth delegates vetted and accredited? (General) -->
-                <div class="faq-item brutalist-card" data-category="general">
-                    <button class="faq-question">
-                        <span class="faq-q-text"><span class="faq-q-icon">?</span>How are youth delegates vetted and accredited?</span>
-                        <span class="faq-icon-arrow"></span>
-                    </button>
-                    <div class="faq-answer-wrapper">
-                        <div class="faq-answer">
-                            Delegates go through a multi-stage vetting process. First, passport credentials and academic portfolios must match server-side standards. Nominees then complete remote sandbox sprints, peer feedback sessions, or Riyadh onboarding programs before receiving their official delegation accreditation credentials.
+            <!-- GALLERY SECTION -->
+            <section id="gallery" class="gallery-section">
+                <div class="section-header">
+                    <span class="section-tag">// PAST MEMORIES</span>
+                    <h2 class="section-title">MOMENTS</h2>
+                </div>
+                <div id="card-stack" class="card-stack">
+                    <div class="polaroid" style="background-image: url('https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+                    <div class="polaroid" style="background-image: url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+                    <div class="polaroid" style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+                    <div class="polaroid" style="background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+                </div>
+                <p class="gallery-hint">Drag to throw & cycle</p>
+            </section>
+
+            <!-- SPONSORS MARQUEE CONTAINERS -->
+            <section id="sponsors" class="sponsors-section">
+                <div class="marquee-wrapper">
+                    <!-- Track 1: Scrolling Left -->
+                    <div class="marquee marquee-left">
+                        <div class="marquee-track">
+                            <span class="sponsor-item">Vercel</span>
+                            <span class="sponsor-item">GitHub</span>
+                            <span class="sponsor-item">Stripe</span>
+                            <span class="sponsor-item">Figma</span>
+                            <span class="sponsor-item">Linear</span>
+                            <span class="sponsor-item">Supabase</span>
+                            <!-- Duplicate for infinite loop -->
+                            <span class="sponsor-item">Vercel</span>
+                            <span class="sponsor-item">GitHub</span>
+                            <span class="sponsor-item">Stripe</span>
+                            <span class="sponsor-item">Figma</span>
+                            <span class="sponsor-item">Linear</span>
+                            <span class="sponsor-item">Supabase</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Track 2: Scrolling Right -->
+                    <div class="marquee marquee-right">
+                        <div class="marquee-track">
+                            <span class="sponsor-item">Notion</span>
+                            <span class="sponsor-item">AWS</span>
+                            <span class="sponsor-item">Google Cloud</span>
+                            <span class="sponsor-item">Postman</span>
+                            <span class="sponsor-item">DigitalOcean</span>
+                            <span class="sponsor-item">JetBrains</span>
+                            <!-- Duplicate for infinite loop -->
+                            <span class="sponsor-item">Notion</span>
+                            <span class="sponsor-item">AWS</span>
+                            <span class="sponsor-item">Google Cloud</span>
+                            <span class="sponsor-item">Postman</span>
+                            <span class="sponsor-item">DigitalOcean</span>
+                            <span class="sponsor-item">JetBrains</span>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <!-- 4. Are there travel or accommodation grants available? (Logistics) -->
-                <div class="faq-item brutalist-card" data-category="logistics">
-                    <button class="faq-question">
-                        <span class="faq-q-text"><span class="faq-q-icon">?</span>Are there travel or accommodation grants available?</span>
-                        <span class="faq-icon-arrow"></span>
-                    </button>
-                    <div class="faq-answer-wrapper">
-                        <div class="faq-answer">
-                            Yes! Selected nominees who demonstrate strong contributions in their local pre-summit hackathons may apply for accommodation and travel grants. These grants are coordinated directly with the Secretariat and the Bagmati UNESCO Club delegation offices to cover physical attendance costs in Paris.
+            <!-- FAQ ACCORDION LIST (DYNAMIC CATEGORY FILTERING ADDED) -->
+            <section id="faq" class="faq-section">
+                <div class="faq-container">
+                    <div class="section-header">
+                        <span class="section-tag">// FAQ</span>
+                        <h2 class="section-title">Frequently Asked Questions</h2>
+                        <p class="section-subtitle-text">Answers for nominees, prospective sponsors, and general observers about the Forum's programme and logistics.</p>
+                    </div>
+
+                    <!-- Dynamic Category Filter Tabs -->
+                    <div class="faq-filter-tabs">
+                        <button class="faq-filter-btn active" data-filter="all">All</button>
+                        <button class="faq-filter-btn" data-filter="general">General</button>
+                        <button class="faq-filter-btn" data-filter="programme">Programme Tracks</button>
+                        <button class="faq-filter-btn" data-filter="logistics">Logistics</button>
+                    </div>
+
+                    <div class="faq-grid">
+                        <!-- 1. What is the Global Youth Forum on the Ethics of AI? (General) -->
+                        <div class="faq-item brutalist-card" data-category="general">
+                            <button class="faq-question">
+                                <span class="faq-q-text"><span class="faq-q-icon">?</span>What is the Global Youth Forum on the Ethics of AI?</span>
+                                <span class="faq-icon-arrow"></span>
+                            </button>
+                            <div class="faq-answer-wrapper">
+                                <div class="faq-answer">
+                                    The Global Youth Forum is a high-profile assembly bringing together 200 selected youth delegates, tech researchers, and student ambassadors at the UNESCO Headquarters in Paris. Organized in partnership with the Bagmati UNESCO Club, the forum serves as a bridge, fusing practical AI development in technical sandboxes with strict multilateral policy guidelines to draft the Youth AI Ethics Accord.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. How do the Sandbox and Policy Tracks differ? (Programme Tracks) -->
+                        <div class="faq-item brutalist-card" data-category="programme">
+                            <button class="faq-question">
+                                <span class="faq-q-text"><span class="faq-q-icon">?</span>How do the Sandbox and Policy Tracks differ?</span>
+                                <span class="faq-icon-arrow"></span>
+                            </button>
+                            <div class="faq-answer-wrapper">
+                                <div class="faq-answer">
+                                    The Sandbox Track is tailored for programmers, engineers, and digital ethicists to build, test, and audit algorithmic watermarks for generative AI models. The Policy Track is designed for young diplomats, researchers, and legal scholars to negotiate treaty frameworks, standard-setting guidelines, and structural recommendations based on UNESCO's 2021 global standards.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. How are youth delegates vetted and accredited? (General) -->
+                        <div class="faq-item brutalist-card" data-category="general">
+                            <button class="faq-question">
+                                <span class="faq-q-text"><span class="faq-q-icon">?</span>How are youth delegates vetted and accredited?</span>
+                                <span class="faq-icon-arrow"></span>
+                            </button>
+                            <div class="faq-answer-wrapper">
+                                <div class="faq-answer">
+                                    Delegates go through a multi-stage vetting process. First, passport credentials and academic portfolios must match server-side standards. Nominees then complete remote sandbox sprints, peer feedback sessions, or Riyadh onboarding programs before receiving their official delegation accreditation credentials.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Are there travel or accommodation grants available? (Logistics) -->
+                        <div class="faq-item brutalist-card" data-category="logistics">
+                            <button class="faq-question">
+                                <span class="faq-q-text"><span class="faq-q-icon">?</span>Are there travel or accommodation grants available?</span>
+                                <span class="faq-icon-arrow"></span>
+                            </button>
+                            <div class="faq-answer-wrapper">
+                                <div class="faq-answer">
+                                    Yes! Selected nominees who demonstrate strong contributions in their local pre-summit hackathons may apply for accommodation and travel grants. These grants are coordinated directly with the Secretariat and the Bagmati UNESCO Club delegation offices to cover physical attendance costs in Paris.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5. What is the "Youth AI Ethics Accord"? (Programme Tracks) -->
+                        <div class="faq-item brutalist-card" data-category="programme">
+                            <button class="faq-question">
+                                <span class="faq-q-text"><span class="faq-q-icon">?</span>What is the "Youth AI Ethics Accord"?</span>
+                                <span class="faq-icon-arrow"></span>
+                            </button>
+                            <div class="faq-answer-wrapper">
+                                <div class="faq-answer">
+                                    The Youth AI Ethics Accord is the final, binding master declaration co-signed by all 200 accredited delegates. It aggregates recommendations on algorithmic biases, user transparency, data sovereignty, and human-in-the-loop safeguards to be formally presented to state secretaries and global leaders.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 6. How can our institution state-partner with the summit? (Logistics) -->
+                        <div class="faq-item brutalist-card" data-category="logistics">
+                            <button class="faq-question">
+                                <span class="faq-q-text"><span class="faq-q-icon">?</span>How can our institution state-partner with the summit?</span>
+                                <span class="faq-icon-arrow"></span>
+                            </button>
+                            <div class="faq-answer-wrapper">
+                                <div class="faq-answer">
+                                    Academic institutions, non-profits, and sovereign delegations can request formal partnership or co-convenor status. Sponsors can secure naming rights for sandbox theme rooms or fund dedicated travel grants for underrepresented digital researchers. Connect through our Secretariat offices inside the Contact section.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Still Have Questions Callout -->
+                    <div class="faq-footer-callout brutalist-card">
+                        <div class="callout-grid">
+                            <div class="callout-text">
+                                <h3>Still have questions?</h3>
+                                <p>Reach out to the Secretariat directly — we respond within 2 business days.</p>
+                            </div>
+                            <div class="callout-cta">
+                                <a href="mailto:secretariat@globalyouthforum.org" class="btn-primary">Contact Secretariat</a>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <!-- 5. What is the "Youth AI Ethics Accord"? (Programme Tracks) -->
-                <div class="faq-item brutalist-card" data-category="programme">
-                    <button class="faq-question">
-                        <span class="faq-q-text"><span class="faq-q-icon">?</span>What is the "Youth AI Ethics Accord"?</span>
-                        <span class="faq-icon-arrow"></span>
-                    </button>
-                    <div class="faq-answer-wrapper">
-                        <div class="faq-answer">
-                            The Youth AI Ethics Accord is the final, binding master declaration co-signed by all 200 accredited delegates. It aggregates recommendations on algorithmic biases, user transparency, data sovereignty, and human-in-the-loop safeguards to be formally presented to state secretaries and global leaders.
+            <!-- FOOTER SIGN-OFF -->
+            <footer class="footer">
+                <div class="footer-container">
+                    <div class="footer-brand">
+                        <a href="#" class="nav-logo">
+                            <span class="logo-bracket">[</span>
+                            GYH
+                            <span class="logo-bracket">]</span>
+                            <span class="logo-year">2026</span>
+                        </a>
+                        <p class="footer-desc">The ultimate global gathering of young innovators, builders, and disruptors.</p>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Quick Links</h4>
+                        <a href="#stats">About</a>
+                        <a href="#tracks">Tracks</a>
+                        <a href="#faq">FAQ</a>
+                        <a href="#">Sponsor Us</a>
+                    </div>
+                    <div class="footer-social">
+                        <h4>Connect</h4>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon">Discord</a>
+                            <a href="#" class="social-icon">Twitter</a>
+                            <a href="#" class="social-icon">LinkedIn</a>
+                            <a href="#" class="social-icon">Instagram</a>
                         </div>
                     </div>
                 </div>
-
-                <!-- 6. How can our institution state-partner with the summit? (Logistics) -->
-                <div class="faq-item brutalist-card" data-category="logistics">
-                    <button class="faq-question">
-                        <span class="faq-q-text"><span class="faq-q-icon">?</span>How can our institution state-partner with the summit?</span>
-                        <span class="faq-icon-arrow"></span>
-                    </button>
-                    <div class="faq-answer-wrapper">
-                        <div class="faq-answer">
-                            Academic institutions, non-profits, and sovereign delegations can request formal partnership or co-convenor status. Sponsors can secure naming rights for sandbox theme rooms or fund dedicated travel grants for underrepresented digital researchers. Connect through our Secretariat offices inside the Contact section.
-                        </div>
+                <div class="footer-bottom">
+                    <p>© 2026 Global Youth Hackathon &amp; Forum. All rights reserved.</p>
+                    <div class="dev-credit">
+                        Designed & Engineered by <span>Aaditya & Anuj</span>
                     </div>
                 </div>
-            </div>
-
-            <!-- Still Have Questions Callout -->
-            <div class="faq-footer-callout brutalist-card">
-                <div class="callout-grid">
-                    <div class="callout-text">
-                        <h3>Still have questions?</h3>
-                        <p>Reach out to the Secretariat directly — we respond within 2 business days.</p>
-                    </div>
-                    <div class="callout-cta">
-                        <a href="mailto:secretariat@globalyouthforum.org" class="btn-primary">Contact Secretariat</a>
-                    </div>
-                </div>
-            </div>
+            </footer>
         </div>
-    </section>
+    </div>
 
-    <!-- FOOTER SIGN-OFF -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-brand">
-                <a href="#" class="nav-logo">
-                    <span class="logo-bracket">[</span>
-                    GYH
-                    <span class="logo-bracket">]</span>
-                    <span class="logo-year">2026</span>
-                </a>
-                <p class="footer-desc">The ultimate global gathering of young innovators, builders, and disruptors.</p>
-            </div>
-            <div class="footer-links">
-                <h4>Quick Links</h4>
-                <a href="#stats">About</a>
-                <a href="#tracks">Tracks</a>
-                <a href="#faq">FAQ</a>
-                <a href="#">Sponsor Us</a>
-            </div>
-            <div class="footer-social">
-                <h4>Connect</h4>
-                <div class="social-icons">
-                    <a href="#" class="social-icon">Discord</a>
-                    <a href="#" class="social-icon">Twitter</a>
-                    <a href="#" class="social-icon">LinkedIn</a>
-                    <a href="#" class="social-icon">Instagram</a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 Global Youth Hackathon &amp; Forum. All rights reserved.</p>
-            <div class="dev-credit">
-                Designed & Engineered by <span>Aaditya & Anuj</span>
-            </div>
-        </div>
-    </footer>
+    
 
     <!-- Scripts -->
     <script src="js/preloader.js"></script>
     <script src="js/background.js"></script>
+    <script src="js/smooth-scroll.js"></script>
     <script src="js/components.js"></script>
     <script src="js/app.js"></script>
 </body>
