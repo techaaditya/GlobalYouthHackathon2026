@@ -1000,8 +1000,6 @@ body.nav-lock { overflow: hidden; }
 .social-icon:hover { color: var(--vanilla-custard); }
 .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(10, 147, 150, 0.3); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; }
 .footer-bottom p { color: var(--pearl-aqua); font-size: 0.9rem; }
-.dev-credit { font-family: var(--font-mono); font-size: 0.9rem; color: var(--vanilla-custard); }
-.dev-credit span { color: var(--golden-orange); font-weight: 700; }
 
 /* =========================================
    18. RESPONSIVE ADJUSTMENTS
