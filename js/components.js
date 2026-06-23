@@ -278,20 +278,27 @@ let clickScrollTimeout;
 
 navItems.forEach(item => {
     item.addEventListener('click', (e) => {
+        e.preventDefault();                        // prevent ALL native jumps
         const href = item.getAttribute('href');
+        const target = document.querySelector(href);
+        if (!target) return;
+
         setActiveItem(item);
         moveLine(item);
         isClickScrolling = true;
         clearTimeout(clickScrollTimeout);
-        clickScrollTimeout = setTimeout(() => { isClickScrolling = false; }, 1000);
+        clickScrollTimeout = setTimeout(() => { isClickScrolling = false; }, 1200);
 
-        if (href === '#hero') {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (window.smoother) {
+            window.smoother.scrollTo(target, true, "top 30px");  // smooth scroll via smoother
+        } else {
+            target.scrollIntoView({ behavior: 'smooth' });      // fallback if smoother not ready
         }
+
         closeMobileMenu();
     });
 });
+
 
 const spySections = Array.from(navItems)
     .map(item => document.querySelector(item.getAttribute('href')))
