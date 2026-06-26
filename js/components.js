@@ -409,3 +409,197 @@ navMenu.addEventListener('mouseleave', () => moveLine(getActiveItem()), { passiv
         }, { passive: true });
     });
 });
+
+
+// =========================================
+// 6. MICRO-INTERACTIONS
+// =========================================
+
+// --- Shared overlay for podium pops ---
+const overlay = document.createElement('div');
+overlay.className = 'emoji-overlay';
+const overlayEmoji = document.createElement('div');
+overlayEmoji.className = 'overlay-emoji';
+overlay.appendChild(overlayEmoji);
+document.body.appendChild(overlay);
+
+function popOverlayEmoji(emoji) {
+  overlayEmoji.textContent = emoji;
+  
+  // Kill any running animations on these elements to prevent overlaps
+  gsap.killTweensOf([overlay, overlayEmoji]);
+
+  // Create a clean execution sequence
+  const tl = gsap.timeline({
+    onStart: () => {
+      overlay.classList.add('active');
+    },
+    onComplete: () => {
+      // Safely scrub clean once completely hidden
+      overlay.classList.remove('active');
+      overlayEmoji.textContent = '';
+      gsap.set([overlay, overlayEmoji], { clearProps: "all" });
+    }
+  });
+
+  // 1. Pop & scale up the emoji while background darkens via CSS
+  tl.fromTo(overlayEmoji, 
+    { scale: 0, opacity: 0 },
+    { scale: 1.3, opacity: 1, duration: 0.35, ease: "back.out(1.5)" }
+  )
+  // 2. Settle weight slightly
+  .to(overlayEmoji, { scale: 1, duration: 0.1 })
+  // 3. Wait 0.7 seconds, then cleanly fade out BOTH the overlay background and the emoji together
+  .to([overlay, overlayEmoji], {
+    opacity: 0,
+    duration: 0.4,
+    delay: 0.7,
+    ease: "power2.inOut"
+  });
+}
+
+// Podium cards
+const podiumEmojis = { 'rank-1': '🏆', 'rank-2': '🥈', 'rank-3': '🥉' };
+document.querySelectorAll('.podium-col').forEach(col => {
+  const rank = ['rank-1','rank-2','rank-3'].find(r => col.classList.contains(r));
+  if (!rank) return;
+  col.style.cursor = 'pointer';
+  col.addEventListener('click', () => popOverlayEmoji(podiumEmojis[rank]));
+});
+
+// --- Cash explosion on prize/rewards card ---
+function spawnCash(e, originEl) {
+  const rect = originEl.getBoundingClientRect();
+  // Fall back to center of card if client coordinates aren't passed cleanly
+  const cx = e.clientX || (rect.left + rect.width / 2);
+  const cy = e.clientY || (rect.top + rect.height / 2);
+  const emojis = ['💵','💰','💸','🤑','💵','💸'];
+
+  emojis.forEach((em, i) => {
+    const el = document.createElement('div');
+    el.textContent = em;
+    el.className = 'cash-particle';
+    
+    // Set baseline positioning safely outside loops
+    gsap.set(el, {
+      position: 'fixed',
+      left: cx,
+      top: cy,
+      xPercent: -50,
+      yPercent: -50,
+      fontSize: '2rem',
+      zIndex: 9999,
+      pointerEvents: 'none',
+      userSelect: 'none'
+    });
+    document.body.appendChild(el);
+
+    const angle = (i / emojis.length) * 360 + Math.random() * 30;
+    const dist = 80 + Math.random() * 80;
+    const rad = (angle * Math.PI) / 180;
+    const tx = Math.cos(rad) * dist;
+    const ty = Math.sin(rad) * dist;
+
+    // Fast burst outwards, dropping down slightly like physics weights
+    gsap.to(el, {
+      duration: 0.85,
+      x: tx,
+      y: ty + 40, 
+      rotation: angle,
+      scale: 1.4,
+      opacity: 0,
+      ease: "power2.out",
+      delay: i * 0.02,
+      onComplete: () => el.remove()
+    });
+  });
+}
+
+const prizeCard = document.querySelector('.card-prizes');
+if (prizeCard) {
+  prizeCard.style.cursor = 'pointer';
+  prizeCard.addEventListener('click', (e) => spawnCash(e, prizeCard));
+}
+
+
+// --- Cash explosion on prize/rewards card ---
+function spawnChina(e, originEl) {
+  const rect = originEl.getBoundingClientRect();
+  // Fall back to center of card if client coordinates aren't passed cleanly
+  const cx = e.clientX || (rect.left + rect.width / 2);
+  const cy = e.clientY || (rect.top + rect.height / 2);
+    const emojis = ['🇨🇳', '🐉', '🧧', '💴', '💰', '✨', '🧧', '💴'];
+
+  emojis.forEach((em, i) => {
+    const el = document.createElement('div');
+    el.textContent = em;
+    el.className = 'china-particle';
+    
+    // Set baseline positioning safely outside loops
+    gsap.set(el, {
+      position: 'fixed',
+      left: cx,
+      top: cy,
+      xPercent: -50,
+      yPercent: -50,
+      fontSize: '2rem',
+      zIndex: 9999,
+      pointerEvents: 'none',
+      userSelect: 'none'
+    });
+    document.body.appendChild(el);
+
+    const angle = (i / emojis.length) * 360 + Math.random() * 30;
+    const dist = 80 + Math.random() * 80;
+    const rad = (angle * Math.PI) / 180;
+    const tx = Math.cos(rad) * dist;
+    const ty = Math.sin(rad) * dist;
+
+    // Fast burst outwards, dropping down slightly like physics weights
+    gsap.to(el, {
+      duration: 0.85,
+      x: tx,
+      y: ty + 40, 
+      rotation: angle,
+      scale: 1.4,
+      opacity: 0,
+      ease: "power2.out",
+      delay: i * 0.02,
+      onComplete: () => el.remove()
+    });
+  });
+}
+
+const chinaCard = document.querySelector('.card-mentors');
+if (chinaCard) {
+  chinaCard.style.cursor = 'pointer';
+  chinaCard.addEventListener('click', (e) => spawnChina(e, chinaCard));
+}
+
+
+
+// --- Button ripple for Register + Secretariat nav links ---
+function addRipple(el) {
+  el.style.position = 'relative';
+  el.style.overflow = 'hidden';
+  el.addEventListener('click', (e) => {
+    const rect = el.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    const size = Math.max(rect.width, rect.height) * 2;
+    ripple.className = 'btn-ripple';
+    ripple.style.cssText = `
+      position: absolute;
+      width: ${size}px;
+      height: ${size}px;
+      left: ${e.clientX - rect.left - size / 2}px;
+      top: ${e.clientY - rect.top - size / 2}px;
+    `;
+    el.appendChild(ripple);
+    ripple.addEventListener('animationend', () => ripple.remove());
+  });
+}
+
+document.querySelectorAll('.btn-primary, .nav-drawer-cta').forEach(addRipple);
+const secretariatLink = document.querySelector('.nav-item[href="#secretariat"]');
+if (secretariatLink) addRipple(secretariatLink);
+

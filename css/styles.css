@@ -296,6 +296,8 @@ body.nav-lock { overflow: hidden; }
 /* =========================================
    6. BRUTALIST CARDS, BUTTONS & TILT
 ========================================= */
+
+
 .btn-primary {
   font-family: var(--font-mono);
   font-weight: 600;
@@ -343,6 +345,8 @@ body.nav-lock { overflow: hidden; }
   pointer-events: none;
 }
 .brutalist-card:hover::before { transform: translateX(100%); }
+
+
 
 /* =========================================
    7. SECTION HEADERS
@@ -414,6 +418,39 @@ body.nav-lock { overflow: hidden; }
     animation: blink 1.5s infinite;
 }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.emoji-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(1, 10, 24, 0);
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.emoji-overlay.active {
+  background: rgba(1, 10, 24, 0.85);
+}
+.overlay-emoji {
+  font-size: 8rem; /* Set base font size explicitly */
+  filter: drop-shadow(0 0 30px rgba(26, 107, 255, 0.6));
+  user-select: none;
+}
+
+/* Cleaner UI Ripple */
+.btn-ripple {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  transform: scale(0);
+  pointer-events: none;
+  animation: ripple-out 0.55s ease-out forwards;
+}
+
+
+@keyframes ripple-out { 
+  to { transform: scale(1); opacity: 0; } 
+}
 
 .hero-title {
     font-family: var(--font-header);
@@ -1126,7 +1163,7 @@ body.nav-lock { overflow: hidden; }
     min-width: 0;
     padding: 2.25rem 1.5rem;
   }
-  .rank-1 { order: 1; box-shadow: 5px 5px 0px var(--rusty-spice); }
+  .rank-1 { order: 1;}
   .rank-2 { order: 2; }
   .rank-3 { order: 3; }
   .rank-1:hover { box-shadow: 6px 6px 0px var(--oxidized-iron); }
