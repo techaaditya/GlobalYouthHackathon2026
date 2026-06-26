@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.size = Math.random() * 3 + 1.5;
             this.vx = (Math.random() - 0.5) * 0.5;
             this.vy = (Math.random() - 0.5) * 0.5;
-            const colors = ['#005F73', '#0A9396', '#94D2BD'];
+            const colors = ['#1a6bff', '#00b4ff', '#5ba3ff'];
             this.color = colors[Math.floor(Math.random() * colors.length)];
         }
 
