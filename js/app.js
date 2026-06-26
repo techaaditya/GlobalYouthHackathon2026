@@ -135,7 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 },
-                y: 50, opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out'
+                y: 50, opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out',
+                    clearProps: 'transform'
             });
 
             // --- 4. TRACKS SECTION REVEAL ---
@@ -145,7 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 },
-                y: 50, opacity: 0, stagger: 0.15, duration: 0.6, ease: 'power2.out'
+                y: 50, opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out',
+                clearProps: 'transform'
             });
 
             // --- 5. PRIZE PODIUM REVEAL ---
@@ -155,7 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 },
-                y: 60, opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out'
+                y: 60, opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out',
+                clearProps: 'transform'
             });
 
             // --- 6. ROADMAP REVEAL ---
@@ -165,7 +168,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 },
-                y: 40, opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out'
+                y: 40, opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out',
+                clearProps: 'transform'
+
             });
 
             // --- 7. SECRETARIAT REVEAL ---
@@ -175,7 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 },
-                y: 50, opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out'
+                y: 50, opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out',
+                clearProps: 'transform'
             });
 
             // --- 8. GALLERY SECTION REVEAL ---
@@ -185,7 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 },
-                scale: 0.8, opacity: 0, duration: 1, ease: 'power3.out'
+                scale: 0.8, opacity: 0, duration: 1, ease: 'power3.out',
+                clearProps: 'transform'
             });
 
             // --- 9. FAQ GRID CONTAINER REVEAL ---
