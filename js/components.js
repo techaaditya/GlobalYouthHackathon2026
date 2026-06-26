@@ -277,18 +277,19 @@ function closeMobileMenu() {
     navbarEl.classList.remove('menu-open');
     if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
     document.body.classList.remove('nav-lock');
+    if (window.scrollY > 80) navbarEl.classList.add('scrolled'); // restore if needed
 }
+navToggle.addEventListener('click', () => {
+    const isOpen = navbarEl.classList.toggle('menu-open');
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+    document.body.classList.toggle('nav-lock', isOpen);
 
-if (navToggle) {
-    navToggle.addEventListener('click', () => {
-        const isOpen = navbarEl.classList.toggle('menu-open');
-        navToggle.setAttribute('aria-expanded', String(isOpen));
-        document.body.classList.toggle('nav-lock', isOpen);
-    });
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && navbarEl.classList.contains('menu-open')) closeMobileMenu();
-    });
-}
+    if (isOpen) {
+        navbarEl.classList.remove('scrolled');
+    } else {
+        if (window.scrollY > 80) navbarEl.classList.add('scrolled');
+    }
+});
 
 // The drawer's Register CTA should dismiss the drawer on tap
 const navDrawerCta = document.querySelector('.nav-drawer-cta');
