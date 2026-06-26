@@ -28,10 +28,14 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html, body {
-  overflow-x: hidden;         
+  overflow-x: hidden;
+  max-width: 100%;
   height: 100%;
-  scroll-behavior: auto;      
+  scroll-behavior: auto;
 }
+
+/* Media never blows out its container on small screens */
+img, canvas, svg, video { max-width: 100%; }
 
 body {
   background-color: var(--ink-black);
@@ -159,68 +163,98 @@ body {
 }
 
 
+/* Mobile hamburger — a sleek brutalist square */
 .nav-toggle {
   display: none;
   flex-direction: column;
-  justify-content: space-between;
-  width: 28px;
-  height: 20px;
-  background: none;
-  border: none;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 46px;
+  height: 46px;
+  background: rgba(0, 18, 25, 0.6);
+  border: 2px solid var(--dark-cyan);
+  border-radius: 6px;
   padding: 0;
   cursor: pointer;
   z-index: 1100;
   position: relative;
+  box-shadow: 3px 3px 0px var(--golden-orange);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
 }
+.nav-toggle:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px var(--golden-orange); }
 .nav-toggle-bar {
   display: block;
-  width: 100%;
+  width: 22px;
   height: 2px;
   background: var(--vanilla-custard);
   border-radius: 2px;
   transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.25s ease, background 0.3s ease;
 }
-.navbar.menu-open .nav-toggle-bar:nth-child(1) { transform: translateY(9px) rotate(45deg); background: var(--golden-orange); }
+.navbar.menu-open .nav-toggle { border-color: var(--golden-orange); box-shadow: 3px 3px 0px var(--rusty-spice); }
+.navbar.menu-open .nav-toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--golden-orange); }
 .navbar.menu-open .nav-toggle-bar:nth-child(2) { opacity: 0; }
-.navbar.menu-open .nav-toggle-bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); background: var(--golden-orange); }
+.navbar.menu-open .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--golden-orange); }
+
+/* The drawer's Register CTA only renders on mobile */
+.nav-drawer-cta { display: none; }
 
 body.nav-lock { overflow: hidden; }
 
-@media (max-width: 768px) {
+/* The 7-item horizontal nav + logo + CTA needs ~1040px to fit, so the drawer
+   takes over for tablets too — not just phones — to avoid the links colliding. */
+@media (max-width: 1100px) {
   .nav-toggle { display: flex; }
 
-  .nav-container { padding: 1.1rem 1.5rem; }
-  .navbar.scrolled .nav-container { margin-top: 0.6rem; padding: 0.7rem 1.2rem; }
+  .nav-container { padding: 1rem 1.25rem; }
+  .navbar.scrolled .nav-container { margin-top: 0.6rem; padding: 0.65rem 1rem; box-shadow: 4px 4px 0px var(--golden-orange); }
 
+  /* Full-viewport glassmorphic drawer that slides in from the right */
   .nav-menu {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: safe center; /* `safe` keeps the top reachable when items overflow short screens */
     align-items: center;
-    gap: 2.2rem;
+    gap: 1.75rem;
     position: fixed;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
     height: 100dvh;
-    background: rgba(0, 18, 25, 0.97);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    padding: 5.5rem 1.5rem 2.5rem;
+    background: rgba(0, 18, 25, 0.92);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border-left: 3px solid var(--dark-cyan);
+    box-shadow: inset 6px 0 0 rgba(238, 155, 0, 0.18);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transform: translateY(-12px);
-    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+    transform: translate3d(100%, 0, 0);
+    transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.45s ease, visibility 0.45s;
     z-index: 1050;
+    overflow-y: auto;
   }
   .navbar.menu-open .nav-menu {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
-  .nav-menu .nav-item { font-size: 1.5rem; letter-spacing: 2px; }
+  .nav-menu .nav-item { font-size: clamp(1.3rem, 6vw, 1.7rem); letter-spacing: 2px; padding: 0.3rem 0; }
   .magic-line { display: none; } /* underline tracker doesn't translate to a stacked vertical menu */
 
-  .nav-cta .btn-primary { padding: 0.55rem 1.2rem; font-size: 0.78rem; }
+  /* Promote the drawer CTA, retire the inline header one */
+  .nav-cta { display: none; }
+  .nav-menu .nav-drawer-cta {
+    display: inline-flex;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    padding: 0.95rem 2.4rem;
+    box-shadow: 4px 4px 0px var(--dark-cyan);
+  }
 }
 
 
@@ -299,9 +333,12 @@ body.nav-lock { overflow: hidden; }
         );
 }
 
-/* Hero content sits above the vignette */
+/* Hero content sits above the vignette.
+   width:100% pins it to the viewport so the inner subtitle (max-width:580px)
+   can't shrink-wrap the whole block wider than a narrow screen and overflow. */
 .hero-content {
     z-index: 5;
+    width: 100%;
     max-width: 900px;
     padding: 4rem 2rem 0;
     position: relative;
@@ -337,7 +374,7 @@ body.nav-lock { overflow: hidden; }
 /* Hero title: heavier text-shadow lifts it cleanly off the canvas */
 .hero-title {
     font-family: var(--font-header);
-    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-size: clamp(2rem, 7vw, 6rem);
     font-weight: 700;
     line-height: 1.05;
     color: var(--vanilla-custard);
@@ -359,7 +396,7 @@ body.nav-lock { overflow: hidden; }
 
 /* Subtitle: frosted glass pill so it's always legible */
 .hero-subtitle {
-    font-size: clamp(0.65rem, 1.25vw, 0.95rem);
+    font-size: clamp(1rem, 4vw, 1.2rem);
     color: var(--pearl-aqua);
     max-width: 580px;
     margin: 0 auto 1.5rem;
@@ -460,13 +497,20 @@ body.nav-lock { overflow: hidden; }
 
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
-    .portal-container { width: 340px; height: 340px; }
-    .ring-1 { width: 170px; height: 170px; }
-    .ring-2 { width: 255px; height: 255px; }
-    .ring-3 { width: 340px; height: 340px; }
-    .portal-core { width: 100px; height: 100px; }
+    .portal-container { width: 320px; height: 320px; }
+    .ring-1 { width: 160px; height: 160px; }
+    .ring-2 { width: 240px; height: 240px; }
+    .ring-3 { width: 320px; height: 320px; }
+    .portal-core { width: 96px; height: 96px; }
     .portal-text { font-size: 0.8rem; letter-spacing: 2px; }
-    .hero-subtitle { font-size: 0.95rem; padding: 0.8rem 1.1rem; }
+    .hero-subtitle { padding: 0.85rem 1.1rem; }
+}
+@media (max-width: 480px) {
+    .portal-container { width: 280px; height: 280px; }
+    .ring-1 { width: 140px; height: 140px; }
+    .ring-2 { width: 210px; height: 210px; }
+    .ring-3 { width: 280px; height: 280px; }
+    .portal-core { width: 84px; height: 84px; }
 }
 /* =========================================
    9. STATS & DYNAMIC SEGMENT TIMER GLOW
@@ -1006,14 +1050,153 @@ body.nav-lock { overflow: hidden; }
 /* =========================================
    18. RESPONSIVE ADJUSTMENTS
 ========================================= */
+
+/* ---- Tablet (≤1024px): keep multi-column grids from overlapping ---- */
+@media (max-width: 1024px) {
+  .secretariat-section { padding: 5rem 1.5rem; }
+  .leadership-grid,
+  .department-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .category-divider-title { font-size: 1.4rem; margin-bottom: 2.25rem; }
+}
+
+/* ---- Mobile (≤768px) ---- */
 @media (max-width: 768px) {
-  .bento-grid { grid-template-columns: 1fr; }
+  /* Fluid, breathable section padding across the board */
+  .stats-section { padding: 4rem 1rem; }
+  .tracks-section,
+  .prizes-section,
+  .timeline-section,
+  .gallery-section,
+  .faq-section { padding: 4rem 1rem; }
+  .sponsors-section { padding: 3.5rem 0; }
+  .footer { padding: 3rem 1.25rem 1.5rem; }
+  .section-header { margin-bottom: 2.5rem; }
+
+  /* Brutalist scaling — thinner borders & shorter offset shadows */
+  .brutalist-card { border-width: 2px; box-shadow: 4px 4px 0px var(--golden-orange); }
+  .brutalist-card:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0px var(--rusty-spice); }
+  .btn-primary { box-shadow: 2px 2px 0px var(--dark-cyan); }
+  .btn-primary:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0px var(--rusty-spice); }
+
+  /* Bento collapses to a single clean column */
+  .bento-grid { grid-template-columns: 1fr; gap: 1.25rem; }
   .span-2-col, .span-2-row { grid-column: span 1; grid-row: span 1; }
-  .footer-container { grid-template-columns: 1fr; }
-  .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
-  /* .nav-menu { display: none; } */
-  .prizes-podium { flex-direction: column; align-items: center; }
-  .podium-col { height: auto !important; width: 100%; max-width: 100%; }
+  .bento-card { padding: 1.5rem; }
+
+  /* Tracks */
+  .tracks-grid { gap: 1.5rem; }
+  .track-card { padding: 2rem 1.5rem; }
+
+  /* Prize podium: stack with the Grand Champion first */
+  .prizes-podium { flex-direction: column; align-items: center; gap: 1.5rem; margin-top: 2.5rem; }
+  .podium-col {
+    height: auto !important;
+    width: 100%;
+    max-width: 440px;
+    min-width: 0;
+    padding: 2.25rem 1.5rem;
+  }
+  .rank-1 { order: 1; box-shadow: 5px 5px 0px var(--rusty-spice); }
+  .rank-2 { order: 2; }
+  .rank-3 { order: 3; }
+  .rank-1:hover { box-shadow: 6px 6px 0px var(--brown-red); }
+  .podium-value { margin-bottom: 1.5rem; }
+  .podium-details { padding-top: 1.25rem; }
+
+  /* Roadmap → connected vertical timeline */
+  .roadmap-timeline {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    position: relative;
+    padding-left: 1.75rem;
+  }
+  .roadmap-timeline::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 2px;
+    background: var(--dark-cyan);
+    opacity: 0.4;
+  }
+  .roadmap-step { padding: 1.75rem 1.5rem; gap: 0.75rem; }
+  .roadmap-step::before {
+    content: '';
+    position: absolute;
+    left: -1.75rem;
+    top: 2rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--golden-orange);
+    border: 2px solid var(--ink-black);
+    box-shadow: 0 0 8px rgba(238, 155, 0, 0.5);
+    transform: translateX(-5px);
+  }
+  .step-num { font-size: 2rem; }
+
+  /* Secretariat → single column */
+  .secretariat-section { padding: 4rem 1rem; }
+  .leadership-grid,
+  .department-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .secretariat-category-group { margin-bottom: 3rem; }
+
+  /* Sponsors marquee — compact & sleek */
+  .sponsor-item { font-size: clamp(1.2rem, 3.5vw, 1.6rem); }
+  .marquee-track { gap: 3rem; }
+  .marquee-wrapper { gap: 1.75rem; }
+
+  /* Gallery polaroid stack — smaller & precisely centered */
+  .gallery-section { padding-bottom: 3rem; }
+  .card-stack { width: min(270px, 80vw); height: 340px; }
+  .polaroid { border-width: 10px; }
+  .gallery-hint { margin-top: 1.5rem; }
+
+  /* FAQ */
+  .faq-filter-tabs { gap: 0.6rem; margin-bottom: 2.25rem; }
+  .faq-filter-btn { font-size: 0.8rem; padding: 0.5rem 1rem; }
+  .faq-item { border-width: 2px; box-shadow: 4px 4px 0px var(--golden-orange); }
+  .faq-item:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0px var(--rusty-spice); }
+  .faq-question { padding: 1.1rem 1.2rem; font-size: 1rem; }
+  .faq-q-text { gap: 0.8rem; }
+  .faq-q-icon { width: 26px; height: 26px; font-size: 0.8rem; flex-shrink: 0; }
+  .faq-answer { padding: 0 1.2rem; font-size: 0.95rem; }
+  .faq-item.active .faq-answer { padding-bottom: 1.4rem; }
+  .faq-footer-callout { margin-top: 3rem; padding: 1.75rem 1.5rem; border-width: 2px; box-shadow: 4px 4px 0px var(--golden-orange); }
   .callout-grid { flex-direction: column; text-align: center; gap: 1.5rem; }
-  .faq-answer { padding-left: 2rem; }
+
+  /* Footer */
+  .footer-container { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+
+  /* Timer wrapper */
+  .timer-wrapper { padding: 1.5rem 1rem; }
+  .timer-display { gap: 0.75rem; }
+}
+
+/* ---- Small phones (≤480px) ---- */
+@media (max-width: 480px) {
+  .section-tag { font-size: 0.78rem; }
+
+  /* Timer: keep all four segments comfortably on a single row */
+  .timer-wrapper { padding: 1.25rem 0.75rem; }
+  .timer-title { font-size: 0.85rem; margin-bottom: 1rem; }
+  .timer-display { gap: 0.45rem; flex-wrap: nowrap; }
+  .time-unit { gap: 0.35rem; flex: 1 1 0; min-width: 0; }
+  .timer-segment, .digit-card {
+    min-width: 0;
+    width: 100%;
+    padding: 0.4rem 0.3rem;
+    font-size: clamp(1.5rem, 7.5vw, 2.5rem);
+  }
+  .time-label { font-size: 0.65rem; letter-spacing: 1px; }
+
+  /* Hero breathing room */
+  .hero-content { padding: 3.5rem 1.25rem 0; }
+  .metadata-pills { gap: 0.6rem; }
+  .pill { font-size: 0.75rem; padding: 0.45rem 0.85rem; }
+
+  .nav-logo { font-size: 1.3rem; }
 }

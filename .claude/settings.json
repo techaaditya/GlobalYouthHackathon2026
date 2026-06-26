@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"console.log\\('node', process.version\\)\")",
+      "Bash(npx --no-install playwright --version)",
+      "Bash('/c/Program Files/Google/Chrome/Application/chrome.exe' --headless=new --disable-gpu --hide-scrollbars=false --virtual-time-budget=8000 --window-size=320,720 --screenshot=C:/Users/user/AppData/Local/Temp/claude/d--Downloads-GlobalYouthHackathon2026/ccdb0e5e-0572-4fa2-bd1d-d155e4257ef7/scratchpad/hero-320.png file:///D:/Downloads/GlobalYouthHackathon2026/index.html)",
+      "Bash('/c/Program Files/Google/Chrome/Application/chrome.exe' --headless=new --disable-gpu --virtual-time-budget=16000 --window-size=375,720 --screenshot=C:/Users/user/AppData/Local/Temp/claude/d--Downloads-GlobalYouthHackathon2026/ccdb0e5e-0572-4fa2-bd1d-d155e4257ef7/scratchpad/hero-375b.png file:///D:/Downloads/GlobalYouthHackathon2026/index.html)",
+      "Bash('/c/Program Files/Google/Chrome/Application/chrome.exe' --headless=new --disable-gpu --virtual-time-budget=4000 --window-size=375,800 --screenshot=C:/Users/user/AppData/Local/Temp/claude/d--Downloads-GlobalYouthHackathon2026/ccdb0e5e-0572-4fa2-bd1d-d155e4257ef7/scratchpad/full-375.png file:///D:/Downloads/GlobalYouthHackathon2026/__test_harness.html)",
+      "Bash('/c/Program Files/Google/Chrome/Application/chrome.exe' --headless=new --disable-gpu --virtual-time-budget=4000 --window-size=375,800 --screenshot=C:/Users/user/AppData/Local/Temp/claude/d--Downloads-GlobalYouthHackathon2026/ccdb0e5e-0572-4fa2-bd1d-d155e4257ef7/scratchpad/full-375c.png file:///D:/Downloads/GlobalYouthHackathon2026/__test_harness.html)",
+      "Bash(node -e ' *)",
+      "Bash('/c/Program Files/Google/Chrome/Application/chrome.exe' --headless=new --disable-gpu --virtual-time-budget=4000 --window-size=375,420 --screenshot=C:/Users/user/AppData/Local/Temp/claude/d--Downloads-GlobalYouthHackathon2026/ccdb0e5e-0572-4fa2-bd1d-d155e4257ef7/scratchpad/debug-375.png file:///D:/Downloads/GlobalYouthHackathon2026/__test_harness.html)",
+      "Bash('/c/Program Files/Google/Chrome/Application/chrome.exe' --headless=new --disable-gpu --force-device-scale-factor=1.285 --hide-scrollbars --virtual-time-budget=4000 --window-size=482,900 --screenshot=C:/Users/user/AppData/Local/Temp/claude/d--Downloads-GlobalYouthHackathon2026/ccdb0e5e-0572-4fa2-bd1d-d155e4257ef7/scratchpad/direct.png file:///D:/Downloads/GlobalYouthHackathon2026/__test_harness.html)",
+      "Bash(node -e 'const fs=require\\(\"fs\"\\);const b=fs.readFileSync\\(process.argv[1]\\);console.log\\(\"direct.png: \"+b.readUInt32BE\\(16\\)+\"x\"+b.readUInt32BE\\(20\\)\\)' C:/Users/user/AppData/Local/Temp/claude/d--Downloads-GlobalYouthHackathon2026/ccdb0e5e-0572-4fa2-bd1d-d155e4257ef7/scratchpad/direct.png)",
+      "Bash('/c/Program Files/Google/Chrome/Application/chrome.exe' --headless=new --disable-gpu --force-device-scale-factor=1 --hide-scrollbars --virtual-time-budget=4500 --window-size=482,820 --screenshot=C:/Users/user/AppData/Local/Temp/claude/d--Downloads-GlobalYouthHackathon2026/ccdb0e5e-0572-4fa2-bd1d-d155e4257ef7/scratchpad/scrolltest.png 'file:///D:/Downloads/GlobalYouthHackathon2026/__test_harness.html#s=1400')",
+      "Bash(node -e 'const fs=require\\(\"fs\"\\);const b=fs.readFileSync\\(process.argv[1]\\);console.log\\(\"scrolltest.png: \"+b.readUInt32BE\\(16\\)+\"x\"+b.readUInt32BE\\(20\\)\\)' C:/Users/user/AppData/Local/Temp/claude/d--Downloads-GlobalYouthHackathon2026/ccdb0e5e-0572-4fa2-bd1d-d155e4257ef7/scratchpad/scrolltest.png)",
+      "Bash('/c/Program Files/Google/Chrome/Application/chrome.exe' --headless=new --disable-gpu --force-device-scale-factor=1 --hide-scrollbars --virtual-time-budget=4500 --window-size=482,820 --screenshot=C:/Users/user/AppData/Local/Temp/claude/d--Downloads-GlobalYouthHackathon2026/ccdb0e5e-0572-4fa2-bd1d-d155e4257ef7/scratchpad/drawer.png 'file:///D:/Downloads/GlobalYouthHackathon2026/__test_harness.html#open')"
+    ]
+  }
+}

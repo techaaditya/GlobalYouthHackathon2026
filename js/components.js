@@ -41,7 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================
     // 2. PARALLAX 3D TILT WITH SMOOTH RESET
     // =========================================
-    const tiltCards = document.querySelectorAll('.track-card, .bento-card, .prizes-section .podium-col, .secretariat-card');
+    // Only run the heavy 3D tilt on devices with a precise hover pointer (desktops).
+    // On touch screens it adds nothing and can leave cards stuck mid-transform.
+    const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const tiltCards = supportsHover
+        ? document.querySelectorAll('.track-card, .bento-card, .prizes-section .podium-col, .secretariat-card')
+        : [];
 
     tiltCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
@@ -240,6 +245,9 @@ function syncLineWithLayout(duration = 650) {
 }
 function moveLine(target) {
     if (!target) return;
+    // The magic line is hidden inside the stacked drawer (phones + tablets) —
+    // skip all the measuring so it never fights the drawer layout or causes jump bugs.
+    if (window.matchMedia('(max-width: 1100px)').matches) return;
     const rect = target.getBoundingClientRect();
     const parentRect = navMenu.getBoundingClientRect();
     magicLine.style.opacity = '1';
@@ -272,6 +280,19 @@ if (navToggle) {
         if (e.key === 'Escape' && navbarEl.classList.contains('menu-open')) closeMobileMenu();
     });
 }
+
+// The drawer's Register CTA should dismiss the drawer on tap
+const navDrawerCta = document.querySelector('.nav-drawer-cta');
+if (navDrawerCta) {
+    navDrawerCta.addEventListener('click', closeMobileMenu);
+}
+
+// If the viewport grows past the drawer breakpoint while it's open, close it cleanly
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 1100 && navbarEl.classList.contains('menu-open')) {
+        closeMobileMenu();
+    }
+}, { passive: true });
 
 let isClickScrolling = false;
 let clickScrollTimeout;
