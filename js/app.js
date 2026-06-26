@@ -25,87 +25,78 @@ document.addEventListener('DOMContentLoaded', () => {
                 .from('.metadata-pills .pill', { y: 20, opacity: 0, stagger: 0.1, duration: 0.4 }, '-=0.3')
                 .from('.portal-container', { scale: 0.5, opacity: 0, duration: 1.5, ease: 'expo.out' }, '-=1');
 
-        // --- 2. PORTAL ZOOM-IN SCROLLTRIGGER (SNAPPY ZOOM) ---
-            if (isDesktop) {
-                let portalDone = false;
-
-                const portalTl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "#hero",
-                        start: "top top",
-                        end: "+=90%",
-                        scrub: 2,
-                        pin: true,
-                        anticipatePin: 1,
-                        invalidateOnRefresh: true,
-                        onLeaveBack: (self) => {
-                            // When user scrolls back up into the hero, kill the pin
-                            // so there's no magnetic snap pulling them back down
-                            if (portalDone) {
-                                self.disable();
-                                gsap.set('.portal-container', { scale: 1, opacity: 1 });
-                                gsap.set('.portal-core, .portal-text', { opacity: 1 });
-                                portalDone = false;
-
-                                // Re-enable after they fully leave back to top
-                                ScrollTrigger.create({
-                                    trigger: "#hero",
-                                    start: "top top",
-                                    onLeave: () => {
-                                        self.enable();
-                                        portalDone = true;
-                                    },
-                                    once: true
-                                });
-                            }
-                        },
-                        onLeave: () => {
-                            portalDone = true;  // portal zoom completed
-                        }
-                    }
-                })
-                .to('.portal-container', { 
-                    scale: 8,
-                    ease: 'power1.inOut', 
-                    duration: 1 
-                }, 0)
-                .to('.portal-core, .portal-text', { 
-                    opacity: 0, 
-                    ease: 'power2.in', 
-                    duration: 0.6
-                }, 0)
-                .to('.hero-content', {         // ← add this
-                opacity: 0,
-                y: -20,                    // subtle upward drift, not -100
-                ease: 'power1.in',
-                duration: 0.8,             // slow fade over most of the scroll
-                delay: 0.1                 // starts just slightly after portal begins zooming
-            }, 0)
-            .to('.metadata-pills', {       // pills fade out slightly before the rest
-                opacity: 0,
-                y: -10,
-                ease: 'power1.in',
-                duration: 0.5
-            }, 0);
-
+        // --- 2. PORTAL ZOOM-IN SCROLLTRIGGER ---
+if (isDesktop) {
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: "#hero",
+            start: "top top",
+            end: "+=80%",
+            scrub: 2,
+            pin: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            onLeaveBack: () => {
+                // Reset everything when scrolling back up
+                gsap.set('.portal-container', { scale: 1, opacity: 1 });
+                gsap.set('.portal-core', { opacity: 1 });
+                gsap.set('.hero-content', { opacity: 1, y: 0 });
+                gsap.set('.metadata-pills', { opacity: 1, y: 0 });
             }
-            else {
-                gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "#hero",
-                        start: "top top",
-                        end: "+=60%",
-                        scrub: 2,
-                        invalidateOnRefresh: true
-                    }
-                })
-                .to('.portal-container', { 
-                    opacity: 0, 
-                    scale: 1.3,
-                    ease: 'power1.inOut', 
-                    duration: 0.8 
-                }, 0);
+        }
+    })
+    .to('.portal-container', {
+        scale: 6,
+        ease: 'none',
+        duration: 0.3
+    }, 0)
+    // .to('.portal-core', {
+    //     opacity: 0,
+    //     ease: 'none',
+    //     duration: 0.4
+    // }, 0)
+    // .to('.hero-content', {
+    //     opacity: 0,
+    //     y: -20,
+    //     ease: 'none',
+    //     duration: 0.6
+    // }, 0)
+    // .to('.metadata-pills', {
+    //     opacity: 0,
+    //     y: -10,
+    //     ease: 'none',
+    //     duration: 0.4
+    // }, 0);
+
+} else {
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: "#hero",
+            start: "top top",
+            end: "+=60%",
+            scrub: 2,
+            pin: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            onLeaveBack: () => {
+                gsap.set('.portal-container', { opacity: 1, scale: 1 });
+                gsap.set('.hero-content', { opacity: 1, y: 0 });
             }
+        }
+    })
+    // .to('.portal-container', {
+    //     opacity: 0,
+    //     scale: 1.3,
+    //     ease: 'none',
+    //     duration: 0.8
+    // }, 0)
+    // .to('.hero-content', {
+    //     opacity: 0,
+    //     y: -20,
+    //     ease: 'none',
+    //     duration: 0.6
+    // }, 0);
+}
 
             // --- 3. STATS & TIMER SECTION REVEAL ---
             gsap.from('.stats-section', {
@@ -135,8 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 },
-                y: 50, opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out',
-                    clearProps: 'transform'
+                opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out',
+                clearProps: 'all'
             });
 
             // --- 4. TRACKS SECTION REVEAL ---
@@ -146,8 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 },
-                y: 50, opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out',
-                clearProps: 'transform'
+                opacity: 0, stagger: 0.1 , duration: 0.6, ease: 'power2.out',
+                clearProps: 'all'
             });
 
             // --- 5. PRIZE PODIUM REVEAL ---
@@ -157,8 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 },
-                y: 60, opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out',
-                clearProps: 'transform'
+                opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out',
+                clearProps: 'all'
             });
 
             // --- 6. ROADMAP REVEAL ---
@@ -168,8 +159,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 },
-                y: 40, opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out',
-                clearProps: 'transform'
+                opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out',
+                clearProps: 'all'
 
             });
 
@@ -180,8 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 },
-                y: 50, opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out',
-                clearProps: 'transform'
+                opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out',
+                clearProps: 'all'
             });
 
             // --- 8. GALLERY SECTION REVEAL ---
@@ -192,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     toggleActions: 'play none none reverse'
                 },
                 scale: 0.8, opacity: 0, duration: 1, ease: 'power3.out',
-                clearProps: 'transform'
+                clearProps: 'all'
             });
 
             // --- 9. FAQ GRID CONTAINER REVEAL ---
