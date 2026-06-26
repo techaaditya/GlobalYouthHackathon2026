@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         trigger: "#hero",
                         start: "top top",
                         end: "+=90%",
-                        scrub: 2,
+                        scrub: 0.8,
                         pin: true,
                         anticipatePin: 1,
                         invalidateOnRefresh: true,
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         trigger: "#hero",
                         start: "top top",
                         end: "+=60%",
-                        scrub: 2,
+                        scrub: 0.6,
                         invalidateOnRefresh: true
                     }
                 })

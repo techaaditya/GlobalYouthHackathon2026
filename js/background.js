@@ -30,51 +30,66 @@ document.addEventListener('DOMContentLoaded', () => {
             if (this.x < 0 || this.x > width) this.vx *= -1;
             if (this.y < 0 || this.y > height) this.vy *= -1;
 
-            const dx = mouse.x - this.x;
-            const dy = mouse.y - this.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            
-            if (dist < mouse.radius) {
-                const force = (mouse.radius - dist) / mouse.radius;
-                this.x -= dx * force * 0.05;
-                this.y -= dy * force * 0.05;
+            // Skip the mouse math entirely until the pointer actually moves
+            // (avoids NaN work every frame and a stray sqrt per node).
+            if (mouse.x !== null) {
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                const distSq = dx * dx + dy * dy;
+                if (distSq < mouse.radius * mouse.radius) {
+                    const dist = Math.sqrt(distSq) || 1;
+                    const force = (mouse.radius - dist) / mouse.radius;
+                    this.x -= dx * force * 0.05;
+                    this.y -= dy * force * 0.05;
+                }
             }
         }
 
         draw() {
+            // Cheap glow: a faint halo + a solid core. Canvas shadowBlur was the
+            // single biggest per-frame cost, so we fake the glow with globalAlpha.
+            ctx.globalAlpha = 0.16;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size * 2.6, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+
+            ctx.globalAlpha = 1;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fillStyle = this.color;
-            ctx.shadowBlur = 6;
-            ctx.shadowColor = this.color;
             ctx.fill();
-            ctx.shadowBlur = 0; 
         }
     }
 
     function init() {
         nodes = [];
-        const nodeCount = Math.min(120, Math.floor(window.innerWidth / 10)); 
+        const nodeCount = Math.min(90, Math.floor(window.innerWidth / 16));
         for (let i = 0; i < nodeCount; i++) {
             nodes.push(new Node());
         }
     }
 
-    function connect() {
-        let opacity = 1;
-        for (let a = 0; a < nodes.length; a++) {
-            for (let b = a + 1; b < nodes.length; b++) {
-                const dx = nodes[a].x - nodes[b].x;
-                const dy = nodes[a].y - nodes[b].y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
+    const MAX_LINK = 140;
+    const MAX_LINK_SQ = MAX_LINK * MAX_LINK;
 
-                if (dist < 140) {
-                    opacity = 1 - (dist / 120);
+    function connect() {
+        for (let a = 0; a < nodes.length; a++) {
+            const na = nodes[a];
+            for (let b = a + 1; b < nodes.length; b++) {
+                const nb = nodes[b];
+                const dx = na.x - nb.x;
+                const dy = na.y - nb.y;
+                const distSq = dx * dx + dy * dy;
+
+                // Squared-distance gate first; only pay for sqrt on actual links.
+                if (distSq < MAX_LINK_SQ) {
+                    const opacity = 1 - Math.sqrt(distSq) / MAX_LINK;
                     ctx.strokeStyle = `rgba(10, 147, 150, ${opacity * 0.45})`;
                     ctx.lineWidth = 1;
                     ctx.beginPath();
-                    ctx.moveTo(nodes[a].x, nodes[a].y);
-                    ctx.lineTo(nodes[b].x, nodes[b].y);
+                    ctx.moveTo(na.x, na.y);
+                    ctx.lineTo(nb.x, nb.y);
                     ctx.stroke();
                 }
             }
