@@ -33,10 +33,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if(elHours) elHours.innerText = String(hours).padStart(2, '0');
         if(elMinutes) elMinutes.innerText = String(minutes).padStart(2, '0');
         if(elSeconds) elSeconds.innerText = String(seconds).padStart(2, '0');
+
+
+        const elNav = document.getElementById('nav-countdown');
+        if (elNav) {
+        elNav.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
     }
 
     setInterval(updateTimer, 1000);
     updateTimer();
+
+
 
     // =========================================
     // 2. PARALLAX 3D TILT WITH SMOOTH RESET
@@ -207,6 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ScrollTrigger.refresh();
         });
     });
+
 
     // =========================================
 // 5. NAVBAR: SHRINK ON SCROLL, MAGIC LINE, SCROLL-SPY, MOBILE TOGGLE

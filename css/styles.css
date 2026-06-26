@@ -210,10 +210,13 @@ body {
 
 body.nav-lock { overflow: hidden; }
 
+.nav-center-timer { display: none; }
+
+
 @media (max-width: 1100px) {
   .nav-toggle { display: flex; }
   .nav-container { padding: 1rem 1.25rem; }
-    .nav-container::after {
+    /* .nav-container::after {
     content: "GYH'26";
     position: absolute;
     left: 50%;
@@ -224,7 +227,27 @@ body.nav-lock { overflow: hidden; }
     color: var(--golden-orange);
     letter-spacing: 2px;
     pointer-events: none;
+  } */
+
+
+    .nav-center-timer {
+      display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 0.96rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: var(--pearl-aqua);
+    pointer-events: none;
+    white-space: nowrap;
   }
+
+  #nav-countdown {
+    color: var(--golden-orange);
+  }
+
 
   .navbar.scrolled .nav-container { margin-top: 0.6rem; padding: 0.65rem 1rem; box-shadow: 0px 0px 2px var(--golden-orange); }
 
