@@ -25,87 +25,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 .from('.metadata-pills .pill', { y: 20, opacity: 0, stagger: 0.1, duration: 0.4 }, '-=0.3')
                 .from('.portal-container', { scale: 0.5, opacity: 0, duration: 1.5, ease: 'expo.out' }, '-=1');
 
-        // --- 2. PORTAL ZOOM-IN SCROLLTRIGGER (SNAPPY ZOOM) ---
-            if (isDesktop) {
-                let portalDone = false;
-
-                const portalTl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "#hero",
-                        start: "top top",
-                        end: "+=90%",
-                        scrub: 0.8,
-                        pin: true,
-                        anticipatePin: 1,
-                        invalidateOnRefresh: true,
-                        onLeaveBack: (self) => {
-                            // When user scrolls back up into the hero, kill the pin
-                            // so there's no magnetic snap pulling them back down
-                            if (portalDone) {
-                                self.disable();
-                                gsap.set('.portal-container', { scale: 1, opacity: 1 });
-                                gsap.set('.portal-core, .portal-text', { opacity: 1 });
-                                portalDone = false;
-
-                                // Re-enable after they fully leave back to top
-                                ScrollTrigger.create({
-                                    trigger: "#hero",
-                                    start: "top top",
-                                    onLeave: () => {
-                                        self.enable();
-                                        portalDone = true;
-                                    },
-                                    once: true
-                                });
-                            }
-                        },
-                        onLeave: () => {
-                            portalDone = true;  // portal zoom completed
-                        }
-                    }
-                })
-                .to('.portal-container', { 
-                    scale: 8,
-                    ease: 'power1.inOut', 
-                    duration: 1 
-                }, 0)
-                .to('.portal-core, .portal-text', { 
-                    opacity: 0, 
-                    ease: 'power2.in', 
-                    duration: 0.6
-                }, 0)
-                .to('.hero-content', {         // ← add this
+        // --- 2. HERO EXIT (no pin) ---
+        // Pinning used to hold a content-faded, empty viewport in place while you kept
+        // scrolling — that was the "black section". Without the pin the hero scrolls away
+        // naturally and the stats section flows straight up behind it, leaving no dead space.
+        // Same behaviour on every screen size, just a gentler portal scale on mobile.
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#hero",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: 0.8,
+                    invalidateOnRefresh: true
+                }
+            })
+            .to('.hero-content', {
                 opacity: 0,
-                y: -20,                    // subtle upward drift, not -100
+                y: -60,
                 ease: 'power1.in',
-                duration: 0.8,             // slow fade over most of the scroll
-                delay: 0.1                 // starts just slightly after portal begins zooming
+                duration: 0.65          // fully faded by ~65% of the hero scroll, as it exits the top
             }, 0)
-            .to('.metadata-pills', {       // pills fade out slightly before the rest
+            .to('.portal-container', {
+                scale: isDesktop ? 1.6 : 1.25,
                 opacity: 0,
-                y: -10,
                 ease: 'power1.in',
+                duration: 0.8
+            }, 0)
+            .to('.portal-core, .portal-text', {
+                opacity: 0,
+                ease: 'power2.in',
                 duration: 0.5
             }, 0);
-
-            }
-            else {
-                gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "#hero",
-                        start: "top top",
-                        end: "+=60%",
-                        scrub: 0.6,
-                        invalidateOnRefresh: true
-                    }
-                })
-                .to('.portal-container', { 
-                    opacity: 0, 
-                    scale: 1.3,
-                    ease: 'power1.inOut', 
-                    duration: 0.8 
-                }, 0);
-            }
 
             // --- 3. STATS & TIMER SECTION REVEAL ---
             gsap.from('.stats-section', {
