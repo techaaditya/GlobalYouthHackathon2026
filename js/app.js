@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .from('.hero-title', { y: 50, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.3')
                 .from('.hero-subtitle', { y: 30, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4')
                 .from('.metadata-pills .pill', { y: 20, opacity: 0, stagger: 0.1, duration: 0.4 }, '-=0.3')
-                .from('.portal-container', { scale: 0.5, opacity: 0, duration: 1.5, ease: 'expo.out' }, '-=1');
+                .from('.portal-container', { scale: 6, opacity: 0, duration: 1.5, ease: 'expo.out' }, '-=1');
 
         // --- 2. HERO EXIT (no pin) ---
         // Pinning used to hold a content-faded, empty viewport in place while you kept
@@ -46,9 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 duration: 0.65          // fully faded by ~65% of the hero scroll, as it exits the top
             }, 0)
             .to('.portal-container', {
-                scale: isDesktop ? 1.6 : 1.25,
+                scale: isDesktop ? 4 : 1.25,
                 opacity: 0,
-                ease: 'power1.in',
+                ease: 'power1.out',
                 duration: 0.8
             }, 0)
             .to('.portal-core, .portal-text', {
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 },
-                y: 50, opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out'
+                clearProps: 'all', opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out'
             });
 
             // --- 4. TRACKS SECTION REVEAL ---
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 },
-                y: 50, opacity: 0, stagger: 0.15, duration: 0.6, ease: 'power2.out'
+                clearProps: 'all', opacity: 0, stagger: 0.15, duration: 0.6, ease: 'power2.out'
             });
 
             // --- 5. PRIZE PODIUM REVEAL ---
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 },
-                y: 60, opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out'
+                clearProps: 'all', opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out'
             });
 
             // --- 6. ROADMAP REVEAL ---
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 },
-                y: 40, opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out'
+                clearProps: 'all', opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out'
             });
 
             // --- 7. SECRETARIAT REVEAL ---
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 },
-                y: 50, opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out'
+                clearProps: 'all', opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out'
             });
 
             // --- 8. GALLERY SECTION REVEAL ---
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 },
-                scale: 0.8, opacity: 0, duration: 1, ease: 'power3.out'
+                clearProps: 'all', scale: 0.8, opacity: 0, duration: 1, ease: 'power3.out'
             });
 
             // --- 9. FAQ GRID CONTAINER REVEAL ---
