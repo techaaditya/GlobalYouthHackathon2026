@@ -16,141 +16,172 @@ document.addEventListener('DOMContentLoaded', () => {
         }, (context) => {
             const { isDesktop, isMobile } = context.conditions;
 
-            // --- 1. HERO ENTRANCE ANIMATION ---
+            // =========================================
+            // 1. HERO ENTRANCE ANIMATION (Shared Base)
+            // =========================================
             const heroTl = gsap.timeline();
             heroTl
-                .from('.live-badge', { y: -30, opacity: 0, duration: 0.6, ease: 'power2.out' })
-                .from('.hero-title', { y: 50, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.3')
-                .from('.hero-subtitle', { y: 30, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4')
-                .from('.metadata-pills .pill', { y: 20, opacity: 0, stagger: 0.1, duration: 0.4 }, '-=0.3')
-                .from('.portal-container', { scale: 6, opacity: 0, duration: 1.5, ease: 'expo.out' }, '-=1');
+                .from('.live-badge', { y: -20, opacity: 0, duration: 0.6, ease: 'power2.out' })
+                .from('.hero-title', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.3')
+                .from('.hero-subtitle', { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4')
+                .from('.metadata-pills .pill', { y: 15, opacity: 0, stagger: 0.08, duration: 0.4 }, '-=0.3');
 
-        // --- 2. HERO EXIT (no pin) ---
-        // Pinning used to hold a content-faded, empty viewport in place while you kept
-        // scrolling — that was the "black section". Without the pin the hero scrolls away
-        // naturally and the stats section flows straight up behind it, leaving no dead space.
-        // Same behaviour on every screen size, just a gentler portal scale on mobile.
-            gsap.timeline({
-                scrollTrigger: {
-                    trigger: "#hero",
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: 0.8,
-                    invalidateOnRefresh: true
-                }
-            })
-            .to('.hero-content', {
-                opacity: 0,
-                y: -60,
-                ease: 'power1.in',
-                duration: 0.65          // fully faded by ~65% of the hero scroll, as it exits the top
-            }, 0)
-            .to('.portal-container', {
-                scale: isDesktop ? 4 : 1.25,
-                opacity: 0,
-                ease: 'power1.out',
-                duration: 0.8
-            }, 0)
-            .to('.portal-core, .portal-text', {
-                opacity: 0,
-                ease: 'power2.in',
-                duration: 0.5
-            }, 0);
+            // --- DESKTOP ONLY: Heavy Portal Transitions ---
+            if (isDesktop) {
+                heroTl.from('.portal-container', { scale: 6, opacity: 0, duration: 1.5, ease: 'expo.out' }, '-=1');
 
-            // --- 3. STATS & TIMER SECTION REVEAL ---
-            gsap.from('.stats-section', {
-                scrollTrigger: {
-                    trigger: '.stats-section',
-                    start: 'top 85%',
-                    toggleActions: 'play none none reverse'
-                },
-                opacity: 0,
-                y: 50,
-                duration: 1,
-                ease: 'power3.out'
-            });
+                // Advanced scroll-tied exit physics (Safely omitted from mobile touch browsers)
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: "#hero",
+                        start: "top top",
+                        end: "bottom top",
+                        scrub: 0.8,
+                        invalidateOnRefresh: true
+                    }
+                })
+                .to('.hero-content', {
+                    opacity: 0,
+                    y: -60,
+                    ease: 'power1.in',
+                    duration: 0.65          
+                }, 0)
+                .to('.portal-container', {
+                    scale: 4,
+                    opacity: 0,
+                    ease: 'power1.out',
+                    duration: 0.8
+                }, 0)
+                .to('.portal-core, .portal-text', {
+                    opacity: 0,
+                    ease: 'power2.in',
+                    duration: 0.5
+                }, 0);
+            }
 
-            gsap.from('.timer-wrapper', {
-                scrollTrigger: {
-                    trigger: '.timer-wrapper',
-                    start: 'top 80%',
-                    toggleActions: 'play none none reverse'
-                },
-                y: 40, opacity: 0, duration: 0.8, ease: 'power2.out'
-            });
+            // =========================================
+            // 2. MAIN SCROLL REVEALS (Responsive Logic)
+            // =========================================
+            if (isDesktop) {
+                // --- Premium Widescreen Timelines (Staggers & Directions) ---
+                gsap.from('.stats-section', {
+                    scrollTrigger: {
+                        trigger: '.stats-section',
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    opacity: 0,
+                    y: 50,
+                    duration: 1,
+                    ease: 'power3.out'
+                });
 
-            gsap.from('.bento-card', {
-                scrollTrigger: {
-                    trigger: '.bento-grid',
-                    start: 'top 80%',
-                    toggleActions: 'play none none reverse'
-                },
-                clearProps: 'all', opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out'
-            });
+                gsap.from('.timer-wrapper', {
+                    scrollTrigger: {
+                        trigger: '.timer-wrapper',
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    y: 40, opacity: 0, duration: 0.8, ease: 'power2.out'
+                });
 
-            // --- 4. TRACKS SECTION REVEAL ---
-            gsap.from('.track-card', {
-                scrollTrigger: {
-                    trigger: '.tracks-grid',
-                    start: 'top 80%',
-                    toggleActions: 'play none none reverse'
-                },
-                clearProps: 'all', opacity: 0, stagger: 0.15, duration: 0.6, ease: 'power2.out'
-            });
+                gsap.from('.bento-card', {
+                    scrollTrigger: {
+                        trigger: '.bento-grid',
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    clearProps: 'all', opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out'
+                });
 
-            // --- 5. PRIZE PODIUM REVEAL ---
-            gsap.from('.podium-col', {
-                scrollTrigger: {
-                    trigger: '.prizes-podium',
-                    start: 'top 80%',
-                    toggleActions: 'play none none reverse'
-                },
-                clearProps: 'all', opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out'
-            });
+                gsap.from('.track-card', {
+                    scrollTrigger: {
+                        trigger: '.tracks-grid',
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    clearProps: 'all', opacity: 0, stagger: 0.15, duration: 0.6, ease: 'power2.out'
+                });
 
-            // --- 6. ROADMAP REVEAL ---
-            gsap.from('.roadmap-step', {
-                scrollTrigger: {
-                    trigger: '.roadmap-timeline',
-                    start: 'top 80%',
-                    toggleActions: 'play none none reverse'
-                },
-                clearProps: 'all', opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out'
-            });
+                gsap.from('.podium-col', {
+                    scrollTrigger: {
+                        trigger: '.prizes-podium',
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    clearProps: 'all', opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out'
+                });
 
-            // --- 7. SECRETARIAT REVEAL ---
-            gsap.from('.secretariat-category-group', {
-                scrollTrigger: {
-                    trigger: '.secretariat-section',
-                    start: 'top 80%',
-                    toggleActions: 'play none none reverse'
-                },
-                clearProps: 'all', opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out'
-            });
+                gsap.from('.roadmap-step', {
+                    scrollTrigger: {
+                        trigger: '.roadmap-timeline',
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    clearProps: 'all', opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out'
+                });
 
-            // --- 8. GALLERY SECTION REVEAL ---
-            gsap.from('.card-stack', {
-                scrollTrigger: {
-                    trigger: '.gallery-section',
-                    start: 'top 80%',
-                    toggleActions: 'play none none reverse'
-                },
-                clearProps: 'all', scale: 0.8, opacity: 0, duration: 1, ease: 'power3.out'
-            });
+                gsap.from('.secretariat-category-group', {
+                    scrollTrigger: {
+                        trigger: '.secretariat-section',
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    clearProps: 'all', opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out'
+                });
 
-            // --- 9. FAQ GRID CONTAINER REVEAL ---
-            // Consolidated to parent container to prevent individual item opacity locking on filter states
-            gsap.from('.faq-grid', {
-                scrollTrigger: {
-                    trigger: '.faq-grid',
-                    start: 'top 85%',
-                    toggleActions: 'play none none reverse'
-                },
-                y: 40,
-                opacity: 0,
-                duration: 0.8,
-                ease: 'power2.out'
-            });
+                gsap.from('.card-stack', {
+                    scrollTrigger: {
+                        trigger: '.gallery-section',
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    clearProps: 'all', scale: 0.8, opacity: 0, duration: 1, ease: 'power3.out'
+                });
+
+                gsap.from('.faq-grid', {
+                    scrollTrigger: {
+                        trigger: '.faq-grid',
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    y: 40,
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: 'power2.out'
+                });
+
+            } else if (isMobile) {
+                // --- Mobile Performance Set (Ultra-lightweight Section-based Fade-Ins Only) ---
+                const simpleRevealElements = [
+                    '.stats-section',
+                    '.timer-wrapper',
+                    '.bento-grid',
+                    '.tracks-grid',
+                    '.prizes-podium',
+                    '.roadmap-timeline',
+                    '.secretariat-section',
+                    '.gallery-section',
+                    '.faq-grid'
+                ];
+
+                simpleRevealElements.forEach(selector => {
+                    if (document.querySelector(selector)) {
+                        gsap.from(selector, {
+                            scrollTrigger: {
+                                trigger: selector,
+                                start: 'top 90%', 
+                                toggleActions: 'play none none none' // Play once on mobile to conserve CPU cycles
+                            },
+                            opacity: 0,
+                            y: 20, 
+                            duration: 0.6,
+                            ease: 'power1.out',
+                            clearProps: 'all' // Instantly clean inline modifications after fade-in completes
+                        });
+                    }
+                });
+            }
 
             ScrollTrigger.refresh();
             
@@ -163,5 +194,5 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         });
 
-    }, 4500); // Syncs with preloader completion
+    }, 4500); 
 });
