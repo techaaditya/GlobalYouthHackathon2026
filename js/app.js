@@ -161,6 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     '.prizes-podium',
                     '.roadmap-timeline',
                     '.secretariat-section',
+                    '.sponsors-section',
                     '.gallery-section',
                     '.faq-grid'
                 ];
