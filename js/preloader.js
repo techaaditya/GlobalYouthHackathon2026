@@ -8,30 +8,41 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.style.overflow = "hidden";
 
   // Glitch Effect Matrix Configurations
-  const letters = "#@%$#)(%@&#)ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const letters = "#@%$[]{}+=";
   let iterations = 0;
   let interval = null;
 
-  const triggerGlitch = () => {
-    clearInterval(interval);
-    interval = setInterval(() => {
-      if (!glitchText) return clearInterval(interval);
-      glitchText.innerText = glitchText.innerText
-        .split("")
-        .map((letter, index) => {
-          if(index < iterations) {
-            return glitchText.dataset.value[index];
-          }
-          return letters[Math.floor(Math.random() * letters.length)];
-        })
-        .join("");
-      
-      if(iterations >= glitchText.dataset.value.length){ 
-        clearInterval(interval);
-      }
-      iterations += 1 / 3;
-    }, 20);
-  };
+const triggerGlitch = () => {
+    const target = glitchText.dataset.value;
+    const duration = 1500; // ms
+    let startTime = null;
+
+    const result = target.split("").map(() => 
+        letters[Math.floor(Math.random() * letters.length)]
+    );
+
+    const frame = (timestamp) => {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // How many characters should be revealed by now
+        const revealedCount = Math.floor(progress * target.length);
+
+        glitchText.innerText = result.map((char, index) => {
+            if (index < revealedCount) return target[index];
+            return letters[Math.floor(Math.random() * letters.length)];
+        }).join("");
+
+        if (progress < 1) {
+            requestAnimationFrame(frame);
+        } else {
+            glitchText.innerText = target; // snap to final clean text
+        }
+    };
+
+    requestAnimationFrame(frame);
+};
 
   if (glitchText) triggerGlitch();
 
