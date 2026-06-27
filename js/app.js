@@ -1,6 +1,6 @@
 gsap.registerPlugin(ScrollTrigger);
 
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('preloaderComplete', () => {
     // Delay initialization to sync with the preloader timeline completion
     setTimeout(() => {
         ScrollTrigger.refresh();
@@ -63,6 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // 2. MAIN SCROLL REVEALS (Responsive Logic)
             // =========================================
             if (isDesktop) {
+
+                gsap.from(".hero-title", {
+                    y: 100,
+                    opacity: 0,
+                    duration: 1.2,
+                    ease: "power4.out"
+                });
+                
                 // --- Premium Widescreen Timelines (Staggers & Directions) ---
                 gsap.from('.stats-section', {
                     scrollTrigger: {
@@ -213,5 +221,5 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         });
 
-    }, 1200); 
+    }, 120); 
 });
