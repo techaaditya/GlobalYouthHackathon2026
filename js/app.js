@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     opacity: 0,
                     y: -60,
                     ease: 'power1.in',
-                    duration: 0.65          
+                    duration: 0.65
                 }, 0)
                 .to('.portal-container', {
                     scale: 4,

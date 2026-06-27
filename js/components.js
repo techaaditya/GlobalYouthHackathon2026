@@ -96,22 +96,41 @@ document.addEventListener('DOMContentLoaded', () => {
     polaroids.forEach(p => {
         let startX, startY, currentX = 0, currentY = 0;
         let isDragging = false;
+        let isAnimatingOut = false;   // ignore hover-tilt while a card is flying to the pile
+
+        // Mouse-perspective tilt: the front card gently leans toward the cursor before any drag
+        p.addEventListener('mousemove', (e) => {
+            if (isDragging || isAnimatingOut) return;
+            const rect = p.getBoundingClientRect();
+            const rotY = ((e.clientX - rect.left) / rect.width - 0.5) * 14;
+            const rotX = ((e.clientY - rect.top) / rect.height - 0.5) * -14;
+            const base = parseFloat(p.dataset.rotation) || 0;
+            p.style.transition = 'transform 0.12s ease-out';
+            p.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) rotate(${base}deg)`;
+        });
+
+        p.addEventListener('mouseleave', () => {
+            if (isDragging || isAnimatingOut) return;
+            const base = parseFloat(p.dataset.rotation) || 0;
+            p.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
+            p.style.transform = `rotate(${base}deg)`;
+        });
 
         p.addEventListener('pointerdown', (e) => {
             isDragging = true;
             startX = e.clientX;
             startY = e.clientY;
             p.style.zIndex = ++topZ;
-            p.style.transition = 'none'; 
+            p.style.transition = 'none';
             p.setPointerCapture(e.pointerId);
         }, { passive: true });
 
         p.addEventListener('pointermove', (e) => {
             if (!isDragging) return;
-            
+
             currentX = e.clientX - startX;
             currentY = e.clientY - startY;
-            
+
             const baseRotation = parseFloat(p.dataset.rotation);
             p.style.transform = `translate(${currentX}px, ${currentY}px) rotate(${baseRotation + currentX / 15}deg)`;
         }, { passive: true });
@@ -119,29 +138,34 @@ document.addEventListener('DOMContentLoaded', () => {
         p.addEventListener('pointerup', (e) => {
             if (!isDragging) return;
             isDragging = false;
-            
-            if (Math.abs(currentX) > 150 || Math.abs(currentY) > 150) {
-                p.style.transition = 'transform 0.5s ease-out, opacity 0.5s ease-out';
-                p.style.transform = `translate(${currentX * 5}px, ${currentY * 5}px) rotate(${currentX / 2}deg)`;
+
+            if (Math.abs(currentX) > 140 || Math.abs(currentY) > 140) {
+                // Thrown: fling out with extra rotational inertia so it spins into the pile
+                isAnimatingOut = true;
+                const dir = currentX >= 0 ? 1 : -1;
+                const spin = parseFloat(p.dataset.rotation) + dir * (420 + Math.random() * 200);
+                p.style.transition = 'transform 0.6s cubic-bezier(0.33, 0, 0.2, 1), opacity 0.6s ease-out';
+                p.style.transform = `translate(${currentX * 6}px, ${currentY * 6}px) rotate(${spin}deg)`;
                 p.style.opacity = '0';
-                
+
                 setTimeout(() => {
                     p.style.transition = 'none';
-                    p.style.zIndex = 0; 
-                    topZ--; 
+                    p.style.zIndex = 0;
+                    topZ--;
                     p.style.opacity = '1';
-                    
+
                     const newRotation = Math.random() * 12 - 6;
                     p.dataset.rotation = newRotation;
                     p.style.transform = `rotate(${newRotation}deg)`;
-                    
+
                     stack.appendChild(p);
-                    
+
                     currentX = 0;
                     currentY = 0;
-                }, 500);
+                    isAnimatingOut = false;
+                }, 600);
             } else {
-                p.style.transition = 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
+                p.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
                 p.style.transform = `rotate(${parseFloat(p.dataset.rotation)}deg)`;
                 currentX = 0;
                 currentY = 0;
@@ -154,7 +178,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================
     const faqItems = document.querySelectorAll('.faq-item');
     const filterBtns = document.querySelectorAll('.faq-filter-btn');
-    
+    const filterIndicator = document.querySelector('.faq-filter-indicator');
+
+    // Slide the glassmorphic highlight beneath whichever tab is active
+    function moveFilterIndicator(btn) {
+        if (!filterIndicator || !btn) return;
+        filterIndicator.style.left = btn.offsetLeft + 'px';
+        filterIndicator.style.width = btn.offsetWidth + 'px';
+    }
+    function initFilterIndicator() {
+        const active = document.querySelector('.faq-filter-btn.active') || filterBtns[0];
+        if (!filterIndicator || !active) return;
+        filterIndicator.style.transition = 'none';   // snap into place on first paint / resize
+        moveFilterIndicator(active);
+        void filterIndicator.offsetWidth;             // force reflow
+        filterIndicator.style.transition = '';        // restore the CSS glide
+    }
+
     // Accordion click triggers
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
@@ -182,9 +222,10 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
             const targetFilter = btn.getAttribute('data-filter') || btn.textContent.trim().toLowerCase();
             
-            // Switch active tab styling
+            // Switch active tab styling + glide the highlight
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+            moveFilterIndicator(btn);
 
             let categoryKey = 'all';
             if (targetFilter.includes('general')) categoryKey = 'general';
@@ -216,6 +257,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Position the filter highlight once layout/fonts settle, and keep it aligned on resize
+    setTimeout(initFilterIndicator, 350);
+    window.addEventListener('load', initFilterIndicator);
+    window.addEventListener('resize', initFilterIndicator, { passive: true });
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(initFilterIndicator);
+    }
 
     // =========================================
 // 5. NAVBAR: SHRINK ON SCROLL, MAGIC LINE, SCROLL-SPY, MOBILE TOGGLE
@@ -321,7 +369,8 @@ navItems.forEach(item => {
         clickScrollTimeout = setTimeout(() => { isClickScrolling = false; }, 1200);
 
         if (window.smoother) {
-            window.smoother.scrollTo(target, true, "top 30px");  // smooth scroll via smoother
+            // land ~100px down so the fixed navbar never clips the section's top border/shadow
+            window.smoother.scrollTo(target, true, "top 100px");
         } else {
             target.scrollIntoView({ behavior: 'smooth' });      // fallback if smoother not ready
         }
@@ -380,34 +429,7 @@ navItems.forEach(item => {
 });
 navMenu.addEventListener('mouseleave', () => moveLine(getActiveItem()), { passive: true });
 
-    // Sponsor Text Split Effect
-    const sponsorItems = document.querySelectorAll('.sponsor-item');
-    sponsorItems.forEach(item => {
-        const text = item.textContent;
-        item.innerHTML = ''; 
-        text.split('').forEach(char => {
-            const span = document.createElement('span');
-            span.textContent = char === ' ' ? '\u00A0' : char; 
-            span.style.display = 'inline-block';
-            span.style.transition = 'transform 0.3s ease';
-            item.appendChild(span);
-        });
-
-        const charSpans = item.querySelectorAll('span');
-        item.addEventListener('mouseenter', () => {
-            charSpans.forEach(span => {
-                const randomX = (Math.random() - 0.5) * 6;
-                const randomY = (Math.random() - 0.5) * 6;
-                span.style.transform = `translate(${randomX}px, ${randomY}px)`;
-            });
-        }, { passive: true });
-
-        item.addEventListener('mouseleave', () => {
-            charSpans.forEach(span => {
-                span.style.transform = 'translate(0, 0)';
-            });
-        }, { passive: true });
-    });
+    // (Sponsor marquee is now card-based \u2014 hover effects are handled purely in CSS)
 });
 
 
@@ -602,4 +624,3 @@ function addRipple(el) {
 document.querySelectorAll('.btn-primary, .nav-drawer-cta').forEach(addRipple);
 const secretariatLink = document.querySelector('.nav-item[href="#secretariat"]');
 if (secretariatLink) addRipple(secretariatLink);
-
