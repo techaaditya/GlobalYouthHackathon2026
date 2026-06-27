@@ -12,11 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
   let iterations = 0;
   let interval = null;
 
-  // Function to run the dynamic text unscramble
   const triggerGlitch = () => {
     clearInterval(interval);
-    
     interval = setInterval(() => {
+      if (!glitchText) return clearInterval(interval);
       glitchText.innerText = glitchText.innerText
         .split("")
         .map((letter, index) => {
@@ -30,49 +29,45 @@ document.addEventListener("DOMContentLoaded", () => {
       if(iterations >= glitchText.dataset.value.length){ 
         clearInterval(interval);
       }
-      
-      iterations += 1 / 3; // Controls speed of decryption (lower = slower decoding)
-    },20);
+      iterations += 1 / 3;
+    }, 20);
   };
 
+  if (glitchText) triggerGlitch();
+
   // Master Preloader Timeline
-  const tl = gsap.timeline({
+// Master Preloader Timeline
+const tl = gsap.timeline({
     onComplete: () => {
-      preloader.style.display = "none";
-      document.body.style.overflow = "unset";
-      window.dispatchEvent(new CustomEvent("preloaderFinished"));
+        if (preloader) {
+            preloader.style.display = "none";
+            preloader.style.pointerEvents = "none";
+        }
+        const curtainWrap = document.querySelector(".curtain-wrap");
+        if (curtainWrap) {
+            curtainWrap.style.display = "none";
+            curtainWrap.style.pointerEvents = "none";
+        }
     }
-  });
+});
 
-  tl
-  // Step 1: Trigger the text decode animation right away
-  .call(triggerGlitch)
-  
-  // Step 2: Let the text sit fully decoded for a brief second
-  .to({}, { duration: 1.6 }) 
+tl.to({}, { duration: 1.8 });
 
-  // Step 3: Text fades and dissolves away sharply
-  .to(".preloader-content", {
-    opacity: 0,
-    y: -20,
-    duration: 0.4,
-    ease: "power2.in"
-  })
+if (preloaderWrap) {
+    tl.to(".preloader-content", {
+        opacity: 0, y: -20, duration: 0.4, ease: "power2.in"
+    })
+    .to(preloaderWrap, {
+        opacity: 0, duration: 0.05
+    }, "-=0.1");
+}
 
-  // Step 4: Hide the dark background container wrapper
-  .to(preloaderWrap, {
-    opacity: 0,
-    duration: 0.05,
-  }, "-=0.1")
-
-  // Step 5: The Grand Finale – High-end grid panels lift up smoothly from center outward
-  .to(gridPanels, {
-    scaleY: 0,
-    duration: 1.2,
-    ease: "expo.inOut",
-    stagger: {
-      amount: 0.3,
-      from: "center" 
-    }
-  }, "-=0.1");
+if (gridPanels.length > 0) {
+    tl.to(gridPanels, {
+        scaleY: 0,
+        duration: 1.2,
+        ease: "expo.inOut",
+        stagger: { amount: 0.3, from: "center" },
+    }, "-=0.1");
+}
 });
