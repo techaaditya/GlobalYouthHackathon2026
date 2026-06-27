@@ -58,15 +58,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 0);
 
             // --- 3. STATS & TIMER SECTION REVEAL ---
+            // Begins a touch sooner so the stats panel eases into focus right as the
+            // portal clears the viewport — no empty beat, comfortable settle.
             gsap.from('.stats-section', {
                 scrollTrigger: {
                     trigger: '.stats-section',
-                    start: 'top 85%',
+                    start: 'top 90%',
                     toggleActions: 'play none none reverse'
                 },
                 opacity: 0,
-                y: 50,
-                duration: 1,
+                y: 40,
+                duration: 0.9,
                 ease: 'power3.out'
             });
 
