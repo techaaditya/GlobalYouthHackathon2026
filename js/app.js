@@ -121,6 +121,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     clearProps: 'all', opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out'
                 });
 
+                gsap.from('.sponsors-grid', {
+                    scrollTrigger: {
+                        trigger: '.sponsors-grid',
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    clearProps: 'all', opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out'
+                });
+
+                gsap.from('.sponsors-callout', {
+                    scrollTrigger: {
+                        trigger: '.sponsors-callout',
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    clearProps: 'all', opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out'
+                });
+
                 gsap.from('.secretariat-category-group', {
                     scrollTrigger: {
                         trigger: '.secretariat-section',
