@@ -3,6 +3,7 @@
 
 /* =========================================
    1. DESIGN SYSTEM TOKENS (:root)
+========================================= */
 :root {
   /* Core Backgrounds & Text */
   --ink-black: #010a18;
@@ -26,6 +27,7 @@
 
 /* =========================================
    2. GLOBAL RESETS & BASE STYLES
+========================================= */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html, body {
@@ -61,6 +63,7 @@ body {
 
 /* =========================================
    3. PRELOADER
+========================================= */
 .preloader {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
   background-color: var(--ink-black); z-index: 9999;
@@ -79,6 +82,7 @@ body {
 
 /* =========================================
    4. CANVAS & GLASSMORPHISM
+========================================= */
 #bg-canvas {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
   z-index: -1; pointer-events: none;
@@ -91,6 +95,7 @@ body {
 
 /* =========================================
    5. NAVBAR & MAGIC LINE
+========================================= */
 .navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 0 1.5rem; }
 
 .navbar.glass {
@@ -307,9 +312,11 @@ body.nav-lock { overflow: hidden; }
 
 /* =========================================
    6. BRUTALIST CARDS, BUTTONS & TILT
+========================================= */
 
 /* =========================================
    6. BRUTALIST CARDS, BUTTONS & TILT
+========================================= */
 
 /* The Core Button: Gemini Gradient Border Baseline */
 /* The Core Button: Gemini Gradient Border Baseline */
@@ -416,7 +423,7 @@ body.nav-lock { overflow: hidden; }
   opacity: 1;
   transform: scale(1) rotate(0deg);
 }
-/* .brutalist-card — replace the existing rule */
+/* .brutalist-card â€” replace the existing rule */
 .brutalist-card {
   background: rgba(1, 10, 24, 0.85);
   border: 1px solid rgba(26, 107, 255, 0.2);
@@ -450,6 +457,7 @@ body.nav-lock { overflow: hidden; }
 
 /* =========================================
    7. SECTION HEADERS
+========================================= */
 .section-header { text-align: center; margin-bottom: 4rem; }
 .section-tag { display: block; font-family: var(--font-mono); color: var(--golden-orange); letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 0.5rem; }
 .section-title { font-family: var(--font-header); font-size: clamp(2rem, 5vw, 3.5rem); color: var(--vanilla-custard); text-transform: uppercase; line-height: 1.2; }
@@ -457,6 +465,7 @@ body.nav-lock { overflow: hidden; }
 
 /* =========================================
    8. HERO & PORTAL
+========================================= */
 .hero-section {
     position: relative;
     height: 100vh;
@@ -699,6 +708,7 @@ body.nav-lock { overflow: hidden; }
 
 /* =========================================
    9. STATS & DYNAMIC SEGMENT TIMER GLOW
+========================================= */
 .stats-section { position: relative; z-index: 2; background: var(--ink-black); padding: 8rem 2rem; border-top: 1px solid var(--dark-cyan); }
 .stats-container { max-width: 1200px; margin: 0 auto; }
 .timer-wrapper { padding: 2rem; margin-bottom: 3rem; text-align: center; }
@@ -738,6 +748,7 @@ body.nav-lock { overflow: hidden; }
 
 /* =========================================
    10. TRACKS (3D TILT)
+========================================= */
 .tracks-section { position: relative; z-index: 2; padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
 .tracks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; perspective: 1000px; }
 .track-card { padding: 2.5rem 2rem; transform-style: preserve-3d; }
@@ -749,6 +760,7 @@ body.nav-lock { overflow: hidden; }
 
 /* =========================================
    11. PRIZES PODIUM
+========================================= */
 .prizes-section {
   position: relative;
   z-index: 2;
@@ -828,6 +840,7 @@ body.nav-lock { overflow: hidden; }
 
 /* =========================================
    12. TIMELINE ROADMAP
+========================================= */
 .timeline-section {
   position: relative;
   z-index: 2;
@@ -874,6 +887,7 @@ body.nav-lock { overflow: hidden; }
 
 /* =========================================
    13. SECRETARIAT COALITION GRID
+========================================= */
 .secretariat-section {
   position: relative;
   z-index: 2;
@@ -971,6 +985,7 @@ body.nav-lock { overflow: hidden; }
 
 /* =========================================
    14. GALLERY (POLAROID STACK)
+========================================= */
 .gallery-section { position: relative; z-index: 2; padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; text-align: center; }
 .card-stack { position: relative; width: 320px; height: 400px; margin: 0 auto; perspective: 1100px; }
 .polaroid {
@@ -1020,6 +1035,7 @@ body.nav-lock { overflow: hidden; }
 
 /* =========================================
    15. SPONSORS MARQUEE
+========================================= */
 .sponsors-section {
   position: relative;
   z-index: 2;
@@ -1103,6 +1119,7 @@ body.nav-lock { overflow: hidden; }
 
 /* =========================================
    16. FAQ SECTION & ACCORDION
+========================================= */
 .faq-section {
   position: relative;
   z-index: 2;
@@ -1337,6 +1354,7 @@ body.nav-lock { overflow: hidden; }
 }
 /* =========================================
    17. FOOTER
+========================================= */
 .footer { background: var(--ink-black); border-top: 1px solid var(--dark-cyan); padding: 4rem 2rem 2rem; position: relative; z-index: 2; }
 .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
 .footer-logo {
@@ -1374,6 +1392,7 @@ body.nav-lock { overflow: hidden; }
 
 /* =========================================
    18. RESPONSIVE ADJUSTMENTS
+========================================= */
 @media (max-width: 1024px) {
   .secretariat-section { padding: 5rem 1.5rem; }
   .leadership-grid,
@@ -1456,7 +1475,7 @@ body.nav-lock { overflow: hidden; }
   .department-grid { grid-template-columns: 1fr; gap: 1.5rem; }
   .secretariat-category-group { margin-bottom: 3rem; }
 
-  /* Sponsors marquee — compact brand cards */
+  /* Sponsors marquee â€” compact brand cards */
   .sponsor-card { padding: 0.7rem 1.4rem; }
   .sponsor-item { font-size: clamp(1rem, 3.5vw, 1.4rem); }
   .marquee-track { gap: 1rem; }
