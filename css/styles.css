@@ -64,22 +64,65 @@ body {
 /* =========================================
    3. PRELOADER
 ========================================= */
-.preloader {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background-color: var(--ink-black); z-index: 9999;
-  display: flex; justify-content: center; align-items: center; flex-direction: column;
-}
-.preloader-content { text-align: center; }
-.scramble-text {
-  font-family: var(--font-mono); font-size: clamp(1.5rem, 5vw, 3.5rem);
-  font-weight: 700; color: var(--golden-orange); letter-spacing: 2px;
-  margin-bottom: 1rem; text-transform: uppercase;
-}
-.preloader-line {
-  height: 4px; width: 0; background-color: var(--dark-cyan);
-  margin: 0 auto; box-shadow: 0 0 15px var(--dark-cyan);
+
+
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 99999;
+  overflow: hidden;
+  background: transparent;
+  pointer-events: all;
 }
 
+.preloader-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  background: #041842; 
+}
+
+.preloader-content {
+  text-align: center;
+  color: #ffffff;
+}
+
+.preloader-title {
+  font-family: 'JetBrains Mono', monospace; /* Monospace works best for system hack/glitch visuals */
+  font-size: clamp(1.5rem, 4vw, 3.5rem);
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+/* The Grid Panels */
+.preloader-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.grid-panel {
+  flex: 1;
+  height: 100%;
+  background: #041842; 
+  transform: scaleY(1);
+  transform-origin: top; 
+  will-change: transform;
+}
 /* =========================================
    4. CANVAS & GLASSMORPHISM
 ========================================= */
@@ -92,6 +135,7 @@ body {
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(26, 107, 255, 0.15);
 }
+
 
 /* =========================================
    5. NAVBAR & MAGIC LINE
