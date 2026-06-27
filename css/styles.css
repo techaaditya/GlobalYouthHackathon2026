@@ -207,7 +207,7 @@ body {
 .navbar.menu-open .nav-toggle-bar:nth-child(2) { opacity: 0; }
 .navbar.menu-open .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--golden-orange); }
 
-.nav-drawer-cta { display: none; }
+.nav-menu .nav-drawer-cta { display: none; }
 
 body.nav-lock { overflow: hidden; }
 
@@ -281,13 +281,13 @@ body.nav-lock { overflow: hidden; }
   }
   .nav-menu .nav-item { font-size: clamp(1.3rem, 6vw, 1.7rem); letter-spacing: 2px; padding: 0.3rem 0; }
   .magic-line { display: none; }
-  .nav-cta { display: none; }
+  .nav-cta { display: none !important; }
   .nav-menu .nav-drawer-cta {
     display: inline-flex;
     margin-top: 1.5rem;
     font-size: 1rem;
     padding: 0.95rem 2.4rem;
-    box-shadow: 4px 4px 0px var(--dark-cyan);
+    box-shadow: 0px 0px 1px var(--dark-cyan);
   }
 
 
@@ -297,25 +297,115 @@ body.nav-lock { overflow: hidden; }
    6. BRUTALIST CARDS, BUTTONS & TILT
 ========================================= */
 
+/* =========================================
+   6. BRUTALIST CARDS, BUTTONS & TILT
+========================================= */
 
+/* The Core Button: Gemini Gradient Border Baseline */
+/* The Core Button: Gemini Gradient Border Baseline */
 .btn-primary {
   font-family: var(--font-mono);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   font-size: 0.82rem;
-  background: var(--dark-cyan);
   color: var(--vanilla-custard);
-  border: none;
-  border-radius: 6px;
+  text-decoration: none;
+  
+  /* FIXED: Changed to inline-flex to properly anchor dimensions on <a> tags */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.7rem 1.6rem;
   cursor: pointer;
-  transition: background 0.2s ease, opacity 0.2s ease, transform 0.15s ease;
-  box-shadow: none;
+  border: none;
+  border-radius: 6px;
+  
+  /* Default background setup matching your design system token variables */
+  background: var(--ink-black); 
+  
+  overflow: hidden;
+  z-index: 1;
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
-.btn-primary:hover { background: #2a7fff; transform: translateY(-1px); opacity: 0.95; }
-.btn-primary:active { transform: translateY(0); opacity: 1; }
+/* 1. Gemini Gradient Layer ("Border Source") */
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  /* Premium Gemini-inspired spectrum shift */
+  background: linear-gradient(135deg, #9b51e0, #1a6bff, #00b4ff, #39d353); 
+  z-index: -2;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
 
+/* 2. Inner Mask Layer (Leaves a fine 1.5px gradient border profile) */
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 1.5px;
+  border-radius: 4.5px;
+  background: var(--dark-cyan); /* Base solid layout backer fill */
+  z-index: -1;
+  transition: background-color 0.3s ease;
+}
+
+/* Reveal gradient boundary frame on hover conditions */
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+/* Deepen inner container background canvas hue during active hover states */
+.btn-primary:hover::after {
+  background: #061b40;
+}
+
+
+/* --- Specific Override: REGISTER CTA MODIFIER --- */
+.btn-primary.register-cta {
+  min-width: 170px; /* Locks down spatial container requirements */
+}
+
+.btn-primary.register-cta .btn-text {
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-primary.register-cta .hide-on-hover {
+  display: inline-block;
+  opacity: 1;
+  max-width:60px;
+  transition: opacity 0.2s ease, max-width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-primary.register-cta .btn-emoji {
+  position: absolute;
+  left: 20px;
+  font-size: 1.1rem;
+  z-index: 2;
+  opacity: 0;
+  transform: scale(0) rotate(-30deg);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.5), opacity 0.2s ease;
+}
+
+/* Hover Mechanics for Register CTA */
+.btn-primary.register-cta:hover .hide-on-hover {
+  opacity: 0;
+  max-width: 0;
+}
+
+.btn-primary.register-cta:hover .btn-text {
+  transform: translateX(14px);
+}
+
+.btn-primary.register-cta:hover .btn-emoji {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
 /* .brutalist-card — replace the existing rule */
 .brutalist-card {
   background: rgba(1, 10, 24, 0.85);
@@ -1082,8 +1172,53 @@ body.nav-lock { overflow: hidden; }
   font-size: 1rem;
   opacity: 0.9;
 }
-.callout-cta { flex-shrink: 0; }
+/* .callout-cta { flex-shrink: 0;} */
 
+/* Container button baseline layout */
+/* --- Specific Override: CONTACT CTA MODIFIER --- */
+/* --- Specific Override: CONTACT CTA MODIFIER --- */
+.btn-primary.contact-cta {
+  min-width: 240px; /* Locked explicit container bound */
+}
+
+.btn-primary.contact-cta .btn-text {
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-primary.contact-cta .hide-on-hover {
+  display: inline-block;
+  opacity: 1;
+  max-width: 100px; /* Hard boundaries on structural transition paths */
+  transition: opacity 0.2s ease, max-width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-primary.contact-cta .btn-emoji {
+  position: absolute;
+  left: 45px;
+  font-size: 1.15rem;
+  z-index: 2;
+  opacity: 0;
+  transform: scale(0) rotate(-40deg);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.5), opacity 0.2s ease;
+}
+
+/* Hover Mechanics for Contact CTA */
+.btn-primary.contact-cta:hover .hide-on-hover {
+  opacity: 0;
+  max-width: 0;
+}
+
+.btn-primary.contact-cta:hover .btn-text {
+  transform: translateX(10px); /* Clean balance for wide string shifts */
+}
+
+.btn-primary.contact-cta:hover .btn-emoji {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
 /* =========================================
    17. FOOTER
 ========================================= */
@@ -1166,7 +1301,6 @@ body.nav-lock { overflow: hidden; }
   .rank-1 { order: 1;}
   .rank-2 { order: 2; }
   .rank-3 { order: 3; }
-  .rank-1:hover { box-shadow: 6px 6px 0px var(--oxidized-iron); }
   .podium-value { margin-bottom: 1.5rem; }
   .podium-details { padding-top: 1.25rem; }
 
