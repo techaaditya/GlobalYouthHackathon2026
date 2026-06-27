@@ -3,23 +3,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const preloaderLine = document.querySelector('.preloader-line');
     const preloader = document.getElementById('preloader');
     
-    const phrases = [
-        "GLOBAL YOUTH HACKATHON 2026",
-        "INITIALIZING SYSTEM..."
-    ];
-
+    // Kept only the initializing message
+    const phrase = "INITIALIZING SYSTEM...";
     const chars = "!@#$%^&*()_+-=<>?/[]{}|";
-    let currentPhrase = 0;
 
     const lineTimeline = anime.timeline({
         autoplay: true,
         loop: false
     });
 
+    // Tracking bar fills cleanly over 500ms
     lineTimeline.add({
         targets: '.preloader-line',
         width: ['0%', '100%'],
-        duration: 3500,
+        duration: 500,
         easing: 'easeInOutQuart'
     });
 
@@ -57,24 +54,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 10);
     }
 
+    // Precise 1.3 Second (1300ms) Execution Timeline:
     setTimeout(() => {
-        scrambleEffect(scrambleText, phrases[0], 1500, () => {
+        // Scramble animation runs smoothly for 400ms
+        scrambleEffect(scrambleText, phrase, 400, () => {
+            // Settle time for user readability before swipe
             setTimeout(() => {
-                scrambleEffect(scrambleText, phrases[1], 1200, () => {
-                    setTimeout(() => {
-                        anime({
-                            targets: preloader,
-                            scaleY: [1, 0],
-                            transformOrigin: '100% 100%',
-                            duration: 900,
-                            easing: 'easeInExpo',
-                            complete: () => {
-                                preloader.style.display = 'none';
-                            }
-                        });
-                    }, 500);
+                // Curtain slides up out of view in 350ms
+                anime({
+                    targets: preloader,
+                    scaleY: [1, 0],
+                    transformOrigin: '100% 100%',
+                    duration: 350,
+                    easing: 'easeInExpo',
+                    complete: () => {
+                        preloader.style.display = 'none';
+                    }
                 });
             }, 400);
         });
-    }, 300);
+    }, 50);
 });
