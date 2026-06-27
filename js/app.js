@@ -1,6 +1,6 @@
 gsap.registerPlugin(ScrollTrigger);
 
-window.addEventListener('preloaderComplete', () => {
+document.addEventListener('DOMContentLoaded', () => {
     // Delay initialization to sync with the preloader timeline completion
     setTimeout(() => {
         ScrollTrigger.refresh();
@@ -42,18 +42,21 @@ window.addEventListener('preloaderComplete', () => {
                 })
                 .to('.hero-content', {
                     opacity: 0,
+                    immediateRender: false,
                     y: -60,
                     ease: 'power1.in',
                     duration: 0.65
                 }, 0)
                 .to('.portal-container', {
                     scale: 4,
+                    immediateRender: false,
                     opacity: 0,
                     ease: 'power1.out',
                     duration: 0.8
                 }, 0)
                 .to('.portal-core, .portal-text', {
                     opacity: 0,
+                    immediateRender: false,
                     ease: 'power2.in',
                     duration: 0.5
                 }, 0);
@@ -63,14 +66,7 @@ window.addEventListener('preloaderComplete', () => {
             // 2. MAIN SCROLL REVEALS (Responsive Logic)
             // =========================================
             if (isDesktop) {
-
-                gsap.from(".hero-title", {
-                    y: 100,
-                    opacity: 0,
-                    duration: 1.2,
-                    ease: "power4.out"
-                });
-                
+               
                 // --- Premium Widescreen Timelines (Staggers & Directions) ---
                 gsap.from('.stats-section', {
                     scrollTrigger: {
@@ -221,5 +217,5 @@ window.addEventListener('preloaderComplete', () => {
             };
         });
 
-    }, 120); 
+    }, 500); 
 });

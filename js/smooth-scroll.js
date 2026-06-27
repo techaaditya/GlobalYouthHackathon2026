@@ -1,12 +1,16 @@
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-const smoother = ScrollSmoother.create({
-    wrapper: "#smooth-wrapper",
-    content: "#smooth-content",
-    smooth: 1.1,          // was 1.8 — tighter, less "floaty" catch-up
-    effects: true,
-    normalizeScroll: true,
-    ignoreMobileResize: true,
-});
+// Do not initialize instantly! Wrap it inside a clean listener function
+    const smoother = ScrollSmoother.create({
+        wrapper: "#smooth-wrapper",
+        content: "#smooth-content",
+        smooth: 1.1,          
+        effects: true,
+        normalizeScroll: true,
+        ignoreMobileResize: true,
+    });
 
-window.smoother = smoother;
+    window.smoother = smoother;
+    
+    // Force recalculating positions right after initialization
+    ScrollTrigger.refresh();
