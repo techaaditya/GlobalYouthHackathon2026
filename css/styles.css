@@ -355,8 +355,9 @@ body {
   display: none;
 }
 
-body.nav-lock {
-  overflow: hidden;
+body.nav-lock,
+html.nav-lock {
+  overflow: hidden !important;
 }
 
 .nav-center-timer {
@@ -441,6 +442,7 @@ body.nav-lock {
     transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.45s ease, visibility 0.45s;
     z-index: 1050;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .navbar.menu-open .nav-menu {
@@ -2546,7 +2548,7 @@ body.nav-lock {
   }
 
   .hero-content {
-    padding: 3.5rem 1.25rem 0;
+    padding: 1.5rem 1.25rem 0;
   }
 
   .metadata-pills {

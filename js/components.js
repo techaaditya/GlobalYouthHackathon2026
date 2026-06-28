@@ -325,16 +325,21 @@ function closeMobileMenu() {
     navbarEl.classList.remove('menu-open');
     if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
     document.body.classList.remove('nav-lock');
+    document.documentElement.classList.remove('nav-lock');
+    if (window.smoother) window.smoother.paused(false);
     if (window.scrollY > 80) navbarEl.classList.add('scrolled'); // restore if needed
 }
 navToggle.addEventListener('click', () => {
     const isOpen = navbarEl.classList.toggle('menu-open');
     navToggle.setAttribute('aria-expanded', String(isOpen));
     document.body.classList.toggle('nav-lock', isOpen);
+    document.documentElement.classList.toggle('nav-lock', isOpen);
 
     if (isOpen) {
         navbarEl.classList.remove('scrolled');
+        if (window.smoother) window.smoother.paused(true);
     } else {
+        if (window.smoother) window.smoother.paused(false);
         if (window.scrollY > 80) navbarEl.classList.add('scrolled');
     }
 });
