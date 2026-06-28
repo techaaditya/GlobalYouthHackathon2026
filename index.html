@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,9 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
@@ -21,76 +24,77 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/ScrollSmoother.min.js"></script></head>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/ScrollSmoother.min.js"></script>
+</head>
 
-  
+
 <body>
 
-<!-- Ultimate GSAP Preloader -->
-<div id="preloader">
-  <div class="preloader-wrap">
-    <div class="preloader-content">
-      <!-- We add a data attribute to store the final text we want to reveal -->
-      <h1 class="preloader-title" id="glitch-text" data-value="INITIALIZING SYSTEM.">#$%(^*#)(@ @#$%^&</h1>
+    <!-- Ultimate GSAP Preloader -->
+    <div id="preloader">
+        <div class="preloader-wrap">
+            <div class="preloader-content">
+                <!-- We add a data attribute to store the final text we want to reveal -->
+                <h1 class="preloader-title" id="glitch-text" data-value="INITIALIZING SYSTEM.">#$%(^*#)(@ @#$%^&</h1>
+            </div>
+        </div>
+
+        <!-- Premium Grid Panels that slide away -->
+        <div class="preloader-grid">
+            <div class="grid-panel"></div>
+            <div class="grid-panel"></div>
+            <div class="grid-panel"></div>
+            <div class="grid-panel"></div>
+            <div class="grid-panel"></div>
+        </div>
     </div>
-  </div>
-  
-  <!-- Premium Grid Panels that slide away -->
-  <div class="preloader-grid">
-    <div class="grid-panel"></div>
-    <div class="grid-panel"></div>
-    <div class="grid-panel"></div>
-    <div class="grid-panel"></div>
-    <div class="grid-panel"></div>
-  </div>
-</div>
 
 
     <!-- Interactive Background Canvas -->
     <canvas id="bg-canvas"></canvas>
 
-        <!-- Sticky Glassmorphic Navbar -->
-            <header id="navbar" class="navbar glass">
-                <div class="nav-container">
-                    <a href="#hero" class="nav-logo" aria-label="Global Youth Hackathon 2026 — home">
-                        <img src="assets/images/logo.png" alt="Global Youth Hackathon 2026" class="nav-logo-img">
-                    </a>
+    <!-- Sticky Glassmorphic Navbar -->
+    <header id="navbar" class="navbar glass">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo" aria-label="Global Youth Hackathon 2026 — home">
+                <img src="assets/images/logo.png" alt="Global Youth Hackathon 2026" class="nav-logo-img">
+            </a>
 
-                    <div class="nav-center-timer" id="nav-timer">
-                        GYH'26
-                    </div>
+            <div class="nav-center-timer" id="nav-timer">
+                GYH'26
+            </div>
 
-                    <nav class="nav-menu" id="nav-menu">
-                        <div id="magic-line" class="magic-line"></div>
-                        <a href="#hero" class="nav-item active">Home</a>
-                        <a href="#stats" class="nav-item">About</a>
-                        <a href="#tracks" class="nav-item">Tracks</a>
-                        <a href="#prizes" class="nav-item">Prizes</a>
-                        <a href="#timeline" class="nav-item">Timeline</a>
-                        <a href="#sponsors" class="nav-item">Sponsors</a>
-                        <a href="#gallery" class="nav-item">Gallery</a>
-                        <a href="#faq" class="nav-item">FAQ</a>
-                        <!-- <button class="btn-primary nav-drawer-cta" type="button">Register Now</button> -->
-                         <button class="btn-primary nav-drawer-cta register-cta">
-                                <span class="btn-emoji">🚀</span>
-                                <span class="btn-text">Register <span class="hide-on-hover">Now</span></span>
-                            </button>
-                    </nav>
+            <nav class="nav-menu" id="nav-menu">
+                <div id="magic-line" class="magic-line"></div>
+                <a href="#hero" class="nav-item active">Home</a>
+                <a href="#stats" class="nav-item">About</a>
+                <a href="#tracks" class="nav-item">Tracks</a>
+                <a href="#prizes" class="nav-item">Prizes</a>
+                <a href="#timeline" class="nav-item">Timeline</a>
+                <a href="#sponsors" class="nav-item">Sponsors</a>
+                <a href="#gallery" class="nav-item">Gallery</a>
+                <a href="#faq" class="nav-item">FAQ</a>
+                <!-- <button class="btn-primary nav-drawer-cta" type="button">Register Now</button> -->
+                <button class="btn-primary nav-drawer-cta register-cta">
+                    <span class="btn-emoji">🚀</span>
+                    <span class="btn-text">Register <span class="hide-on-hover">Now</span></span>
+                </button>
+            </nav>
 
-                    <div class="nav-cta">
-                            <button class="btn-primary register-cta">
-                                <span class="btn-emoji">🚀</span>
-                                <span class="btn-text">Register <span class="hide-on-hover">Now</span></span>
-                            </button>
-                    </div>
+            <div class="nav-cta">
+                <button class="btn-primary register-cta">
+                    <span class="btn-emoji">🚀</span>
+                    <span class="btn-text">Register <span class="hide-on-hover">Now</span></span>
+                </button>
+            </div>
 
-                    <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-                        <span class="nav-toggle-bar"></span>
-                        <span class="nav-toggle-bar"></span>
-                        <span class="nav-toggle-bar"></span>
-                    </button>
-                </div>
-            </header>
+            <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
+        </div>
+    </header>
 
 
     <div id="smooth-wrapper">
@@ -115,7 +119,9 @@
                         <span class="live-dot"></span> REGISTRATIONS OPEN
                     </div>
                     <h1 class="hero-title">GLOBAL YOUTH<br><span class="text-highlight">HACKATHON</span> 2026</h1>
-                    <p class="hero-subtitle">Responsible AI for People, Planet &amp; Peace. A free, global platform empowering young innovators to build ethical, inclusive, and sustainable AI solutions for real-world challenges.</p>
+                    <p class="hero-subtitle">Responsible AI for People, Planet &amp; Peace. A free, global platform
+                        empowering young innovators to build ethical, inclusive, and sustainable AI solutions for
+                        real-world challenges.</p>
 
                     <div class="metadata-pills">
                         <div class="pill"><span class="pill-icon">📅</span> Sept 4-6, 2026</div>
@@ -123,13 +129,20 @@
                         <div class="pill"><span class="pill-icon">🎟️</span> Free via Devpost</div>
                         <div class="pill"><span class="pill-icon">🏛️</span> China Finale</div>
                     </div>
+
+                    <div class="hero-mobile-cta">
+                        <button class="btn-primary register-cta">
+                            <span class="btn-emoji">🚀</span>
+                            <span class="btn-text">Register <span class="hide-on-hover">Now</span></span>
+                        </button>
+                    </div>
                 </div>
             </section>
 
             <!-- STATS & TIMER SECTION -->
             <section id="stats" class="stats-section">
                 <div class="stats-container">
-                    
+
                     <!-- SEGMENT TIMER GRID -->
                     <div class="timer-wrapper brutalist-card">
                         <h3 class="timer-title">COUNTDOWN TO LAUNCH</h3>
@@ -159,14 +172,17 @@
                             <div class="card-content">
                                 <span class="card-tag">GLOBAL REWARDS</span>
                                 <h2 class="card-value">$10,000+</h2>
-                                <p class="card-desc">Comprehensive bounty pool split among top tracks, specialty awards, and direct incubation support to scale your prototype into a real-world enterprise.</p>
+                                <p class="card-desc">Comprehensive bounty pool split among top tracks, specialty awards,
+                                    and direct incubation support to scale your prototype into a real-world enterprise.
+                                </p>
                             </div>
                         </div>
                         <div class="bento-card brutalist-card card-format">
                             <div class="card-content">
                                 <span class="card-tag">FORMAT</span>
                                 <h2 class="card-value">36 Hrs</h2>
-                                <p class="card-desc">An intense build run connecting youth teams directly to industry mentors and project design leads.</p>
+                                <p class="card-desc">An intense build run connecting youth teams directly to industry
+                                    mentors and project design leads.</p>
                             </div>
                         </div>
                         <div class="bento-card brutalist-card card-hackers">
@@ -180,7 +196,8 @@
                             <div class="card-content">
                                 <span class="card-tag">FINALE LOCATION</span>
                                 <h2 class="card-value">China Grand Finale</h2>
-                                <p class="card-desc">The top selected teams from evaluation will win complete travel support to pitch their models live before international organizations in China.</p>
+                                <p class="card-desc">The top selected teams from evaluation will win complete travel
+                                    support to pitch their models live before international organizations in China.</p>
                             </div>
                         </div>
                     </div>
@@ -198,7 +215,8 @@
                         <div class="track-content">
                             <div class="track-icon">📚</div>
                             <h3>AI for Education &amp; Digital Literacy</h3>
-                            <p>Build AI that widens access to quality learning, personalized tutoring, and digital skills for students and communities everywhere.</p>
+                            <p>Build AI that widens access to quality learning, personalized tutoring, and digital
+                                skills for students and communities everywhere.</p>
                             <div class="track-prize">Prize: TBD</div>
                         </div>
                     </div>
@@ -206,7 +224,8 @@
                         <div class="track-content">
                             <div class="track-icon">🌍</div>
                             <h3>AI for Climate Action &amp; Sustainability</h3>
-                            <p>Engineer data-driven tools for climate resilience, clean energy, and sustainable resource use that protect people and planet.</p>
+                            <p>Engineer data-driven tools for climate resilience, clean energy, and sustainable resource
+                                use that protect people and planet.</p>
                             <div class="track-prize">Prize: TBD</div>
                         </div>
                     </div>
@@ -214,7 +233,8 @@
                         <div class="track-content">
                             <div class="track-icon">🛡️</div>
                             <h3>AI for Digital Trust, Misinformation &amp; Online Safety</h3>
-                            <p>Develop systems that detect misinformation, verify content, and keep people safe online — without compromising their rights.</p>
+                            <p>Develop systems that detect misinformation, verify content, and keep people safe online —
+                                without compromising their rights.</p>
                             <div class="track-prize">Prize: TBD</div>
                         </div>
                     </div>
@@ -222,7 +242,8 @@
                         <div class="track-content">
                             <div class="track-icon">🤝</div>
                             <h3>AI for Inclusion, Accessibility &amp; Low-Resource Communities</h3>
-                            <p>Design inclusive, accessible AI that works for underserved, low-connectivity, and low-resource communities.</p>
+                            <p>Design inclusive, accessible AI that works for underserved, low-connectivity, and
+                                low-resource communities.</p>
                             <div class="track-prize">Prize: TBD</div>
                         </div>
                     </div>
@@ -230,7 +251,8 @@
                         <div class="track-content">
                             <div class="track-icon">🩺</div>
                             <h3>AI for Health, Wellbeing &amp; Social Good</h3>
-                            <p>Create AI that improves healthcare access, mental wellbeing, and social outcomes for vulnerable populations.</p>
+                            <p>Create AI that improves healthcare access, mental wellbeing, and social outcomes for
+                                vulnerable populations.</p>
                             <div class="track-prize">Prize: TBD</div>
                         </div>
                     </div>
@@ -238,7 +260,8 @@
                         <div class="track-content">
                             <div class="track-icon">⚖️</div>
                             <h3>AI Governance, Transparency &amp; Responsible Data Use</h3>
-                            <p>Prototype frameworks for transparent, accountable AI and responsible, privacy-respecting use of data.</p>
+                            <p>Prototype frameworks for transparent, accountable AI and responsible, privacy-respecting
+                                use of data.</p>
                             <div class="track-prize">Prize: TBD</div>
                         </div>
                     </div>
@@ -251,7 +274,7 @@
                     <span class="section-tag">// WINNER DISTRIBUTION</span>
                     <h2 class="section-title">PODIUM REWARDS</h2>
                 </div>
-                
+
                 <div class="prizes-podium">
                     <!-- Rank 2: Left column -->
                     <div class="podium-col rank-2 brutalist-card">
@@ -294,14 +317,15 @@
                     <span class="section-tag">// July - December 2026 Master Timeline</span>
                     <h2 class="section-title">EVENT TIMELINE</h2>
                 </div>
-                
+
                 <div class="roadmap-timeline">
                     <!-- Step 1 -->
                     <div class="roadmap-step brutalist-card">
                         <div class="step-num">01</div>
                         <h3>Event Announcement</h3>
                         <p class="step-date">July 1, 2026</p>
-                        <p class="step-details">Official announcement of the Global Youth Hackathon &amp; Forum 2026. Kick-off of global marketing campaigns.</p>
+                        <p class="step-details">Official announcement of the Global Youth Hackathon &amp; Forum 2026.
+                            Kick-off of global marketing campaigns.</p>
                     </div>
 
                     <!-- Step 2 -->
@@ -309,7 +333,8 @@
                         <div class="step-num">02</div>
                         <h3>Registration Window</h3>
                         <p class="step-date">July 12 - Aug 29, 2026 (49 Days)</p>
-                        <p class="step-details">Online team enrollment portal opens. Open registrations for global youth cohorts and track alignment checks.</p>
+                        <p class="step-details">Online team enrollment portal opens. Open registrations for global youth
+                            cohorts and track alignment checks.</p>
                     </div>
 
                     <!-- Step 3 -->
@@ -317,7 +342,8 @@
                         <div class="step-num">03</div>
                         <h3>Pre-Hackathon Buffer</h3>
                         <p class="step-date">Aug 30 - Sept 3, 2026 (5-Day Buffer)</p>
-                        <p class="step-details">Screening of applications, participant orientations, final environment setup, and pairing of expert mentors.</p>
+                        <p class="step-details">Screening of applications, participant orientations, final environment
+                            setup, and pairing of expert mentors.</p>
                     </div>
 
                     <!-- Step 4 -->
@@ -325,7 +351,8 @@
                         <div class="step-num">04</div>
                         <h3>Online Hackathon</h3>
                         <p class="step-date">Sept 4 - 6, 2026 (72 Hours)</p>
-                        <p class="step-details">The main build sprint. Teams construct, test, and submit their solutions and technical project proposals.</p>
+                        <p class="step-details">The main build sprint. Teams construct, test, and submit their solutions
+                            and technical project proposals.</p>
                     </div>
 
                     <!-- Step 5 -->
@@ -333,7 +360,8 @@
                         <div class="step-num">05</div>
                         <h3>Evaluation &amp; Selection</h3>
                         <p class="step-date">Sept 7 - 26, 2026</p>
-                        <p class="step-details">Rigorous evaluation period (Sept 7-23) followed by the final team selection (Sept 24-26) to determine finalists heading to China.</p>
+                        <p class="step-details">Rigorous evaluation period (Sept 7-23) followed by the final team
+                            selection (Sept 24-26) to determine finalists heading to China.</p>
                     </div>
 
                     <!-- Step 6 -->
@@ -341,7 +369,8 @@
                         <div class="step-num">06</div>
                         <h3>Grand Finale in China</h3>
                         <p class="step-date">Oct 1 - Dec 7, 2026</p>
-                        <p class="step-details">Finalist visa support and preparation phase (Oct-Nov), culminating in the 2-day live Grand Finale in China (Dec 2-7).</p>
+                        <p class="step-details">Finalist visa support and preparation phase (Oct-Nov), culminating in
+                            the 2-day live Grand Finale in China (Dec 2-7).</p>
                     </div>
                 </div>
             </section>
@@ -491,10 +520,10 @@
             </section>
         -->
 
-            
+
 
             <!-- SPONSORS MARQUEE CONTAINERS :: OLD-->
-<!--             
+            <!--             
             <section id="sponsors" class="sponsors-section">
                 <div class="marquee-wrapper">
                     <div class="marquee marquee-left">
@@ -534,53 +563,53 @@
             </section> -->
 
 
-<section id="sponsors" class="sponsors-section">
-    <div class="sponsors-container">
-        
-        <div class="sponsors-header">
-            <span class="section-tag">// PARTNERS</span>
-            <h2 class="section-title">EVENT SPONSORS</h2>
-        </div>
+            <section id="sponsors" class="sponsors-section">
+                <div class="sponsors-container">
 
-        <div class="sponsors-grid">
-            <div class="sponsor-card">
-                <img src="assets/images/sponsors/yc.png" alt="YC Logo" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-                <img src="assets/images/sponsors/shopify.png" alt="Shopify Logo" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-                <img src="assets/images/sponsors/amazon.png" alt="Amazon Logo" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-                <img src="assets/images/sponsors/chatgpt.png" alt="ChatGPT Logo" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-                <img src="assets/images/sponsors/mlh.png" alt="MLH Logo" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-                <img src="assets/images/sponsors/devpost.png" alt="Devpost Logo" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-                <img src="assets/images/sponsors/ibm.png" alt="IBM Logo" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-                <img src="assets/images/sponsors/at&t.png" alt="AT&T Logo" class="sponsor-logo">
-            </div>
-        </div>
+                    <div class="sponsors-header">
+                        <span class="section-tag">// PARTNERS</span>
+                        <h2 class="section-title">EVENT SPONSORS</h2>
+                    </div>
 
-        <div class="sponsors-callout">
-            <div class="callout-content">
-                <h3>Interested in backing this event?</h3>
-            </div>
-        <a href="mailto:sponsor@gyh2026.org" class="btn-primary sponsors-cta">
-            <span class="btn-emoji">❤️</span>
-            <span class="btn-text">Sponsor <span class="hide-on-hover"> us!</span></span>
-        </a>        
-    </div>
+                    <div class="sponsors-grid">
+                        <div class="sponsor-card">
+                            <img src="assets/images/sponsors/sponsor.png" alt="YC Logo" class="sponsor-logo">
+                        </div>
+                        <div class="sponsor-card">
+                            <img src="assets/images/sponsors/sponsor.png" alt="Shopify Logo" class="sponsor-logo">
+                        </div>
+                        <div class="sponsor-card">
+                            <img src="assets/images/sponsors/sponsor.png" alt="Amazon Logo" class="sponsor-logo">
+                        </div>
+                        <div class="sponsor-card">
+                            <img src="assets/images/sponsors/sponsor.png" alt="ChatGPT Logo" class="sponsor-logo">
+                        </div>
+                        <div class="sponsor-card">
+                            <img src="assets/images/sponsors/sponsor.png" alt="MLH Logo" class="sponsor-logo">
+                        </div>
+                        <div class="sponsor-card">
+                            <img src="assets/images/sponsors/sponsor.png" alt="Devpost Logo" class="sponsor-logo">
+                        </div>
+                        <div class="sponsor-card">
+                            <img src="assets/images/sponsors/sponsor.png" alt="IBM Logo" class="sponsor-logo">
+                        </div>
+                        <div class="sponsor-card">
+                            <img src="assets/images/sponsors/sponsor.png" alt="AT&T Logo" class="sponsor-logo">
+                        </div>
+                    </div>
 
-    </div>
-</section>
+                    <div class="sponsors-callout">
+                        <div class="callout-content">
+                            <h3>Interested in backing this event?</h3>
+                        </div>
+                        <a href="mailto:sponsor@gyh2026.org" class="btn-primary sponsors-cta">
+                            <span class="btn-emoji">❤️</span>
+                            <span class="btn-text">Sponsor <span class="hide-on-hover"> us!</span></span>
+                        </a>
+                    </div>
+
+                </div>
+            </section>
 
             <!-- GALLERY SECTION -->
             <section id="gallery" class="gallery-section">
@@ -590,19 +619,27 @@
                 </div>
                 <div id="card-stack" class="card-stack">
                     <div class="polaroid">
-                        <div class="polaroid-photo" style="background-image: url('https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+                        <div class="polaroid-photo"
+                            style="background-image: url('https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                        </div>
                         <div class="polaroid-caption">China Finale — 2026</div>
                     </div>
                     <div class="polaroid">
-                        <div class="polaroid-photo" style="background-image: url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+                        <div class="polaroid-photo"
+                            style="background-image: url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                        </div>
                         <div class="polaroid-caption">Kathmandu Build — 2026</div>
                     </div>
                     <div class="polaroid">
-                        <div class="polaroid-photo" style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+                        <div class="polaroid-photo"
+                            style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                        </div>
                         <div class="polaroid-caption">Hack Night — 2026</div>
                     </div>
                     <div class="polaroid">
-                        <div class="polaroid-photo" style="background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+                        <div class="polaroid-photo"
+                            style="background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                        </div>
                         <div class="polaroid-caption">Team Demo — 2026</div>
                     </div>
                 </div>
@@ -615,7 +652,8 @@
                     <div class="section-header">
                         <span class="section-tag">// FAQ</span>
                         <h2 class="section-title">Frequently Asked Questions</h2>
-                        <p class="section-subtitle-text">Answers for participants, prospective sponsors, and partners about the hackathon's tracks, judging, and logistics.</p>
+                        <p class="section-subtitle-text">Answers for participants, prospective sponsors, and partners
+                            about the hackathon's tracks, judging, and logistics.</p>
                     </div>
 
                     <!-- Dynamic Category Filter Tabs -->
@@ -631,12 +669,17 @@
                         <!-- 1. What is the Global AI Ethics Hackathon? (General) -->
                         <div class="faq-item brutalist-card" data-category="general">
                             <button class="faq-question">
-                                <span class="faq-q-text"><span class="faq-q-icon">1</span>What is the Global AI Ethics Hackathon?</span>
+                                <span class="faq-q-text"><span class="faq-q-icon">1</span>What is the Global AI Ethics
+                                    Hackathon?</span>
                                 <span class="faq-icon-arrow"></span>
                             </button>
                             <div class="faq-answer-wrapper">
                                 <div class="faq-answer">
-                                    It is a free, global online hackathon organized by the Bagmati UNESCO Club that challenges young innovators, students, developers, researchers, and designers to build practical, responsible AI solutions for real-world problems. Projects are submitted online via Devpost, and the top finalist teams are invited to a live final showcase in China.
+                                    It is a free, global online hackathon organized by the Bagmati UNESCO Club that
+                                    challenges young innovators, students, developers, researchers, and designers to
+                                    build practical, responsible AI solutions for real-world problems. Projects are
+                                    submitted online via Devpost, and the top finalist teams are invited to a live final
+                                    showcase in China.
                                 </div>
                             </div>
                         </div>
@@ -644,12 +687,17 @@
                         <!-- 2. What are the hackathon's thematic tracks? (Programme Tracks) -->
                         <div class="faq-item brutalist-card" data-category="programme">
                             <button class="faq-question">
-                                <span class="faq-q-text"><span class="faq-q-icon">2</span>What are the hackathon's thematic tracks?</span>
+                                <span class="faq-q-text"><span class="faq-q-icon">2</span>What are the hackathon's
+                                    thematic tracks?</span>
                                 <span class="faq-icon-arrow"></span>
                             </button>
                             <div class="faq-answer-wrapper">
                                 <div class="faq-answer">
-                                    Teams build along six thematic areas: AI for Education &amp; Digital Literacy; Climate Action &amp; Sustainability; Digital Trust, Misinformation &amp; Online Safety; Inclusion, Accessibility &amp; Low-Resource Communities; Health, Wellbeing &amp; Social Good; and AI Governance, Transparency &amp; Responsible Data Use. Pick the track that best fits your idea.
+                                    Teams build along six thematic areas: AI for Education &amp; Digital Literacy;
+                                    Climate Action &amp; Sustainability; Digital Trust, Misinformation &amp; Online
+                                    Safety; Inclusion, Accessibility &amp; Low-Resource Communities; Health, Wellbeing
+                                    &amp; Social Good; and AI Governance, Transparency &amp; Responsible Data Use. Pick
+                                    the track that best fits your idea.
                                 </div>
                             </div>
                         </div>
@@ -657,12 +705,16 @@
                         <!-- 3. Who can take part and how do I register? (General) -->
                         <div class="faq-item brutalist-card" data-category="general">
                             <button class="faq-question">
-                                <span class="faq-q-text"><span class="faq-q-icon">3</span>Who can take part and how do I register?</span>
+                                <span class="faq-q-text"><span class="faq-q-icon">3</span>Who can take part and how do I
+                                    register?</span>
                                 <span class="faq-icon-arrow"></span>
                             </button>
                             <div class="faq-answer-wrapper">
                                 <div class="faq-answer">
-                                    Participation is free and open to teams from anywhere in the world — students, developers, researchers, designers, educators, and early-stage innovators are all welcome. Registration and project submission are handled through Devpost, where you'll also find the guidelines, challenge tracks, and submission requirements.
+                                    Participation is free and open to teams from anywhere in the world — students,
+                                    developers, researchers, designers, educators, and early-stage innovators are all
+                                    welcome. Registration and project submission are handled through Devpost, where
+                                    you'll also find the guidelines, challenge tracks, and submission requirements.
                                 </div>
                             </div>
                         </div>
@@ -670,12 +722,16 @@
                         <!-- 4. Is there travel support to the China finale? (Logistics) -->
                         <div class="faq-item brutalist-card" data-category="logistics">
                             <button class="faq-question">
-                                <span class="faq-q-text"><span class="faq-q-icon">4</span>Is there travel support to the China finale?</span>
+                                <span class="faq-q-text"><span class="faq-q-icon">4</span>Is there travel support to the
+                                    China finale?</span>
                                 <span class="faq-icon-arrow"></span>
                             </button>
                             <div class="faq-answer-wrapper">
                                 <div class="faq-answer">
-                                    The top five finalist teams will be invited to present their projects at the live final showcase in China. Final attendance logistics, travel support, prize pool, and rewards depend on confirmed sponsorship and partnership support, and will be shared with finalists ahead of the showcase.
+                                    The top five finalist teams will be invited to present their projects at the live
+                                    final showcase in China. Final attendance logistics, travel support, prize pool, and
+                                    rewards depend on confirmed sponsorship and partnership support, and will be shared
+                                    with finalists ahead of the showcase.
                                 </div>
                             </div>
                         </div>
@@ -683,12 +739,17 @@
                         <!-- 5. How are projects judged and what do winners receive? (Programme Tracks) -->
                         <div class="faq-item brutalist-card" data-category="programme">
                             <button class="faq-question">
-                                <span class="faq-q-text"><span class="faq-q-icon">5</span>How are projects judged and what do winners receive?</span>
+                                <span class="faq-q-text"><span class="faq-q-icon">5</span>How are projects judged and
+                                    what do winners receive?</span>
                                 <span class="faq-icon-arrow"></span>
                             </button>
                             <div class="faq-answer-wrapper">
                                 <div class="faq-answer">
-                                    Judges and mentors review projects on innovation, ethical impact, technical quality, feasibility, inclusion, transparency, and real-world relevance. Each thematic track winner is recognized, and rewards may include cash prizes, cloud/AI tool credits, incubation support, certificates, and mentorship — finalized as sponsorship is confirmed.
+                                    Judges and mentors review projects on innovation, ethical impact, technical quality,
+                                    feasibility, inclusion, transparency, and real-world relevance. Each thematic track
+                                    winner is recognized, and rewards may include cash prizes, cloud/AI tool credits,
+                                    incubation support, certificates, and mentorship — finalized as sponsorship is
+                                    confirmed.
                                 </div>
                             </div>
                         </div>
@@ -696,12 +757,17 @@
                         <!-- 6. How can our organization sponsor or partner? (Logistics) -->
                         <div class="faq-item brutalist-card" data-category="logistics">
                             <button class="faq-question">
-                                <span class="faq-q-text"><span class="faq-q-icon">6</span>How can our organization sponsor or partner?</span>
+                                <span class="faq-q-text"><span class="faq-q-icon">6</span>How can our organization
+                                    sponsor or partner?</span>
                                 <span class="faq-icon-arrow"></span>
                             </button>
                             <div class="faq-answer-wrapper">
                                 <div class="faq-answer">
-                                    Sponsors and partners can support the hackathon through funding, mentorship, judging, cloud/API credits, technical tools, prizes, travel support for finalists, or media and capacity-development sessions. In return you gain visibility across a global responsible-AI program and recognition in the post-event impact report. Connect through our Secretariat offices inside the Contact section.
+                                    Sponsors and partners can support the hackathon through funding, mentorship,
+                                    judging, cloud/API credits, technical tools, prizes, travel support for finalists,
+                                    or media and capacity-development sessions. In return you gain visibility across a
+                                    global responsible-AI program and recognition in the post-event impact report.
+                                    Connect through our Secretariat offices inside the Contact section.
                                 </div>
                             </div>
                         </div>
@@ -735,7 +801,8 @@
                         <a href="#hero" class="footer-logo" aria-label="Global Youth Hackathon 2026 — home">
                             <img src="assets/images/logo.png" alt="Global Youth Hackathon 2026">
                         </a>
-                        <p class="footer-desc">The ultimate global gathering of young innovators, builders, and disruptors.</p>
+                        <p class="footer-desc">The ultimate global gathering of young innovators, builders, and
+                            disruptors.</p>
                     </div>
                     <div class="footer-links">
                         <h4>Quick Links</h4>
@@ -771,4 +838,5 @@
     <script src="js/components.js"></script>
     <script src="js/app.js"></script>
 </body>
+
 </html>
